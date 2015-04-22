@@ -1,8 +1,8 @@
-package cardstatic;
+package cardAssignment;
 import java.io.*;
 import java.util.*;
 
-public class Static {
+public class Assignment {
 	
 	// Kartenname in ein Array speichern
 	
@@ -75,8 +75,8 @@ public class Static {
 	 
 	public static void main(String[] argv)
 	{
-		Static.cardValues();
-		Static.suitColors();
+		Assignment.cardValues();
+		Assignment.suitColors();
 	}
 	
 	*/

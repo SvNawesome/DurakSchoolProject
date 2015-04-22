@@ -1,5 +1,3 @@
-package durak;
-
 public class durak {
 	// Spiellogik
 	
