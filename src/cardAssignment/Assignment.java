@@ -24,13 +24,14 @@ public class Assignment {
 	// Hashmap Erstellen (Key + Value) mit der For-Schleife das Array mit den Namen durchgehen und es als Key setzen
 	// und jedem Key einen Wert zu weisen um Damit später einfachere vergleiche durchzuführen
 	
-	public static void cardValues()
-	{
+	public static final Map<String, Integer> cardValues;
+	static{
 		Map<String, Integer> cardMap = new HashMap<String, Integer>();
 		for(int i = 6;i < 15;i++)
 		{
 			cardMap.put(ranks[i-6], i);
 		}
+		cardValues = Collections.unmodifiableMap(cardMap);
 		
 		//zum Testen wird die Map durchgegangen für jeden gesetzen Key
 		for(String key: cardMap.keySet())
@@ -52,13 +53,14 @@ public class Assignment {
 		
 	// Karten Farbe
 	// Karten Symbole (als Key), den passenden Farben zuordnen
-	public static void suitColors()
-	{
+	public static final Map<String, String> suitColors;
+	static{
 		Map<String, String> colorMap = new HashMap<String, String>();
 			colorMap.put("Spades", "black");
 			colorMap.put("Clubs", "black");
 			colorMap.put("Hearts", "red");
 			colorMap.put("Diamonds", "red");
+			suitColors = Collections.unmodifiableMap(colorMap);
 			
 			
 		// Zum Testen der Zuordnung
@@ -69,16 +71,9 @@ public class Assignment {
 		}
 	}
 
-	
 	//zum Testen
-	/*
 	 
 	public static void main(String[] argv)
 	{
-		Assignment.cardValues();
-		Assignment.suitColors();
 	}
-	
-	*/
 }
-

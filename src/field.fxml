@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="600.0" styleClass="toolbar" stylesheets="@application.css">
+        <items>
+          <Button id="buttonOptions" mnemonicParsing="false" text="Options" />
+            <Button id="buttonStart" mnemonicParsing="false" text="Start" />
+            <Button id="buttonExit" contentDisplay="BOTTOM" mnemonicParsing="false" text="Exit" />
+        </items>
+      </ToolBar>
+      <BorderPane layoutX="1.0" layoutY="39.0" prefHeight="362.0" prefWidth="600.0">
+         <bottom>
+            <Canvas id="Player1Hand" height="75.0" width="490.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+      <Canvas id="fieldBackground" height="362.0" layoutY="38.0" width="600.0" />
+   </children>
+</AnchorPane>
