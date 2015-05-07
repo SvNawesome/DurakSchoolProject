@@ -71,9 +71,4 @@ public class Assignment {
 		}
 	}
 
-	//zum Testen
-	 
-	public static void main(String[] argv)
-	{
-	}
 }
