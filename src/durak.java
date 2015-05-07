@@ -1,7 +1,7 @@
 
 public class durak {
 	
- //	private ;
+ //	private ; 
 	
 	void setAttacker(Player PlayerID)
 	{
