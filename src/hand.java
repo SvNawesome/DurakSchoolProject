@@ -12,9 +12,8 @@ public class hand implements cards{
 	
 	public static void fillHand(){
 		if(hand.size() < 6){
-			
-			while(hand.size() < 6) do{
-				hand.add(hand.size() + 1, cards);//von stapel nehmen!!!;
+			while(hand.size() < 6){
+				hand.add(deck.topCardDraw());//von stapel nehmen
 			}
 		}
 	}
