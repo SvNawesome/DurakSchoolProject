@@ -1,9 +1,10 @@
 public class Player
 {
-  public int[] id{
-    1,
-    2,
-    3,
-    4
-    };
+  public int id[]=
+	  {
+		  0,
+		  1,
+		  2,
+		  3
+	  };
 }

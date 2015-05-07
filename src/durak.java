@@ -1,40 +1,42 @@
 
 public class durak {
 	
- //	private ; 
+	int currentPlayerId;
+
 	
-	void setAttacker(Player PlayerID)
+	void setFirstAttacker(Player AllPlayer)
 	{
-		PlayerID = 1;
+		AllPlayer.id[0] = 1;
 	}
 	
-    int getAttacker(Player PlayerID)
+    Player getAttacker(Player AllPlayer)
     {
-    	for(int i = 0; i < PlayerID.length;i++)
+    	for(int i = 0; i < AllPlayer.id.length;i++)
 		{
-			if (PlayerID[i]==0)
+			if (AllPlayer.id[i]==0)
 			{
-				System.out.println(PlayerID[i]);
+				System.out.println(AllPlayer.id[i]);
 				System.out.println(i);
 			}
 		}
+		return AllPlayer;
     }
     
-    void setDefender(int currentPlayer)
+    void setDefender(int currentPlayerId)
 	{
-		currentPlayer = 0;
+    	currentPlayerId = 0;
 	}
 	
     int getDefender()
     {
-       return currentPlayer;	
+       return currentPlayerId;	
     }
     
-    public static final void changeCurrentPlayer()
+    public final void changeCurrentPlayer()
     {
-    	if (currentPlayer = 1)
+    	if (currentPlayerId == 1)
     	{
-    		setDefender(currentPlayer);
+    		setDefender(currentPlayerId);
     	}
     	
     }
@@ -52,6 +54,4 @@ public class durak {
 	
 	// Verteidiger bestimmen
 	
-	// Verteidigung durchführen (vergleich je 2er paare)
-
-}
+	// Verteidigung durchführen (vergleich je 2er paare)s
