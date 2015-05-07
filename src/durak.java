@@ -19,7 +19,7 @@ public class durak {
 				}
 				else
 				{
-					firstPlayer = ((Math.random()*playerCount)+1);
+				//	firstPlayer = ((Math.random()*playerCount)+1);
 				}
 			}
 		}
