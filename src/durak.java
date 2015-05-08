@@ -4,17 +4,17 @@ public class durak {
 	{
 		int min = Integer.MAX_VALUE;
 		int firstPlayer = 0;
-		//AllPlayer.id[0] = 1;
-		for(int i = 0, i < AllPlayer.length, i++)
+		AllPlayer.hands.get(0, hand);
+		for(int i = 0; i < AllPlayer.id.length; i++)
 		{
-			for(int j = 0, j < Player[i].hand.size(), j++)
+			for(int j = 0; j < AllPlayer.id[i].hand.size(); j++)
 			{
-				if(Player[i].hand[j].suit = trump)
+				if(AllPlayer.id[i].hand[j].suit == trump)
 				{
-					if (Player[i].hand[j]<min)
+					if (AllPlayer.id[i].hand[j]<min)
 					{
-						min = Player[i].hand[j];
-						firstPlayer = Player[i].id
+						min = AllPlayer.id[i].hand[j];
+						firstPlayer = Integer.valueOf(AllPlayer.id[i]);
 					}
 				}
 				else
@@ -69,7 +69,3 @@ public class durak {
 
 // Verteidiger bestimmen
 // Verteidigung durchführen (vergleich je 2er paare)s
-		
-	
-	
-}

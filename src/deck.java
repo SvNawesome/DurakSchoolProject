@@ -15,9 +15,9 @@ public class deck {
 	}
 	
 	// Deck neu aufsetzen
-//	public static cards topCardDraw(deck deck)
+	public static cards topCardDraw()
 	{
-		
-		
+		cards a = new cards(null, null);
+		return a;
 	}
 }

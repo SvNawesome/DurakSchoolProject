@@ -10,7 +10,7 @@
    <children>
       <ToolBar prefHeight="40.0" prefWidth="600.0" styleClass="toolbar" stylesheets="@application.css">
         <items>
-          <Button id="buttonOptions" mnemonicParsing="false" text="Options" />
+          <Button id="buttonOptions" fx:id="buttonOptions" mnemonicParsing="false" onAction="#buttonPressed" text="Options" />
             <Button id="buttonStart" mnemonicParsing="false" text="Start" />
             <Button id="buttonExit" contentDisplay="BOTTOM" mnemonicParsing="false" text="Exit" />
         </items>
