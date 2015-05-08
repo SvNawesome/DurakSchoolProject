@@ -5,19 +5,19 @@ import cardAssignment.*;
 public class deck {
 	public deck()
 	{
-		ArrayList<cards> deck = new ArrayList<cards>();
+		ArrayList<Card> deck = new ArrayList<Card>();
 		for (String rank : Assignment.ranks) {
 			for (String suit : Assignment.suits) {
-				deck.add(new cards(rank, suit));
+				deck.add(new Card(rank, suit));
 				Collections.shuffle(deck);
 			}
 		}
 	}
 	
 	// Deck neu aufsetzen
-	public static cards topCardDraw()
+	public static Card topCardDraw()
 	{
-		cards a = new cards(null, null);
+		Card a = new Card(null, null);
 		return a;
 	}
 }

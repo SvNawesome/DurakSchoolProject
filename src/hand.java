@@ -8,7 +8,7 @@ public class hand{
 	{
 		int i = 1;
 	}
-	static List<cards> hand = new ArrayList<cards>();
+	static List<Card> hand = new ArrayList<Card>();
 	
 	public static int getCardNumber(){
 		return hand.size();
@@ -22,12 +22,12 @@ public class hand{
 		}
 	}
 	
-//	public static void playCard(cards card){
+//	public static void playCard(Card card){
 //		//ToDo
 //		for(int i = 0; hand.size() != i; i++){
 //			for(hand : ranks == card : ranks && hand : suits == card : suits){
 //				//karte ausspielen
-//				//karte löschen+
+//				//karte l�schen+
 //				hand[i].remove(i);
 //				//(array einrücken)
 //			}

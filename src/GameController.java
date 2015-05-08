@@ -1,24 +1,34 @@
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GameController {
 	
 	@FXML
-	Button buttonOptions;
+	Button optionButton;
+	Button exitButton;
 	
 	@FXML
 	protected void buttonPressed(){
-		Stage stage = new Stage();
-		stage.setScene(new Scene(new Group(new Text(10,10, "my second window"))));
-		stage.show();
-
+		Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("GameOptions.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Options");
+            stage.setScene(new Scene(root, 450, 450));
+            stage.show();
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }
+	}
+	@FXML
+	protected void exitButtonPressed(){
+			Stage stage = (Stage) exitButton.getScene().getWindow();
+			stage.close();
 	}
 }

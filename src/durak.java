@@ -1,47 +1,48 @@
+import java.util.ArrayList;
+
 public class durak {
 	int currentPlayerId, playerCount;
-	void setFirstAttacker(Player AllPlayer)
+	ArrayList<Player> Players;
+	void setFirstAttacker(String trmpSuit)
 	{
 		int min = Integer.MAX_VALUE;
 		int firstPlayer = 0;
-		AllPlayer.hands.get(0, hand);
-		for(int i = 0; i < AllPlayer.id.length; i++)
-		{
-			for(int j = 0; j < AllPlayer.id[i].hand.size(); j++)
-			{
-				if(AllPlayer.id[i].hand[j].suit == trump)
+		Card prvCard = null;
+		
+		for (int plsCount = 0; plsCount < Players.size(); plsCount++) {
+			ArrayList<Card> actualHand = Players.get(plsCount).getHand();
+			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++) {
+				Integer actlRank = actualHand.get(crdCount).getRank();
+				String actlSuit = actualHand.get(crdCount).getSuit();
+				
+				if(prvCard==null)
 				{
-					if (AllPlayer.id[i].hand[j]<min)
-					{
-						min = AllPlayer.id[i].hand[j];
-						firstPlayer = Integer.valueOf(AllPlayer.id[i]);
-					}
+					prvCard = new Card(actlRank.toString(),actlSuit);
 				}
-				else
+				
+				if(actualHand.get(crdCount).getRank() < prvCard.getRank() && actualHand.get(crdCount).getSuit().equalsIgnoreCase(trmpSuit))
 				{
-				//	firstPlayer = ((Math.random()*playerCount)+1);
+					prvCard = actualHand.get(crdCount);
+					firstPlayer = plsCount;
 				}
 			}
 		}
-		setAttacker(firstPlayer);
-		setDefender((firstPlayer+1) % 4);
+		
+			
+		
+		//	firstPlayer = ((Math.random()*playerCount)+1);
+		//setAttacker(firstPlayer);
+		//setDefender((firstPlayer+1) % 4);
 	}
 	
 	void setAttacker(int currentPlayerId)
 	{
 		currentPlayerId = 1;
 	}
-	Player getAttacker(Player AllPlayer)
+	
+	Player getAttacker()
 	{
-		for(int i = 0; i < AllPlayer.id.length;i++)
-		{
-			if (AllPlayer.id[i]==0)
-			{
-				System.out.println(AllPlayer.id[i]);
-				System.out.println(i);
-			}
-		}
-		return AllPlayer;
+		return null;
 	}
 	void setDefender(int currentPlayerId)
 	{
