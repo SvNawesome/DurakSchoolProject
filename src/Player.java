@@ -21,4 +21,10 @@ public class Player
 	{
 		
 	}
+	
+	void removeCard(Card card)
+	{
+		
+	}
+	}
 }

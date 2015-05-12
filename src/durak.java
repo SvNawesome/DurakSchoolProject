@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class durak {
 	int currentPlayerId, playerCount;
 	ArrayList<Player> Players;
+	ArrayList<Table> currentTable;
 	void setFirstAttacker(String trmpSuit)
 	{
 		int min = Integer.MAX_VALUE;
@@ -59,11 +60,42 @@ public class durak {
 			setDefender(currentPlayerId);
 		}
 	}
+	
 
 // Spiellogik
 // Karten vergleichen (aufrufen)
 
-	}
+	
+
+   void placeCard(Card card)
+   {
+	   int player;
+	   Table.add(card);
+	   for (int plsCount = 0; plsCount < Players.size(); plsCount++)
+	   {
+			ArrayList<Card> actualHand = Players.get(plsCount).getHand();
+			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
+			{
+				if(card == actualHand.get(crdCount))
+				{
+					player = plsCount;
+				}
+					
+			}
+	   }
+	   card.move(x,y);
+	   Players.get(player).removeCard(card);
+	   
+	   
+	   
+   }
+   
+   void takeCards()
+   {
+	   
+   }
+   
+}
 
 // Angreifer bestimmen
 
