@@ -1,29 +1,56 @@
 import java.util.*;
 import java.io.*;
+
 import cardAssignment.*;
 
-public class Card implements Comparable{
+public class Card{
 	
-	int rank = 0;
+	String rank = "";
 	String suit = "";
+	String color = "";
 	
-	public Card(String r,String s)
+	String TRUMP = "";
+	
+	public Card(int r,int s)
 	{
-		this.rank = Assignment.cardValues.get(r);
-		this.suit = Assignment.suitColors.get(s);
+		this.rank = Assignment.ranks[r];
+		this.suit = Assignment.suits[s];
+		this.color = Assignment.suitColors.get(suit);
 	}
 	
-	@Override
-	public int compareTo(Object arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int checkTrump(String TRUMP, Card card)
+	{
+		System.out.println("drin");
+		if(card.getSuit().equalsIgnoreCase(TRUMP))
+		{
+			System.out.println("Beide Karten sind Trumpf");
+			return 1;
+		}
+		else return 0;
 	}
+	
+	/*public int compareTo(Card card) {
+		if(this.getRank() > card.getRank())
+		{
+		return -1;
+		}
+		else if(this.getRank() < card.getRank())
+		{
+		return 1;
+		}
+		else
+		{
+			System.out.println("Cards not comparable.");
+			return 0;
+		}
+		
+	}*/
 
-	public int getRank() {
+	public String getRank() {
 		return rank;
 	}
 
-	public void setRank(int rank) {
+	public void setRank(String rank) {
 		this.rank = rank;
 	}
 
@@ -33,6 +60,22 @@ public class Card implements Comparable{
 
 	public void setSuit(String suit) {
 		this.suit = suit;
+	}
+	
+	public static void main(String[] args)
+	{
+		String TRUMP = "Hearts";
+		Card herz6 = new Card(0, 0);
+		Card herz7 = new Card(1, 0);
+		System.out.println(herz6.getRank());
+		System.out.println(herz6.getSuit());
+		
+		System.out.println("");
+		//System.out.println(herz6.compareTo(herz7));
+		//System.out.println(herz7.compareTo(herz7));
+		//System.out.println(herz7.compareTo(herz6));
+		
+		System.out.println(herz6.checkTrump(TRUMP, herz7));
 	}
 
 }

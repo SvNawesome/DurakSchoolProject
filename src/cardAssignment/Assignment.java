@@ -1,5 +1,4 @@
 package cardAssignment;
-import java.io.*;
 import java.util.*;
 
 public class Assignment {
@@ -55,19 +54,19 @@ public class Assignment {
 	// Karten Symbole (als Key), den passenden Farben zuordnen
 	public static final Map<String, String> suitColors;
 	static{
-		Map<String, String> colorMap = new HashMap<String, String>();
-			colorMap.put("Spades", "black");
-			colorMap.put("Clubs", "black");
-			colorMap.put("Hearts", "red");
-			colorMap.put("Diamonds", "red");
-			suitColors = Collections.unmodifiableMap(colorMap);
+		Map<String, String> cardColors = new HashMap<String, String>();
+			cardColors.put("Spades", "black");
+			cardColors.put("Clubs", "black");
+			cardColors.put("Hearts", "red");
+			cardColors.put("Diamonds", "red");
+			suitColors = Collections.unmodifiableMap(cardColors);
 			
 			
 		// Zum Testen der Zuordnung
-		for(String key: colorMap.keySet())
+		for(String key: cardColors.keySet())
 		{
 			System.out.print("Key: " + key + " - ");
-			System.out.println("Value: " + colorMap.get(key) + "\n");
+			System.out.println("Value: " + cardColors.get(key) + "\n");
 		}
 	}
 
