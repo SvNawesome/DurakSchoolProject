@@ -71,6 +71,8 @@ public class durak {
    {
 	   int player;
 	   Table.add(card);
+	   if(checkcard())
+	   {
 	   for (int plsCount = 0; plsCount < Players.size(); plsCount++)
 	   {
 			ArrayList<Card> actualHand = Players.get(plsCount).getHand();
@@ -87,12 +89,37 @@ public class durak {
 	   Players.get(player).removeCard(card);
 	   
 	   
-	   
+	   }
+	   else
+	   {
+		   Table.remove(Table.size());
+	   }
    }
    
    void takeCards()
    {
 	   
+   }
+   
+   void checkCard()
+   {
+	   if(firstCard =! 1)
+	   {
+		   valueBeforeCard = Table.size()-1.getRank();
+		   valueActualCard = Table.size().getRank();
+		   if(valueBeforeCard < valueActualCard )
+		   {
+			   return(1);
+		   }
+		  /* else if(valueBeforeCard == valueActualCard)
+		   {
+			   switchPlayer();
+		   } */
+		   else
+		   {
+			   return(0);
+		   }
+	   }
    }
    
 }
