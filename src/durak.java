@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import cardAssignment.Assignment;
+
 public class durak {
 	int currentPlayerId, playerCount;
 	ArrayList<Player> Players;
@@ -13,15 +15,16 @@ public class durak {
 		for (int plsCount = 0; plsCount < Players.size(); plsCount++) {
 			ArrayList<Card> actualHand = Players.get(plsCount).getHand();
 			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++) {
-				Integer actlRank = actualHand.get(crdCount).getRank();
+				String actlRank = actualHand.get(crdCount).getRank();
 				String actlSuit = actualHand.get(crdCount).getSuit();
+				Card actlCard = new Card(actlRank, actlSuit);
 				
 				if(prvCard==null)
 				{
-					prvCard = new Card(actlRank.toString(),actlSuit);
+					prvCard = new Card(actlRank, actlSuit);
 				}
 				
-				if(actualHand.get(crdCount).getRank() < prvCard.getRank() && actualHand.get(crdCount).getSuit().equalsIgnoreCase(trmpSuit))
+				if(Assignment.cardValues.get(actlCard.rank) < Assignment.cardValues.get(prvCard.rank) && actualHand.get(crdCount).getSuit().equalsIgnoreCase(trmpSuit))
 				{
 					prvCard = actualHand.get(crdCount);
 					firstPlayer = plsCount;
@@ -69,9 +72,9 @@ public class durak {
 
    void placeCard(Card card)
    {
-	   int player;
 	   Table.add(card);
-	   for (int plsCount = 0; plsCount < Players.size(); plsCount++)
+	   int player = 0;
+	for (int plsCount = 0; plsCount < Players.size(); plsCount++)
 	   {
 			ArrayList<Card> actualHand = Players.get(plsCount).getHand();
 			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
@@ -83,7 +86,7 @@ public class durak {
 					
 			}
 	   }
-	   card.move(x,y);
+	   //card.move(x,y);
 	   Players.get(player).removeCard(card);
 	   
 	   

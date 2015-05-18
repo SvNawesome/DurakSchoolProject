@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+
 import cardAssignment.*;
 
 public class deck {
@@ -17,7 +18,8 @@ public class deck {
 	// Deck neu aufsetzen
 	public static Card topCardDraw()
 	{
-		Card a = new Card(null, null);
+		Card a = new Card("King", "Hearts");
 		return a;
 	}
+	
 }

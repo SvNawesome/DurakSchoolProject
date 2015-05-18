@@ -11,12 +11,20 @@ public class Card{
 	
 	String TRUMP = "";
 	
-	public Card(int r,int s)
+	public Card(String r, String s)
 	{
-		this.rank = Assignment.ranks[r];
-		this.suit = Assignment.suits[s];
-		this.color = Assignment.suitColors.get(suit);
+		if(Arrays.asList(Assignment.ranks).contains(r) && Arrays.asList(Assignment.suits).contains(s))
+		{
+			this.rank = r;
+			this.suit = s;
+			this.color = Assignment.suitColors.get(suit);
+		}
+		else 
+		{
+			System.out.println("Invalid Card.");
+		}
 	}
+	
 	
 	public int checkTrump(String TRUMP, Card card)
 	{
@@ -65,10 +73,12 @@ public class Card{
 	public static void main(String[] args)
 	{
 		String TRUMP = "Hearts";
-		Card herz6 = new Card(0, 0);
-		Card herz7 = new Card(1, 0);
+		Card herz6 = new Card("Ace", "Hearts");
+		Card herz7 = new Card("7", "Hearts");
 		System.out.println(herz6.getRank());
 		System.out.println(herz6.getSuit());
+		
+		System.out.println(Assignment.cardValues.get(herz6.rank));
 		
 		System.out.println("");
 		//System.out.println(herz6.compareTo(herz7));
