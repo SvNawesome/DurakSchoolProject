@@ -73,14 +73,11 @@ public class durak {
    void placeCard(Card card)
    {
 	   Table.add(card);
-<<<<<<< HEAD
 	   int player = 0;
 	for (int plsCount = 0; plsCount < Players.size(); plsCount++)
-=======
 	   if(checkcard())
 	   {
 	   for (int plsCount = 0; plsCount < Players.size(); plsCount++)
->>>>>>> origin/master
 	   {
 			ArrayList<Card> actualHand = Players.get(plsCount).getHand();
 			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
