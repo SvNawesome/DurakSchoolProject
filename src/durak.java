@@ -75,7 +75,7 @@ public class durak {
 	   Table.add(card);
 	   int player = 0;
 	for (int plsCount = 0; plsCount < Players.size(); plsCount++)
-	   if(checkcard())
+	   if(checkCard())
 	   {
 	   for (int plsCount = 0; plsCount < Players.size(); plsCount++)
 	   {
@@ -109,7 +109,7 @@ public class durak {
    {
 	   if(firstCard =! 1)
 	   {
-		   valueBeforeCard = Table.size()-1.getRank();
+		   valueBeforeCard = (Table.size()-1).getRank();
 		   valueActualCard = Table.size().getRank();
 		   if(valueBeforeCard < valueActualCard )
 		   {
