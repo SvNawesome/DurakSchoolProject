@@ -76,13 +76,7 @@ public class durak {
 	   Card card2;
 	   Table.add(card);
 	   int player = 0;
-<<<<<<< HEAD
-	for (int plsCount = 0; plsCount < Players.size(); plsCount++)
-	   if(checkCard())
-=======
-
 	   if(card.compareTo(card2) == 0) //compareTo benutzen!
->>>>>>> origin/master
 	   {
 	   for (int plsCount = 0; plsCount < Players.size(); plsCount++)
 	   {
@@ -112,29 +106,6 @@ public class durak {
 	   
    }
    
-<<<<<<< HEAD
-   void checkCard()
-   {
-	   if(firstCard =! 1)
-	   {
-		   valueBeforeCard = (Table.size()-1).getRank();
-		   valueActualCard = Table.size().getRank();
-		   if(valueBeforeCard < valueActualCard )
-		   {
-			   return(1);
-		   }
-		  /* else if(valueBeforeCard == valueActualCard)
-		   {
-			   switchPlayer();
-		   } */
-		   else
-		   {
-			   return(0);
-		   }
-	   }
-   }
-=======
->>>>>>> origin/master
    
 }
 
