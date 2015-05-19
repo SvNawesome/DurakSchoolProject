@@ -27,9 +27,9 @@ public class Hand{
 //		for(int i = 0; hand.size() != i; i++){
 //			for(hand : ranks == card : ranks && hand : suits == card : suits){
 //				//karte ausspielen
-//				//karte l�schen+
+//				//karte löschen+
 //				hand[i].remove(i);
-//				//(array einrücken)
+//				//(array einrÃ¼cken)
 //			}
 //		}
 	}
