@@ -2,9 +2,9 @@ import java.util.*;
 import java.io.*;
 import cardAssignment.*;
 
-public class hand{
+public class Hand{
 	
-	public hand()
+	public Hand()
 	{
 		int i = 1;
 	}
@@ -17,7 +17,7 @@ public class hand{
 	public static void fillHand(){
 		if(hand.size() < 6){
 			while(hand.size() < 6){
-				hand.add(deck.topCardDraw());//von stapel nehmen
+				hand.add(Deck.topCardDraw());//von stapel nehmen
 			}
 		}
 	}

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 import cardAssignment.Assignment;
 
-public class durak {
+public class Durak {
 	int currentPlayerId, playerCount;
 	Card firstCard;
 	ArrayList<Player> Players;

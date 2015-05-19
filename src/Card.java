@@ -25,34 +25,61 @@ public class Card{
 		}
 	}
 	
-	
-	public int checkTrump(String TRUMP, Card card)
+	public int comparing(Card defCard)
 	{
-		System.out.println("drin");
-		if(card.getSuit().equalsIgnoreCase(TRUMP))
+		if(Assignment.cardValues.get(defCard.rank) > Assignment.cardValues.get(this.rank))
 		{
-			System.out.println("Beide Karten sind Trumpf");
+			System.out.println("(" + defCard.rank + ") has more value than (" + this.rank + ")");
+			System.out.println("You can't attack with this card (" + this.rank + " / " + this.suit + ").");
+			return -1;
+		}
+		else if(Assignment.cardValues.get(defCard.rank) < Assignment.cardValues.get(this.rank))
+		{
+			System.out.println("(" + defCard.rank + ") has less value than (" + this.rank + ")");
 			return 1;
-		}
-		else return 0;
-	}
-	
-	/*public int compareTo(Card card) {
-		if(this.getRank() > card.getRank())
-		{
-		return -1;
-		}
-		else if(this.getRank() < card.getRank())
-		{
-		return 1;
 		}
 		else
 		{
 			System.out.println("Cards not comparable.");
 			return 0;
 		}
-		
-	}*/
+	}
+	public int checkTrump(String TRUMP, Card defCard)
+	{
+		if(defCard.getSuit().equalsIgnoreCase(TRUMP) && this.getSuit().equalsIgnoreCase(TRUMP))
+		{
+			System.out.println("Beide Karten sind Trumpf");
+			return 1;
+		}
+		else if(defCard.getSuit().equalsIgnoreCase(TRUMP) || this.getSuit().equalsIgnoreCase(TRUMP))
+		{
+			if(defCard.getSuit().equalsIgnoreCase(TRUMP))
+			{
+				System.out.println("Verteidiger ist Trumpf");
+				return -1;
+			}
+			else if(this.getSuit().equalsIgnoreCase(TRUMP))
+			{
+				System.out.println("Angreifer ist Trumpf");
+				return 2;
+			}
+		}
+		return 0;
+	}
+	
+	//Angreifende Karte ist "this" verteidigende Karte wird übergeben
+	public int compareTo(Card defCard) {
+
+		if(this.checkTrump(TRUMP, defCard) == 1 || this.checkTrump(TRUMP, defCard) == 0)
+		{
+			return this.comparing(defCard);
+		}
+		else if(this.checkTrump(TRUMP, defCard) == 2)
+		{
+			return 1;
+		}
+		else return 0;
+	}
 
 	public String getRank() {
 		return rank;
@@ -72,20 +99,36 @@ public class Card{
 	
 	public static void main(String[] args)
 	{
-		String TRUMP = "Hearts";
-		Card herz6 = new Card("Ace", "Hearts");
+		Deck deck = new Deck();
+		deck.setTrump("Hearts");
+		
+		String TRUMP = deck.getTrump();
+		
+		Card herzAce = new Card("Ace", "Hearts");
 		Card herz7 = new Card("7", "Hearts");
-		System.out.println(herz6.getRank());
-		System.out.println(herz6.getSuit());
+		Card spade7 = new Card("7", "Spades");
+//		System.out.println(herzAce.getRank());
+//		System.out.println(herzAce.getSuit());
 		
-		System.out.println(Assignment.cardValues.get(herz6.rank));
+		System.out.println(Assignment.cardValues.get(herzAce.rank));
+		System.out.println(Assignment.cardValues.get(herz7.rank));
 		
-		System.out.println("");
-		//System.out.println(herz6.compareTo(herz7));
-		//System.out.println(herz7.compareTo(herz7));
-		//System.out.println(herz7.compareTo(herz6));
+		System.out.println("-------------------");
 		
-		System.out.println(herz6.checkTrump(TRUMP, herz7));
+		System.out.println("Trumpfcheck");
+		System.out.println(spade7.checkTrump(TRUMP, herz7));
+		
+		System.out.println("-----------");
+		System.out.println("Kartenvergleich");
+		System.out.println("---------------");
+		System.out.println("Angreifer höher als Verteidiger");
+		herzAce.compareTo(herz7);
+		System.out.println("---------------");
+		System.out.println("Angreifer = Verteidiger");
+		herz7.compareTo(herz7);
+		System.out.println("---------------");
+		System.out.println("Verteidiger höher als Angreifer");
+		herz7.compareTo(herzAce);
 	}
 
 }

@@ -3,8 +3,10 @@ import java.util.*;
 
 import cardAssignment.*;
 
-public class deck {
-	public deck()
+public class Deck {
+	String Trump;
+	
+	public Deck()
 	{
 		ArrayList<Card> deck = new ArrayList<Card>();
 		for (String rank : Assignment.ranks) {
@@ -22,4 +24,13 @@ public class deck {
 		return a;
 	}
 	
+	public String getTrump()
+	{
+		return Trump;
+	}
+	
+	public void setTrump(String Trump)
+	{
+		this.Trump = Trump;
+	}
 }

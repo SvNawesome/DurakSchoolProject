@@ -1,4 +1,4 @@
-public class dealer {
+public class Dealer {
 	// Karten mischen
 		// ToDo
 	
