@@ -4,6 +4,7 @@ import cardAssignment.Assignment;
 
 public class durak {
 	int currentPlayerId, playerCount;
+	Card firstCard;
 	ArrayList<Player> Players;
 	ArrayList<Table> currentTable;
 	void setFirstAttacker(String trmpSuit)
@@ -70,12 +71,18 @@ public class durak {
 
 	
 
-   void placeCard(Card card)
+   /*void placeCard(Card card)
    {
+	   Card card2;
 	   Table.add(card);
 	   int player = 0;
+<<<<<<< HEAD
 	for (int plsCount = 0; plsCount < Players.size(); plsCount++)
 	   if(checkCard())
+=======
+
+	   if(card.compareTo(card2) == 0) //compareTo benutzen!
+>>>>>>> origin/master
 	   {
 	   for (int plsCount = 0; plsCount < Players.size(); plsCount++)
 	   {
@@ -84,7 +91,7 @@ public class durak {
 			{
 				if(card == actualHand.get(crdCount))
 				{
-					player = plsCount;
+					player = plsCount2;
 				}
 					
 			}
@@ -98,13 +105,14 @@ public class durak {
 	   {
 		   Table.remove(Table.size());
 	   }
-   }
+   }*/
    
    void takeCards()
    {
 	   
    }
    
+<<<<<<< HEAD
    void checkCard()
    {
 	   if(firstCard =! 1)
@@ -125,6 +133,8 @@ public class durak {
 		   }
 	   }
    }
+=======
+>>>>>>> origin/master
    
 }
 
