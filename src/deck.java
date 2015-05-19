@@ -17,6 +17,11 @@ public class Deck {
 		}
 	}
 	
+	public static deck shuffleCards(){
+		deck newDeck = new deck();
+		return(newDeck);
+	}
+	
 	// Deck neu aufsetzen
 	public static Card topCardDraw()
 	{
