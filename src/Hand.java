@@ -8,6 +8,7 @@ public class Hand{
 	{
 		int i = 1;
 	}
+	
 	static List<Card> hand = new ArrayList<Card>();
 	
 	public static int getCardNumber(){
@@ -17,7 +18,9 @@ public class Hand{
 	public static void fillHand(){
 		if(hand.size() < 6){
 			while(hand.size() < 6){
-				hand.add(Deck.topCardDraw());//von stapel nehmen
+				Deck a = new Deck();
+				a.getDeck();
+				hand.add(a.topCardDraw());//von stapel nehmen
 			}
 		}
 	}

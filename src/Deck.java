@@ -5,10 +5,10 @@ import cardAssignment.*;
 
 public class Deck {
 	String Trump;
+	ArrayList<Card> deck = new ArrayList<Card>();
 	
 	public Deck()
 	{
-		ArrayList<Card> deck = new ArrayList<Card>();
 		for (String rank : Assignment.ranks) {
 			for (String suit : Assignment.suits) {
 				deck.add(new Card(rank, suit));
@@ -22,10 +22,11 @@ public class Deck {
 		return(newDeck);
 	}
 	
-	// Deck neu aufsetzen
-	public static Card topCardDraw()
+	public Card topCardDraw()
 	{
 		Card a = new Card("King", "Hearts");
+		//a = deck(0);
+		deck.remove(0);
 		return a;
 	}
 	
@@ -37,5 +38,17 @@ public class Deck {
 	public void setTrump(String Trump)
 	{
 		this.Trump = Trump;
+	}
+	
+	public ArrayList<Card> getDeck(){
+		return this.deck;
+	}
+	
+	public void addCard(ArrayList<Card> deck, Card card){
+		deck.add(card);
+	}
+	
+	public void removeCard(ArrayList<Card> deck, Card card){
+		deck.remove(card);
 	}
 }

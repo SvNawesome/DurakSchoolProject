@@ -8,7 +8,8 @@ public class Dealer {
 	Deck dealerDeck;
 	
 	public Dealer(){
-		Deck dealerDeck = new Deck();
+		dealerDeck.getDeck();
+		//Deck dealerDeck = new Deck();
 	}
 	
 	public void createNewDeck(){
@@ -18,11 +19,14 @@ public class Dealer {
 	public void dealCards(ArrayList<Player> Players){
 		for(int i = 0; i < Players.size(); i++){
 			//code zum austeilen
-			
-			
-			
 		}
-	//trumpDraw();
+		trumpDraw();
+	}
+	
+	public void trumpDraw(){
+		dealerDeck.setTrump(dealerDeck.topCardDraw().suit);
+		dealerDeck.addCard(dealerDeck.getDeck(), dealerDeck.topCardDraw());
+		dealerDeck.removeCard(dealerDeck.getDeck(), dealerDeck.topCardDraw());
 	}
 
 }
