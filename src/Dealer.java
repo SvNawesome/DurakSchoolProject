@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.io.*;
 import java.util.*;
@@ -10,14 +11,18 @@ public class Dealer {
 		Deck dealerDeck = new Deck();
 	}
 	
-	public void shuffleCards(){
-		dealerDeck.shuffleCards();
+	public void createNewDeck(){
+		dealerDeck.createNewDeck();
 	}
 	
-	public void throwCards(int playerCount){
-		for(int i = 0; i < playerCount; i++){
+	public void dealCards(ArrayList<Player> Players){
+		for(int i = 0; i < Players.size(); i++){
 			//code zum austeilen
+			
+			
+			
 		}
+	//trumpDraw();
 	}
 
 }

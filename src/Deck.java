@@ -17,7 +17,7 @@ public class Deck {
 		}
 	}
 	
-	public static Deck shuffleCards(){
+	public static Deck createNewDeck(){
 		Deck newDeck = new Deck();
 		return(newDeck);
 	}
