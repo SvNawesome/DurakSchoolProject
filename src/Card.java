@@ -1,16 +1,26 @@
 import java.util.*;
-import java.io.*;
-
 import cardAssignment.*;
 
 public class Card{
 	
-	String rank = "";
-	String suit = "";
-	String color = "";
+	//Initiaalisieren der benötigten Strings
+	String rank;
+	String suit;
+	String color;
 	
-	String TRUMP = "";
+	String TRUMP;
 	
+	//Konstruktor für eine Zufallskarte
+	public Card()
+	{
+		Random random = new Random();
+		this.rank = Assignment.ranks[random.nextInt(Assignment.ranks.length-1)];
+		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
+		this.color = Assignment.suitColors.get(suit);
+		System.out.println(rank + " " + suit + " " + color);
+		
+	}
+	// Konstruktor für eine bestimmte Karte
 	public Card(String r, String s)
 	{
 		if(Arrays.asList(Assignment.ranks).contains(r) && Arrays.asList(Assignment.suits).contains(s))
@@ -25,6 +35,7 @@ public class Card{
 		}
 	}
 	
+	//Methode für den Vergleich
 	public int comparing(Card defCard)
 	{
 		if(Assignment.cardValues.get(defCard.rank) > Assignment.cardValues.get(this.rank))
@@ -44,6 +55,12 @@ public class Card{
 			return 0;
 		}
 	}
+	
+	//Methode um auf den Trumpf zu überprüfen durch Vergleich des Trumpf-Strings mit dem Suit-String
+	// Return (-1) = Nur der Verteidiger ist Trumpf
+	// 		  ( 0) = Keine Karte ist Trumpf
+	//		  ( 1) = Beide Karten sind Trumpf
+	//	 	  ( 2) = Nur der Angreifer ist Trumpf
 	public int checkTrump(String TRUMP, Card defCard)
 	{
 		if(defCard.getSuit().equalsIgnoreCase(TRUMP) && this.getSuit().equalsIgnoreCase(TRUMP))
@@ -68,6 +85,10 @@ public class Card{
 	}
 	
 	//Angreifende Karte ist "this" verteidigende Karte wird übergeben
+	//Vergleich zweier Karten
+	//Erste if-Abfrage für den Fall ob beide Trumpf sind (Rückgabewert = geschlagen oder nicht möglich)
+	//Zweite if-Abfrage ob der Angreifer Trumpf ist wenn ja 1(geschlagen) return
+	//Ansonsten 0 für nicht möglich
 	public int compareTo(Card defCard) {
 
 		if(this.checkTrump(TRUMP, defCard) == 1 || this.checkTrump(TRUMP, defCard) == 0)
@@ -81,6 +102,8 @@ public class Card{
 		else return 0;
 	}
 
+	
+	//Getter und Setter für Rank und Suit
 	public String getRank() {
 		return rank;
 	}
@@ -97,6 +120,8 @@ public class Card{
 		this.suit = suit;
 	}
 	
+	
+	// Main zum Testen
 	public static void main(String[] args)
 	{
 		Deck deck = new Deck();
@@ -104,6 +129,7 @@ public class Card{
 		
 		String TRUMP = deck.getTrump();
 		
+		Card randomCard = new Card();
 		Card herzAce = new Card("Ace", "Hearts");
 		Card herz7 = new Card("7", "Hearts");
 		Card spade7 = new Card("7", "Spades");

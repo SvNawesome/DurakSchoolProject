@@ -5,10 +5,10 @@ import cardAssignment.*;
 
 public class Deck {
 	String Trump;
-	ArrayList<Card> deck = new ArrayList<Card>();
 	
 	public Deck()
 	{
+		ArrayList<Card> deck = new ArrayList<Card>();
 		for (String rank : Assignment.ranks) {
 			for (String suit : Assignment.suits) {
 				deck.add(new Card(rank, suit));
@@ -22,14 +22,14 @@ public class Deck {
 		return(newDeck);
 	}
 	
-	public Card topCardDraw()
+	public Card topCardDraw(Deck deck)
 	{
 		Card a = new Card("King", "Hearts");
 		//a = deck(0);
 		deck.remove(0);
 		return a;
 	}
-	
+
 	public String getTrump()
 	{
 		return Trump;
