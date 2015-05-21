@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
    <children>
-      <ToolBar prefHeight="40.0" prefWidth="1000.0" styleClass="toolbar" stylesheets="@application.css">
+      <ToolBar prefHeight="43.0" prefWidth="600.0" styleClass="toolbar" stylesheets="@application.css">
         <items>
           <Button id="buttonOptions" fx:id="buttonOptions" mnemonicParsing="false" onAction="#buttonPressed" text="Options" />
             <Button id="buttonStart" mnemonicParsing="false" text="Start" />

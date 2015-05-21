@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +29,6 @@ public class GameController {
 	}
 	@FXML
 	protected void exitButtonPressed(){
-			Stage stage = (Stage) exitButton.getScene().getWindow();
-			stage.close();
+		Platform.exit();
 	}
 }

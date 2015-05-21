@@ -6,12 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 
-/*public class Main extends Application {
+public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
-			Scene scene = new Scene(root,1000,1000);
+			Scene scene = new Scene(root,800,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -24,4 +24,4 @@ import javafx.scene.layout.BorderPane;
 		launch(args);
 	}
 }
-*/
+
