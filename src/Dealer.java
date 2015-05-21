@@ -7,9 +7,8 @@ public class Dealer {
 
 	Deck dealerDeck;
 	
-	public Dealer(){
-		dealerDeck.getDeck();
-		//Deck dealerDeck = new Deck();
+	public Dealer(Deck deck){
+		dealerDeck = deck.getDeck();
 	}
 	
 	public void dealCards(ArrayList<Player> Players){
@@ -21,13 +20,10 @@ public class Dealer {
 	
 	public void trumpDraw(){
 		dealerDeck.setTrump(dealerDeck.topCardDraw().suit);
-		dealerDeck.addCard(dealerDeck.getDeck(), dealerDeck.topCardDraw());
-		dealerDeck.removeCard(dealerDeck.getDeck(), dealerDeck.topCardDraw());
 	}
-
-	public static void main(String[] args)
-	{
+	public static void main(String[] args){
 		Deck deck = new Deck();
-		Dealer dealer = new Dealer();
+		Dealer dealer = new Dealer(deck);
+		dealer.trumpDraw();
 	}
 }

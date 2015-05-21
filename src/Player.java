@@ -4,8 +4,10 @@ import java.util.HashMap;
 public class Player
 {
 	ArrayList<Card> hand;
+	Deck deck;
 	
-	public Player() {
+	public Player(Deck deck) {
+		this.deck = deck.getDeck();
 		this.hand = new ArrayList<Card>();
 	}
 
@@ -20,9 +22,7 @@ public class Player
 	public void fillHand(){
 		if(hand.size() < 6){
 			while(hand.size() < 6){
-				Deck a = new Deck();
-				a.getDeck();
-				hand.add(a.topCardDraw());//von stapel nehmen
+				hand.add(deck.topCardDraw());//von stapel nehmen
 			}
 		}
 	}

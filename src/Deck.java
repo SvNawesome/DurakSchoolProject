@@ -4,6 +4,7 @@ import java.util.*;
 import cardAssignment.*;
 
 public class Deck {
+	Deck deck;
 	String Trump;
 	
 	public Deck()
@@ -22,12 +23,22 @@ public class Deck {
 		return(newDeck);
 	}
 	
-	public Card topCardDraw(Deck deck)
+	public Card getCard() {
+		//!
+		return null;
+	}
+	
+	public Card topCardDraw()
 	{
 		Card a = new Card("King", "Hearts");
-		//a = deck(0);
-		deck.remove(0);
+		a = this.getCard();
+		this.remove(0);
 		return a;
+	}
+
+	private void remove(int i) {
+		// TODO Auto-generated method stub
+		this.remove(i);
 	}
 
 	public String getTrump()
@@ -40,8 +51,12 @@ public class Deck {
 		this.Trump = Trump;
 	}
 	
-	public ArrayList<Card> getDeck(){
-		return this.deck;
+	public void setDeck(Deck setDeck){
+		deck = setDeck;
+	}
+	
+	public Deck getDeck(){
+			return deck;
 	}
 	
 	public void addCard(ArrayList<Card> deck, Card card){
@@ -51,4 +66,10 @@ public class Deck {
 	public void removeCard(ArrayList<Card> deck, Card card){
 		deck.remove(card);
 	}
+	
+	public static void main(String[] args){
+		//h
+	}
 }
+
+	
