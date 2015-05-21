@@ -17,13 +17,23 @@ public class Player
 		this.hand = hand;
 	}
 	
-	void addCard()
+	public void fillHand(){
+		if(hand.size() < 6){
+			while(hand.size() < 6){
+				Deck a = new Deck();
+				a.getDeck();
+				hand.add(a.topCardDraw());//von stapel nehmen
+			}
+		}
+	}
+	
+	void addCard(Card card)
 	{
-		
+		hand.add(card);
 	}
 	
 	void removeCard(Card card)
 	{
-		
+		hand.remove(card);
 	}
 }

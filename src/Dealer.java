@@ -18,7 +18,7 @@ public class Dealer {
 	
 	public void dealCards(ArrayList<Player> Players){
 		for(int i = 0; i < Players.size(); i++){
-			//code zum austeilen
+			Players.get(i).fillHand();
 		}
 		trumpDraw();
 	}
