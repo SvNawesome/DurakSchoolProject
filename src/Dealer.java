@@ -21,11 +21,10 @@ public class Dealer {
 	public void trumpDraw(){
 		dealerDeck.setTrump(dealerDeck.topCardDraw().suit);
 	}
-
-
+	
 	public static void main(String[] args){
 		Deck deck = new Deck();
 		Dealer dealer = new Dealer(deck);
-		dealer.trumpDraw();
+		//dealer.trumpDraw(); NULL Pointer Exception
 	}
 }
