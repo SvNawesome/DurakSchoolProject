@@ -25,6 +25,6 @@ public class Dealer {
 	public static void main(String[] args){
 		Deck deck = new Deck();
 		Dealer dealer = new Dealer(deck);
-		//dealer.trumpDraw(); NULL Pointer Exception
+		dealer.trumpDraw();
 	}
 }

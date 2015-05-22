@@ -37,7 +37,6 @@ public class Deck {
 	}
 
 	private void remove(int i) {
-		// TODO Auto-generated method stub
 		this.remove(i);
 	}
 
@@ -68,7 +67,8 @@ public class Deck {
 	}
 	
 	public static void main(String[] args){
-		//h
+		Deck deck = new Deck();
+		
 	}
 }
 
