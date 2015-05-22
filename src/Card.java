@@ -97,6 +97,12 @@ public class Card{
 		this.suit = suit;
 	}
 	
+	public String toString()
+	{
+		String ret = "<" + this.rank + "/" + this.suit + ">";
+		return ret;
+	}
+	
 	public static void main(String[] args)
 	{
 		Deck deck = new Deck();
@@ -109,9 +115,6 @@ public class Card{
 		Card spade7 = new Card("7", "Spades");
 //		System.out.println(herzAce.getRank());
 //		System.out.println(herzAce.getSuit());
-		
-		System.out.println(Assignment.cardValues.get(herzAce.rank));
-		System.out.println(Assignment.cardValues.get(herz7.rank));
 		
 		System.out.println("-------------------");
 		
@@ -129,6 +132,8 @@ public class Card{
 		System.out.println("---------------");
 		System.out.println("Verteidiger höher als Angreifer");
 		herz7.compareTo(herzAce);
+		
+		System.out.println(herz7);
 	}
 
 }
