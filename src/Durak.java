@@ -7,6 +7,7 @@ public class Durak {
 	Card firstCard;
 	ArrayList<Player> Players;
 	ArrayList<Table> currentTable;
+	ArrayList<Table> discardPile;
 	void setFirstAttacker(String trmpSuit)
 	{
 		int min = Integer.MAX_VALUE;
@@ -71,40 +72,63 @@ public class Durak {
 
 	
 
-   /*void placeCard(Card card)
-   {
-	   Card card2;
-	   Table.add(card);
-	   int player = 0;
-	   if(card.compareTo(card2) == 0) //compareTo benutzen!
-	   {
-	   for (int plsCount = 0; plsCount < Players.size(); plsCount++)
-	   {
-			ArrayList<Card> actualHand = Players.get(plsCount).getHand();
-			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
+	void placeCard(Card card)
+	{
+		Card card2;
+		currentTable.add(card);
+		int player = 0;
+		if(firstCard != 0)
+		{
+			card2 = currentTable.get(currentTable.legnth-1)
+			if(card.compareTo(card2) == 1) //compareTo benutzen!
 			{
-				if(card == actualHand.get(crdCount))
+				for (int plsCount = 0; plsCount < Players.size(); plsCount++)
 				{
-					player = plsCount2;
+					ArrayList<Card> actualHand = Players.get(plsCount).getHand();
+					for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
+					{
+						if(card == actualHand.get(crdCount))
+						{
+							player = plsCount2;
+						}
+
+					}
 				}
-					
+				//card.move(x,y);
+				Players.get(player).removeCard(card);
+
+
 			}
-	   }
-	   //card.move(x,y);
-	   Players.get(player).removeCard(card);
-	   
-	   
-	   }
-	   else
-	   {
-		   Table.remove(Table.size());
-	   }
-   }*/
+			else if(card.compareTo(card2) == -1)
+			{
+				System.out.println("You can't attack with this card ");
+			}
+		}
+		firstCard = 1;
+	}
    
-   void takeCards()
+   void takeCards(int playerID)
    {
+	   for(i = 0; i > currentTable.lenght; i++)
+	   {
+		   Players.get(playerID).addCard(currentTable.get(i));
+		   removeCard = currentTable.get(i);
+		   currentTable.remove(removeCard);
+	   }
 	   
    }
+   
+   void discardPile()
+   {
+	   for(i = 0; i > currentTable.lenght; i++)
+	   {
+		   discardPile.add(currentTable.get(i));
+		   removeCard = currentTable.get(i);
+		   currentTable.remove(removeCard);
+	   }
+   }
+   
+   
    
    
 }
