@@ -1,20 +1,24 @@
 import java.util.ArrayList;
 
 public class Table {
-
-	ArrayList <Card> field;
+	ArrayList<Card> table;
 	
-	public static void add(Card card) {
-		field.add(card);
+	public Table()
+	{
+		this.table = new ArrayList<Card>();	
+	}
+	public void add(Card card)
+	{
+		this.table.add(card);
 	}
 	
-	public static void remove(Card card){
-		field.remove(card)
+	public void remove(Card card)
+	{
+		this.table.remove(card);
 	}
-
-	public static Card size() {
-		// TODO Auto-generated method stub
-		return null;
+	public int size()
+	{
+		return this.table.size();
 	}
 
 }

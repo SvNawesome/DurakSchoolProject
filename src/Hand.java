@@ -1,18 +1,15 @@
 import java.util.*;
-import java.io.*;
-import cardAssignment.*;
 
 public class Hand{
 	
+	ArrayList<Card> hand;
 	public Hand()
 	{
-		int i = 1;
+		hand = new ArrayList<Card>();
 	}
 	
-	static List<Card> hand = new ArrayList<Card>();
-	
-	public static int getCardNumber(){
-		return hand.size();
+	public int getCardNumber(){
+		return this.hand.size();
 	}
 	
 //	public static void playCard(Card card){

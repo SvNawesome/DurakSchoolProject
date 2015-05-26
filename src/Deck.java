@@ -1,19 +1,19 @@
-import java.io.*;
 import java.util.*;
 
 import cardAssignment.*;
 
 public class Deck {
-	Deck deck;
-	String Trump;
+	private Deck deck;
+	private String Trump;
+	private ArrayList<Card> cardDeck;
 	
 	public Deck()
 	{
-		ArrayList<Card> deck = new ArrayList<Card>();
+		this.cardDeck = new ArrayList<Card>();
 		for (String rank : Assignment.ranks) {
 			for (String suit : Assignment.suits) {
-				deck.add(new Card(rank, suit));
-				Collections.shuffle(deck);
+				cardDeck.add(new Card(rank, suit));
+				Collections.shuffle(cardDeck);
 			}
 		}
 	}
@@ -24,20 +24,18 @@ public class Deck {
 	}
 	
 	public Card getCard() {
-		//!
-		return null;
-	}
-	
-	public Card topCardDraw()
-	{
-		Card a = new Card("King", "Hearts");
-		a = this.getCard();
-		this.remove(0);
-		return a;
-	}
-
-	private void remove(int i) {
-		this.remove(i);
+		if(this.cardDeck.size()!=0)
+		{
+			Card tmpCard = this.cardDeck.get(0);
+			System.out.println("Gezogene Karte:" + tmpCard);
+			this.cardDeck.remove(0);
+			return tmpCard;
+		}
+		else
+		{
+			System.out.println("Keine Karten mehr.");
+			return null;
+		}
 	}
 
 	public String getTrump()
@@ -50,25 +48,44 @@ public class Deck {
 		this.Trump = Trump;
 	}
 	
-	public void setDeck(Deck setDeck){
-		deck = setDeck;
+	public void setDeck(Deck deck){
+		this.deck = deck;
 	}
 	
 	public Deck getDeck(){
 			return deck;
 	}
 	
-	public void addCard(ArrayList<Card> deck, Card card){
+	public void addCard(Deck deck, Card card){
 		deck.add(card);
 	}
-	
-	public void removeCard(ArrayList<Card> deck, Card card){
+
+	public void removeCard(Deck deck, Card card){
 		deck.remove(card);
 	}
 	
+	private void add(Card card) {
+		cardDeck.add(card);
+	}
+	
+	private void remove(Card card) {
+		cardDeck.remove(card);
+	}
+
 	public static void main(String[] args){
-		Deck deck = new Deck();
+		new Deck();
 		
+	}
+	
+	public String toString()
+	{
+		String deckString = new String("[Top]\n");
+		for (Card card: this.cardDeck)
+		{
+			deckString += card + "\n";
+		}
+		deckString += "[Bottom]\n";
+		return deckString;
 	}
 }
 

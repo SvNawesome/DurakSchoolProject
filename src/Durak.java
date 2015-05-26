@@ -3,19 +3,21 @@ import java.util.ArrayList;
 import cardAssignment.Assignment;
 
 public class Durak {
-	int currentPlayerId, playerCount;
-	Card firstCard;
-	ArrayList<Player> Players;
-	ArrayList<Table> currentTable;
-	ArrayList<Table> discardPile;
+	private int currentPlayerId, playerCount;
+	private int firstCard;
+	private String Trump;
+	private ArrayList<Player> players;
+	private ArrayList<Card> currentTable;
+	private ArrayList<Card> discardPile;
+	//Table currentTable = new Table();
+	private Card removeCard;
+	
 	void setFirstAttacker(String trmpSuit)
-	{
-		int min = Integer.MAX_VALUE;
-		int firstPlayer = 0;
+	{	
 		Card prvCard = null;
 		
-		for (int plsCount = 0; plsCount < Players.size(); plsCount++) {
-			ArrayList<Card> actualHand = Players.get(plsCount).getHand();
+		for (int plsCount = 0; plsCount < players.size(); plsCount++) {
+			ArrayList<Card> actualHand = players.get(plsCount).getHand();
 			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++) {
 				String actlRank = actualHand.get(crdCount).getRank();
 				String actlSuit = actualHand.get(crdCount).getSuit();
@@ -26,10 +28,10 @@ public class Durak {
 					prvCard = new Card(actlRank, actlSuit);
 				}
 				
-				if(Assignment.cardValues.get(actlCard.rank) < Assignment.cardValues.get(prvCard.rank) && actualHand.get(crdCount).getSuit().equalsIgnoreCase(trmpSuit))
+				if(Assignment.cardValues.get(actlCard.getRank()) < Assignment.cardValues.get(prvCard.getRank()) && actualHand.get(crdCount).getSuit().equalsIgnoreCase(trmpSuit))
 				{
 					prvCard = actualHand.get(crdCount);
-					firstPlayer = plsCount;
+					int firstPlayer = plsCount;
 				}
 			}
 		}
@@ -41,30 +43,47 @@ public class Durak {
 		//setDefender((firstPlayer+1) % 4);
 	}
 	
-	void setAttacker(int currentPlayerId)
+	void setAttacker(Player player)
 	{
-		currentPlayerId = 1;
+		player.setStatusId(1);
 	}
 	
-	Player getAttacker()
+	int getAttacker()
 	{
-		return null;
+		for (Player player : players)
+		{
+			if(player.getStatusId() == 1)
+			{
+				return player.getId();
+			}
+		}
+		return 0;
 	}
-	void setDefender(int currentPlayerId)
+	void setDefender(Player player)
 	{
-		currentPlayerId = 0;
+		player.setStatusId(2);;
 	}
 	int getDefender()
 	{
-		return currentPlayerId;
-	}
-	public final void changeCurrentPlayer()
-	{
-		if (currentPlayerId == 1)
+		for (Player player : players)
 		{
-			setDefender(currentPlayerId);
+			if(player.getStatusId() == 2)
+			{
+				return player.getId();
+			}
 		}
+		return 0;
 	}
+	
+	//muss überarbeitet werden wegen den neuen Set/Get Methoden
+	
+//	public final void changeCurrentPlayer(ArrayList<Player> players)
+//	{
+//		if (players. == 1)
+//		{
+//			setDefender(currentPlayerId);
+//		}
+//	}
 	
 
 // Spiellogik
@@ -74,28 +93,27 @@ public class Durak {
 
 	void placeCard(Card card)
 	{
-		Card card2;
 		currentTable.add(card);
 		int player = 0;
 		if(firstCard != 0)
 		{
-			card2 = currentTable.get(currentTable.legnth-1)
+			Card card2 = currentTable.get(currentTable.size()-1);
 			if(card.compareTo(card2) == 1) //compareTo benutzen!
 			{
-				for (int plsCount = 0; plsCount < Players.size(); plsCount++)
+				for (int plsCount = 0; plsCount < players.size(); plsCount++)
 				{
-					ArrayList<Card> actualHand = Players.get(plsCount).getHand();
+					ArrayList<Card> actualHand = players.get(plsCount).getHand();
 					for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
 					{
 						if(card == actualHand.get(crdCount))
 						{
-							player = plsCount2;
+							player = plsCount;
 						}
 
 					}
 				}
 				//card.move(x,y);
-				Players.get(player).removeCard(card);
+				players.get(player).removeCard(card);
 
 
 			}
@@ -104,14 +122,14 @@ public class Durak {
 				System.out.println("You can't attack with this card ");
 			}
 		}
-		firstCard = 1;
+		else firstCard += 1;
 	}
    
    void takeCards(int playerID)
    {
-	   for(i = 0; i > currentTable.lenght; i++)
+	   for(int i = 0; i > currentTable.size(); i++)
 	   {
-		   Players.get(playerID).addCard(currentTable.get(i));
+		   players.get(playerID).addCard(currentTable.get(i));
 		   removeCard = currentTable.get(i);
 		   currentTable.remove(removeCard);
 	   }
@@ -120,7 +138,7 @@ public class Durak {
    
    void discardPile()
    {
-	   for(i = 0; i > currentTable.lenght; i++)
+	   for(int i = 0; i > currentTable.size(); i++)
 	   {
 		   discardPile.add(currentTable.get(i));
 		   removeCard = currentTable.get(i);
@@ -132,7 +150,6 @@ public class Durak {
    
    
 }
-
 // Angreifer bestimmen
 
 

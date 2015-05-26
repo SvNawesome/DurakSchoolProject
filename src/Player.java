@@ -1,28 +1,55 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Player
 {
-	ArrayList<Card> hand;
-	Deck deck;
+	private ArrayList<Card> hand;
+	private Deck deck;
+	private int idCounter = 0;
+	private int statusId;
+	private int id;
 	
 	public Player(Deck deck) {
+		idCounter++;
 		this.deck = deck.getDeck();
 		this.hand = new ArrayList<Card>();
+		int id = idCounter;
+		int statusId = 0;
 	}
 
+	
+	public int getId()
+	{
+		return this.id;
+	}
+	
+	public void setStatusId(int statusId)
+	{
+		if(statusId == 1 || statusId == 2)
+		{
+			this.statusId = statusId;
+		}
+		else System.out.println("No viable Status.");
+	}
+	
+	public int getStatusId()
+	{
+		return this.statusId;
+	}
 	public ArrayList<Card> getHand() {
 		return hand;
+	}
+	public Card getHand(int i) {
+		return hand.get(i);
 	}
 
 	public void setHand(ArrayList<Card> hand) {
 		this.hand = hand;
 	}
 	
-	public void fillHand(){
+	public void fillHand(Deck deck){
 		if(hand.size() < 6){
 			while(hand.size() < 6){
-				hand.add(deck.topCardDraw());//von stapel nehmen
+				hand.add(deck.getCard());//von stapel nehmen
 			}
 		}
 	}

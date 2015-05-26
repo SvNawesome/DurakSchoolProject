@@ -4,11 +4,11 @@ import cardAssignment.*;
 public class Card{
 	
 	//Initialisieren der benötigten Strings
-	String rank;
-	String suit;
-	String color;
+	private String rank;
+	private String suit;
+	private String color;
 	
-	String TRUMP;
+	private String TRUMP;
 	
 	//Konstruktor für eine Zufallskarte
 	public Card()
@@ -36,15 +36,18 @@ public class Card{
 	}
 	
 	//Methode für den Vergleich
+	// Return (-1) = Verteidiger hat einen höheren Wert (Somit ungültiger Zug)
+	// 		  ( 0) = Karten sind nciht vergleichbar
+	//		  ( 1) = Angreifer hat einen höheren Wert
 	public int comparing(Card defCard)
 	{
-		if(Assignment.cardValues.get(defCard.rank) > Assignment.cardValues.get(this.rank))
+		if(Assignment.cardValues.get(defCard.getRank()) > Assignment.cardValues.get(this.getRank()))
 		{
 			System.out.println("(" + defCard.rank + ") has more value than (" + this.rank + ")");
 			System.out.println("You can't attack with this card (" + this.rank + " / " + this.suit + ").");
 			return -1;
 		}
-		else if(Assignment.cardValues.get(defCard.rank) < Assignment.cardValues.get(this.rank))
+		else if(Assignment.cardValues.get(defCard.getRank()) < Assignment.cardValues.get(this.getRank()))
 		{
 			System.out.println("(" + defCard.rank + ") has less value than (" + this.rank + ")");
 			return 1;
@@ -120,10 +123,11 @@ public class Card{
 		this.suit = suit;
 	}
 	
+	//Neue String Ausgabe der Karten
 	public String toString()
 	{
-		String ret = "<" + this.rank + "/" + this.suit + ">";
-		return ret;
+		String cardString = "[" + this.rank + "/" + this.suit + "]";
+		return cardString;
 	}
 	
 	// Main zum Testen
@@ -135,6 +139,9 @@ public class Card{
 		String TRUMP = deck.getTrump();
 		
 		Card randomCard = new Card();
+		
+		System.out.println(randomCard);
+		
 		Card herzAce = new Card("Ace", "Hearts");
 		Card herz7 = new Card("7", "Hearts");
 		Card spade7 = new Card("7", "Spades");
