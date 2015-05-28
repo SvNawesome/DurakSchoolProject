@@ -75,7 +75,7 @@ public class Durak {
 		return 0;
 	}
 	
-	//muss �berarbeitet werden wegen den neuen Set/Get Methoden
+	//muss überarbeitet werden wegen den neuen Set/Get Methoden
 	
 //	public final void changeCurrentPlayer(ArrayList<Player> players)
 //	{
@@ -91,11 +91,61 @@ public class Durak {
 
 	
 
-	void placeCard(Card card)
+	void placeCardAttacker(Card card)
 	{
+		int currentCard = 0;
+		int firstCard = 0;
+		if(firstCard == 0)
+		{
 		currentTable.add(card);
 		int player = 0;
-		if(firstCard != 0)
+				for (int plsCount = 0; plsCount < players.size(); plsCount++)
+				{
+					ArrayList<Card> actualHand = players.get(plsCount).getHand();
+					for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
+					{
+						if(card == actualHand.get(crdCount))
+						{
+							player = plsCount;
+						}
+
+					}
+				}
+				//card.move(x,y);
+				players.get(player).removeCard(card);
+				currentCard = 0;
+
+		}
+		else if(card.getSuit().equalsIgnoreCase(currentTable.get(currentCard).getSuit()) || card.getRank().equalsIgnoreCase(currentTable.get(currentCard).getRank()))
+		{
+			currentTable.add(card);
+			int player = 0;
+			for (int plsCount = 0; plsCount < players.size(); plsCount++)
+			{
+				ArrayList<Card> actualHand = players.get(plsCount).getHand();
+				for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
+				{
+					if(card == actualHand.get(crdCount))
+					{
+						player = plsCount;
+					}
+
+				}
+			}
+			//card.move(x,y);
+			players.get(player).removeCard(card);
+			currentCard =+2;
+		}
+		else 
+		{
+			System.out.println("Karte kann nicht gelegt werden ");
+		}
+	}
+	
+	void placeCardDefender(Card card)
+	{
+		
+		int player = 0;
 		{
 			Card card2 = currentTable.get(currentTable.size()-1);
 			if(card.compareTo(card2) == 1) //compareTo benutzen!
@@ -112,6 +162,7 @@ public class Durak {
 
 					}
 				}
+				currentTable.add(card);
 				//card.move(x,y);
 				players.get(player).removeCard(card);
 
@@ -119,11 +170,11 @@ public class Durak {
 			}
 			else if(card.compareTo(card2) == -1)
 			{
-				System.out.println("You can't attack with this card ");
+				System.out.println("You can't defend with this card ");
 			}
 		}
-		else firstCard += 1;
 	}
+		
    
    void takeCards(int playerID)
    {
@@ -154,4 +205,4 @@ public class Durak {
 
 
 // Verteidiger bestimmen
-// Verteidigung durchführen (vergleich je 2er paare)s
+// Verteidigung durchfÃ¼hren (vergleich je 2er paare)s
