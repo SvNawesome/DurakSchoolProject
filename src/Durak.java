@@ -212,10 +212,16 @@ public class Durak {
 	   if(j == playerCount-1){
 		   for(int i = 0; i < playerCount; i++){
 			   if(players.get(i).emptyHand == false){
-				   //setLooser();
+				   setLooser(players.get(i));
 			   }
 		   }
 	   }
+   }
+   
+   void setLooser(Player looser){
+	   //Spiel stoppen
+	   //Meldung wer gewonnen, verloren hat
+	   //Spiel neustarten (+ grafik)
    }
    
    
