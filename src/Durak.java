@@ -199,13 +199,24 @@ public class Durak {
    
    //Überprüfen wer verliert
    void checkLooser(int playerCount, int playerID){
-	   for(int i = 0; i < playerCount; i++){ 
-		   if(players.get(playerID).getHand().size() == 0){
-	   			//
-	   		}
+	   int j = 0;
+	   
+	   //Anzahl an Spielern ohne Karten ermitteln
+	   for(int i = 0; i < playerCount; i++){
+		   if(players.get(i).emptyHand == true){
+			   j++;
+		   }
+	   }
+	   
+	   //Den einzigen Spieler mit Karten finden und als Looser setzen
+	   if(j == playerCount-1){
+		   for(int i = 0; i < playerCount; i++){
+			   if(players.get(i).emptyHand == false){
+				   //setLooser();
+			   }
+		   }
 	   }
    }
-   
    
    
    

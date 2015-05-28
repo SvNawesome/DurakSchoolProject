@@ -7,6 +7,7 @@ public class Player
 	private int idCounter = 0;
 	private int statusId;
 	private int id;
+	public boolean emptyHand;
 	
 	public Player(Deck deck) {
 		idCounter++;
