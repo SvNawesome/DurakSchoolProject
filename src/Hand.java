@@ -2,26 +2,19 @@ import java.util.*;
 
 public class Hand{
 	
+	//Initialisieren der benötigten ArrayList
 	ArrayList<Card> hand;
+	
+	//Konstruktor zum erstellen der Hand
 	public Hand()
 	{
 		hand = new ArrayList<Card>();
 	}
 	
+	//gibt Anzahl der Karten auf der Hand zurück
 	public int getCardNumber(){
 		return this.hand.size();
 	}
 	
-//	public static void playCard(Card card){
-//		//ToDo
-//		for(int i = 0; hand.size() != i; i++){
-//			for(hand : ranks == card : ranks && hand : suits == card : suits){
-//				//karte ausspielen
-//				//karte lÃ¶schen+
-//				hand[i].remove(i);
-//				//(array einrÃƒÂ¼cken)
-//			}
-//		}
-	}
+}
 	
-//}
