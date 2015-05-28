@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import cardAssignment.Assignment;
 
 public class Durak {
-	private int currentPlayerId, playerCount;
-	private int firstCard;
+	private int currentPlayerId, playerCount, roundStatus, playerNumber;
+	private int firstCard, firstPlayer;
 	private String Trump;
 	private ArrayList<Player> players;
 	private ArrayList<Card> currentTable;
@@ -31,7 +31,9 @@ public class Durak {
 				if(Assignment.cardValues.get(actlCard.getRank()) < Assignment.cardValues.get(prvCard.getRank()) && actualHand.get(crdCount).getSuit().equalsIgnoreCase(trmpSuit))
 				{
 					prvCard = actualHand.get(crdCount);
-					int firstPlayer = plsCount;
+					firstPlayer = plsCount;
+					setAttacker(players.get(firstPlayer));
+					setDefender(players.get(firstPlayer+1));
 				}
 			}
 		}
@@ -182,9 +184,10 @@ public class Durak {
 	   {
 		   players.get(playerID).addCard(currentTable.get(i));
 		   removeCard = currentTable.get(i);
-		   currentTable.remove(removeCard);
-	   }
-	   
+		   currentTable.remove(removeCard);   
+	   } 
+	   roundStatus = 1;
+	   playerChange();
    }
    
    void discardPile()
@@ -195,9 +198,117 @@ public class Durak {
 		   removeCard = currentTable.get(i);
 		   currentTable.remove(removeCard);
 	   }
+	   roundStatus = 2;
+	   playerChange();
    }
    
-   //�berpr�fen wer verliert
+   void placeCardAttackerKI()
+	{
+		int currentCard = 0;
+		int firstCard = 0;
+		if(firstCard == 0)
+		{
+			if()
+		currentTable.add(card);
+		int player = 0;
+				for (int plsCount = 0; plsCount < players.size(); plsCount++)
+				{
+					ArrayList<Card> actualHand = players.get(plsCount).getHand();
+					for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
+					{
+						if(card == actualHand.get(crdCount))
+						{
+							player = plsCount;
+						}
+
+					}
+				}
+				//card.move(x,y);
+				players.get(player).removeCard(card);
+				currentCard = 0;
+
+		}
+		else if(card.getSuit().equalsIgnoreCase(currentTable.get(currentCard).getSuit()) || card.getRank().equalsIgnoreCase(currentTable.get(currentCard).getRank()))
+		{
+			currentTable.add(card);
+			int player = 0;
+			for (int plsCount = 0; plsCount < players.size(); plsCount++)
+			{
+				ArrayList<Card> actualHand = players.get(plsCount).getHand();
+				for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
+				{
+					if(card == actualHand.get(crdCount))
+					{
+						player = plsCount;
+					}
+
+				}
+			}
+			//card.move(x,y);
+			players.get(player).removeCard(card);
+			currentCard =+2;
+		}
+		else 
+		{
+			System.out.println("Karte kann nicht gelegt werden ");
+		}
+	}
+   
+   void playerChange()
+   {
+	   int attacker, defender;
+	   attacker = getAttacker();
+	   defender = getDefender();
+	   if(playerNumber == 4)
+	   {
+		   if(roundStatus == 1)
+		   {
+			   setAttacker(players.get((attacker+2)%4));
+			   setDefender(players.get((defender+2)%4));
+		   }
+		   else if(roundStatus == 2)
+		   {
+			   setAttacker(players.get((attacker+1)%4));
+			   setDefender(players.get((defender+1)%4));
+		   }
+	   }
+	   else if(playerNumber == 3)
+	   {
+		   if(roundStatus == 1)
+		   {
+			   setAttacker(players.get((attacker+2)%3));
+			   setDefender(players.get((defender+2)%3));
+		   }
+		   else if(roundStatus == 2)
+		   {
+			   setAttacker(players.get((attacker+1)%3));
+			   setDefender(players.get((defender+1)%3));
+		   }
+	   }
+	   else if(playerNumber == 2)
+	   {
+		   if(roundStatus == 1)
+		   {
+		
+		   }
+		   else if(roundStatus == 2)
+		   {
+			   setAttacker(players.get((attacker+1)%2));
+			   setDefender(players.get((defender+1)%2));
+		   }
+	   }
+   }
+   void checkClearHand()
+   {
+	   for (int plsCount = 0; plsCount < players.size(); plsCount++)
+	   {
+		   players.get(plsCount).getCardNumber();
+		   
+	   }
+   }
+}
+   
+   //Überprüfen wer verliert
    void checkLooser(int playerCount, int playerID){
 	   int j = 0;
 	   
@@ -232,4 +343,4 @@ public class Durak {
 
 
 // Verteidiger bestimmen
-// Verteidigung durchfÃ¼hren (vergleich je 2er paare)s
+// Verteidigung durchfÃƒÂ¼hren (vergleich je 2er paare)s
