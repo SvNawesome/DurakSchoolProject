@@ -197,6 +197,15 @@ public class Durak {
 	   }
    }
    
+   //Überprüfen wer verliert
+   void checkLooser(int playerCount, int playerID){
+	   for(int i = 0; i < playerCount; i++){ 
+		   if(players.get(playerID).getHand().size() == 0){
+	   			//
+	   		}
+	   }
+   }
+   
    
    
    
