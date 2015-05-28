@@ -219,6 +219,7 @@ public class Durak {
    }
    
    void setLooser(Player looser){
+	   System.out.println("Verloren hat spieler nummer: " + looser.getId());
 	   //Spiel stoppen
 	   //Meldung wer gewonnen, verloren hat
 	   //Spiel neustarten (+ grafik)
