@@ -1,12 +1,15 @@
-import java.util.*;
+ import java.util.*;
 
 import cardAssignment.*;
 
 public class Deck {
+	
+	//Initialisieren es benötigten String und einer ArrayList
 	private Deck deck;
 	private String Trump;
 	private ArrayList<Card> cardDeck;
 	
+	//Konstruktor erstellt ein neues zufälliges Deck
 	public Deck()
 	{
 		this.cardDeck = new ArrayList<Card>();
@@ -18,11 +21,13 @@ public class Deck {
 		}
 	}
 	
+	//Erstellt neues Deck durch Konstruktor
 	public static Deck createNewDeck(){
 		Deck newDeck = new Deck();
 		return(newDeck);
 	}
 	
+	//Gibt die oberste Karte des Decks zurück
 	public Card getCard() {
 		if(this.cardDeck.size()!=0)
 		{
@@ -38,6 +43,7 @@ public class Deck {
 		}
 	}
 
+	//Getter und Setter für Trumpf und Deck
 	public String getTrump()
 	{
 		return Trump;
@@ -56,6 +62,7 @@ public class Deck {
 			return deck;
 	}
 	
+	//Add und Remove methoden für Deck 
 	public void addCard(Deck deck, Card card){
 		deck.add(card);
 	}
