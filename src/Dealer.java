@@ -11,20 +11,21 @@ public class Dealer {
 	}
 	
 	//Karten an Spieler austeilen (6) und Trumpf ziehen aufrufen
-	public void dealCards(ArrayList<Player> Players, Deck deck){
+	public String dealCards(ArrayList<Player> Players, Deck deck){
 		for(int i = 0; i < Players.size(); i++){
 			System.out.println("\nSpieler" + i + " zieht:");
 			Players.get(i).fillHand(deck);
 		}
-		trumpDraw(deck);
+		return trumpDraw(deck);
 	}
 	
 	//Trumpf ziehen und die gezogene Karte wieder an das Deck anfügen
-	public void trumpDraw(Deck dealerDeck){
+	public String trumpDraw(Deck dealerDeck){
 		System.out.println("\nTrumpf gezogen");
 		Card tmpCard = dealerDeck.getCard();
 		Trump = tmpCard.getSuit();
 		dealerDeck.addCard(dealerDeck, tmpCard);
+		return Trump;
 	}
 	
 	public static void main(String[] args){

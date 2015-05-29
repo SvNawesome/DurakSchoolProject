@@ -4,17 +4,17 @@ public class Player
 {
 	private ArrayList<Card> hand;
 	private Deck deck;
-	private int idCounter = 0;
+	private static int idCounter;
 	private int statusId;
 	private int id;
 	public boolean emptyHand, artificialIntelligence;
 	
 	public Player(Deck deck) {
-		idCounter++;
 		this.deck = deck.getDeck();
 		this.hand = new ArrayList<Card>();
-		int id = idCounter;
-		int statusId = 0;
+		id = idCounter;
+		idCounter = idCounter+1;
+		statusId = 0;
 		artificialIntelligence = false;
 	}
 
@@ -26,11 +26,12 @@ public class Player
 	
 	public void setStatusId(int statusId)
 	{
-		if(statusId == 1 || statusId == 2)
+		/*if(statusId == 1 || statusId == 2)
 		{
 			this.statusId = statusId;
 		}
-		else System.out.println("No viable Status.");
+		else System.out.println("No viable Status.");*/
+		this.statusId = statusId;
 	}
 	
 	public int getStatusId()
