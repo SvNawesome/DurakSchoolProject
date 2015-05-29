@@ -7,7 +7,7 @@ public class Player
 	private int idCounter = 0;
 	private int statusId;
 	private int id;
-	public boolean emptyHand;
+	public boolean emptyHand, artificialIntelligence;
 	
 	public Player(Deck deck) {
 		idCounter++;
@@ -15,6 +15,7 @@ public class Player
 		this.hand = new ArrayList<Card>();
 		int id = idCounter;
 		int statusId = 0;
+		artificialIntelligence = false;
 	}
 
 	
