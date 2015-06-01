@@ -1,14 +1,24 @@
 import java.util.*;
-import cardAssignment.*;
 
-public class Card{
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.*;
+import javafx.stage.Stage;
+import cardAssignment.*;
+import cardImages.ImageStorage;
+
+public class Card extends ImageView{
 	
 	//Initialisieren der benötigten Strings
 	private String rank;
 	private String suit;
 	private String color;
-	
 	private String TRUMP;
+	
+	public static final int  card_width   =  150 ;
+	public static final int  card_height  =  215 ;
+	
+	Image card_faceup_image ;
 	
 	//Konstruktor für eine Zufallskarte
 	public Card()
@@ -17,7 +27,25 @@ public class Card{
 		this.rank = Assignment.ranks[random.nextInt(Assignment.ranks.length-1)];
 		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
 		this.color = Assignment.suitColors.get(suit);
-		System.out.println(rank + " " + suit + " " + color);
+		
+		if ( suit == "Hearts" )
+		{
+			card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
+		}
+		else if ( suit == "Diamonds" )
+		{
+			card_faceup_image = ImageStorage.getInstance().get( "diamonds" + Assignment.cardValues.get(rank) ) ;
+		}
+		else if ( suit == "Spades" )
+		{
+			card_faceup_image = ImageStorage.getInstance().get( "spades" + Assignment.cardValues.get(rank) ) ;
+		}
+		else if ( suit == "Clubs" )
+		{
+			card_faceup_image = ImageStorage.getInstance().get( "clubs" + Assignment.cardValues.get(rank) ) ;
+		}
+
+		setImage( ImageStorage.card_back_image ) ; // Initially the card is face-down
 		
 	}
 	// Konstruktor für eine bestimmte Karte
@@ -28,6 +56,27 @@ public class Card{
 			this.rank = r;
 			this.suit = s;
 			this.color = Assignment.suitColors.get(suit);
+			System.out.println(Assignment.cardValues.get(rank));
+			
+			if ( suit == "Hearts" )
+			{
+				card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
+			}
+			else if ( suit == "Diamonds" )
+			{
+				card_faceup_image = ImageStorage.getInstance().get( "diamonds" + Assignment.cardValues.get(rank) ) ;
+			}
+			else if ( suit == "Spades" )
+			{
+				card_faceup_image = ImageStorage.getInstance().get( "spades" + Assignment.cardValues.get(rank) ) ;
+			}
+			else if ( suit == "Clubs" )
+			{
+				card_faceup_image = ImageStorage.getInstance().get( "clubs" + Assignment.cardValues.get(rank) ) ;
+			}
+
+			setImage(ImageStorage.card_back_image ) ; // Initially the card is face-down
+
 		}
 		else 
 		{
@@ -35,6 +84,19 @@ public class Card{
 		}
 	}
 	
+	
+	public void turn_card()
+	{
+		if(getImage() == card_faceup_image)
+		{
+			setImage(ImageStorage.card_back_image);
+		}
+		else if(getImage() == ImageStorage.card_back_image)
+		{
+			setImage(card_faceup_image);
+		}
+		System.out.println(card_faceup_image);
+	}
 	//Methode für den Vergleich
 	// Return (-1) = Verteidiger hat einen höheren Wert (Somit ungültiger Zug)
 	// 		  ( 0) = Karten sind nciht vergleichbar

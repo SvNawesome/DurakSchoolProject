@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import cardImages.ImageStorage;
+
 public class Table {
 	ArrayList<Card> table;
 	
@@ -20,6 +24,9 @@ public class Table {
 	public void add(Card card)
 	{
 		this.table.add(card);
+		//Grob geschrieben
+		Image card_Image = card.card_faceup_image;
+		ImageView ivTable = new ImageView(card_Image);
 	}
 	
 	public void remove(Card card)

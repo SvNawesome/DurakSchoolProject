@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+
 public class Player
 {
 	private ArrayList<Card> hand;
@@ -32,6 +35,16 @@ public class Player
 		}
 		else System.out.println("No viable Status.");*/
 		this.statusId = statusId;
+	}
+	
+	public void createHand()
+	{
+		HBox handGUI = new HBox();
+		for(Card card : hand)
+		{
+			ImageView iv = new ImageView(card.card_faceup_image);
+			handGUI.getChildren().add(iv);	
+		}
 	}
 	
 	public int getStatusId()
