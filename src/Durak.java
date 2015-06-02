@@ -135,6 +135,7 @@ public class Durak {
 				}
 				//card.move(x,y);
 				players.get(player).removeCard(card);
+				if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 				currentCard = 0;
 
 		}
@@ -156,12 +157,14 @@ public class Durak {
 			}
 			//card.move(x,y);
 			players.get(player).removeCard(card);
+			if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 			currentCard =+2;
 		}
 		else 
 		{
 			System.out.println("Karte kann nicht gelegt werden ");
 		}
+		
 	}
 	
 	void placeCardDefender(Card card)
@@ -187,6 +190,7 @@ public class Durak {
 				currentTable.add(card);
 				//card.move(x,y);
 				players.get(player).removeCard(card);
+				if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 
 
 			}
@@ -332,32 +336,37 @@ public class Durak {
    }
 }*/
    
-   //Überprüfen wer verliert
-   void checkLooser(int playerCount, int playerID){
+   //Ueberpruefen wer verliert
+   void checkLooser(){
 	   int j = 0;
 	   
 	   //Anzahl an Spielern ohne Karten ermitteln
-	   for(int i = 0; i < playerCount; i++){
+	   for(int i = 0; i < playerNumber; i++){
 		   if(players.get(i).emptyHand == true){
 			   j++;
 		   }
 	   }
 	   
 	   //Den einzigen Spieler mit Karten finden und als Looser setzen
-	   if(j == playerCount-1){
-		   for(int i = 0; i < playerCount; i++){
+	   if(j == playerNumber-1){
+		   for(int i = 0; i < playerNumber; i++){
 			   if(players.get(i).emptyHand == false){
 				   setLooser(players.get(i));
 			   }
 		   }
 	   }
+	   else{System.out.println("Keinen Verlierer gefunden");}
    }
    
+   //Ausgabe des Verlierers und neustarten des Spiels
    void setLooser(Player looser){
 	   System.out.println("Verloren hat spieler nummer: " + looser.getId());
-	   //Spiel stoppen
-	   //Meldung wer gewonnen, verloren hat
-	   //Spiel neustarten (+ grafik)
+	   restart();
+   }
+   
+   void restart(){
+	   System.out.println("Spiel wird neu gestartet...");
+	   //Spiel neu starten
    }
    
 	public static void main(String[] args) {
@@ -436,6 +445,20 @@ public class Durak {
 		System.out.println("Table Size: " + durak.currentTable.size());
 		durak.discardPile();
 		System.out.println("Table Size: " + durak.currentTable.size());
+		
+		
+		
+		for(int i = 0; i < Attacker.getHand().size()+1; i++){
+			Attacker.getHand().remove(0);
+			Attacker.emptyHand = true;
+		}
+		
+		for(int i = 0; i < Defender.getHand().size()+1; i++){
+			Defender.getHand().remove(0);
+			Defender.emptyHand = true;
+		}
+		
+		durak.checkLooser();
 	}
    
 }

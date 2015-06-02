@@ -19,6 +19,7 @@ public class Player
 		idCounter = idCounter+1;
 		statusId = 0;
 		artificialIntelligence = false;
+		emptyHand = false;
 	}
 
 	
