@@ -464,6 +464,6 @@ public class Durak {
 }
 // Angreifer bestimmen
 
-
+//test
 // Verteidiger bestimmen
 // Verteidigung durchfÃƒÂ¼hren (vergleich je 2er paare)s
