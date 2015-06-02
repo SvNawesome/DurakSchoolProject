@@ -13,7 +13,7 @@ public class Durak {
 	private Card removeCard;
 	
 	public Durak(){
-		
+		ArrayList<Player> players = new ArrayList<Player>();
 	}
 	
 	void setFirstAttacker(String trmpSuit, ArrayList<Player> players)
@@ -357,7 +357,7 @@ public class Durak {
    }
    
 	public static void main(String[] args) {
-		ArrayList<Player> playerstest = new ArrayList<Player>();
+		ArrayList<Player> playersTmp = new ArrayList<Player>();
 		Deck deck = new Deck();
 		Player player1 = new Player(deck);
 		Player player2 = new Player(deck);
@@ -371,7 +371,7 @@ public class Durak {
 		
 		durak.playerNumber = 3;
 		durak.roundStatus = 2;
-		durak.players = playerstest;
+		durak.players = playersTmp;
 		
 		System.out.println("SpielerIds:");
 		System.out.println(player1.getId());
@@ -383,11 +383,11 @@ public class Durak {
 		durak.players.add(player3);
 		
 		
-		String Trump = dealer.dealCards(durak.players, deck);
+		durak.Trump = dealer.dealCards(durak.players, deck);
 		
-		System.out.println(Trump);
+		System.out.println(durak.Trump);
 		
-		durak.setFirstAttacker(Trump, durak.players);
+		durak.setFirstAttacker(durak.Trump, durak.players);
 		System.out.println("Angreifer ist: " + durak.getAttacker(durak.players));
 		System.out.println("Verteidiger ist: " + durak.getDefender(durak.players));
 		
