@@ -28,7 +28,7 @@ public class Card extends ImageView{
 		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
 		this.color = Assignment.suitColors.get(suit);
 		
-		if ( suit == "Hearts" )
+		/*if ( suit == "Hearts" )
 		{
 			card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
 		}
@@ -46,7 +46,7 @@ public class Card extends ImageView{
 		}
 
 		setImage( ImageStorage.card_back_image ) ; // Initially the card is face-down
-		
+		*/
 	}
 	// Konstruktor für eine bestimmte Karte
 	public Card(String r, String s)
@@ -56,9 +56,9 @@ public class Card extends ImageView{
 			this.rank = r;
 			this.suit = s;
 			this.color = Assignment.suitColors.get(suit);
-			System.out.println(Assignment.cardValues.get(rank));
+			//System.out.println(Assignment.cardValues.get(rank));
 			
-			if ( suit == "Hearts" )
+			/*if ( suit == "Hearts" )
 			{
 				card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
 			}
@@ -76,7 +76,7 @@ public class Card extends ImageView{
 			}
 
 			setImage(ImageStorage.card_back_image ) ; // Initially the card is face-down
-
+*/
 		}
 		else 
 		{

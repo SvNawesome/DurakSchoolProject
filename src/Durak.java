@@ -357,13 +357,13 @@ public class Durak {
    }
    
 	public static void main(String[] args) {
-		ArrayList<Player> players = new ArrayList<Player>();
+		ArrayList<Player> playerstest = new ArrayList<Player>();
 		Deck deck = new Deck();
 		Player player1 = new Player(deck);
 		Player player2 = new Player(deck);
 		Player player3 = new Player(deck);
 		Dealer dealer = new Dealer(deck);
-		Table table = new Table();
+		//Table table = new Table();
 		//currentTable = table;
 		Durak durak = new Durak();
 		
@@ -371,37 +371,62 @@ public class Durak {
 		
 		durak.playerNumber = 3;
 		durak.roundStatus = 2;
+		durak.players = playerstest;
 		
 		System.out.println("SpielerIds:");
 		System.out.println(player1.getId());
 		System.out.println(player2.getId());
+		System.out.println(player3.getId());
 		
-		players.add(player1);
-		players.add(player2);
-		players.add(player3);
+		durak.players.add(player1);
+		durak.players.add(player2);
+		durak.players.add(player3);
 		
 		
-		String Trump = dealer.dealCards(players, deck);
+		String Trump = dealer.dealCards(durak.players, deck);
 		
 		System.out.println(Trump);
 		
-		durak.setFirstAttacker(Trump, players);
-		System.out.println("Angreifer ist: " + durak.getAttacker(players));
-		System.out.println("Verteidiger ist: " + durak.getDefender(players));
+		durak.setFirstAttacker(Trump, durak.players);
+		System.out.println("Angreifer ist: " + durak.getAttacker(durak.players));
+		System.out.println("Verteidiger ist: " + durak.getDefender(durak.players));
 		
 		System.out.println("----player change-----");
-		durak.playerChange(players);
+		durak.playerChange(durak.players);
 
-		System.out.println("Angreifer ist: " + durak.getAttacker(players));
-		System.out.println("Verteidiger ist: " + durak.getDefender(players));
+		System.out.println("Angreifer ist: " + durak.getAttacker(durak.players));
+		System.out.println("Verteidiger ist: " + durak.getDefender(durak.players));
 		
 		
 		
 		
-		Attacker = players.get(durak.getAttacker(players));
-		Defender = players.get(durak.getDefender(players));
+		Attacker = durak.players.get(durak.getAttacker(durak.players));
+		Defender = durak.players.get(durak.getDefender(durak.players));
+		System.out.println("Attacker und Defender zugewiesen");
 		
-		durak.placeCardAttacker(Attacker.getHand(0));
+		
+		Card cardAt = new Card("6", "Spades");
+		Card cardDe = new Card("8", "Spades");
+		
+		//durak.placeCardAttacker(Attacker.getHand(0));
+		durak.placeCardAttacker(cardAt);
+		System.out.println("Placed Card Attacker!");
+		
+		//durak.placeCardDefender(Defender.getHand(0));
+		durak.placeCardDefender(cardDe);
+		System.out.println("Placed Card Defender!");
+		
+		
+		
+		System.out.println("Defender hand size: " + Defender.getHand().size());
+		durak.takeCards(Defender.getId());
+		System.out.println("Defender hand size: " + Defender.getHand().size());
+
+		
+		
+		System.out.println("Table Size: " + durak.currentTable.size());
+		durak.discardPile();
+		System.out.println("Table Size: " + durak.currentTable.size());
 	}
    
 }
