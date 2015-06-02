@@ -200,26 +200,30 @@ public class Durak {
    
    void takeCards(int playerID)
    {
-	   for(int i = 0; i > currentTable.size(); i++)
+	   if(currentTable.size() != 0){
+	   for(int i = -1; i < currentTable.size(); i++)
 	   {
-		   players.get(playerID).addCard(currentTable.get(i));
-		   removeCard = currentTable.get(i);
+		   players.get(playerID).addCard(currentTable.get(0));
+		   removeCard = currentTable.get(0);
 		   currentTable.remove(removeCard);   
 	   } 
 	   roundStatus = 1;
 	   playerChange(players);
+	   }
    }
    
    void discardPile()
    {
-	   for(int i = 0; i > currentTable.size(); i++)
+	   if(currentTable.size() != 0){
+	   for(int i = -1; i < currentTable.size(); i++)
 	   {
-		   discardPile.add(currentTable.get(i));
-		   removeCard = currentTable.get(i);
+		   discardPile.add(currentTable.get(0));
+		   removeCard = currentTable.get(0);
 		   currentTable.remove(removeCard);
 	   }
 	   roundStatus = 2;
 	   playerChange(players);
+	   }
    }
    
    /*void placeCardAttackerKI()
@@ -358,6 +362,8 @@ public class Durak {
    
 	public static void main(String[] args) {
 		ArrayList<Player> playersTmp = new ArrayList<Player>();
+		ArrayList<Card> discardPileTmp = new ArrayList<Card>();
+		
 		Deck deck = new Deck();
 		Player player1 = new Player(deck);
 		Player player2 = new Player(deck);
@@ -372,6 +378,7 @@ public class Durak {
 		durak.playerNumber = 3;
 		durak.roundStatus = 2;
 		durak.players = playersTmp;
+		durak.discardPile = discardPileTmp;
 		
 		System.out.println("SpielerIds:");
 		System.out.println(player1.getId());
@@ -410,11 +417,11 @@ public class Durak {
 		
 		//durak.placeCardAttacker(Attacker.getHand(0));
 		durak.placeCardAttacker(cardAt);
-		System.out.println("Placed Card Attacker!");
+		System.out.println("Place Card Attacker!");
 		
 		//durak.placeCardDefender(Defender.getHand(0));
 		durak.placeCardDefender(cardDe);
-		System.out.println("Placed Card Defender!");
+		System.out.println("Place Card Defender!");
 		
 		
 		
@@ -422,7 +429,9 @@ public class Durak {
 		durak.takeCards(Defender.getId());
 		System.out.println("Defender hand size: " + Defender.getHand().size());
 
-		
+		for(int i = 0; i < durak.currentTable.size(); i++){
+			System.out.println(durak.currentTable.get(i));
+		}
 		
 		System.out.println("Table Size: " + durak.currentTable.size());
 		durak.discardPile();
