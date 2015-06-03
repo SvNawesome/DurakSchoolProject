@@ -347,6 +347,17 @@ public class Durak {
 		   }
 	   }
 	   
+	   //Den einzigen Spieler ohne Karten finden und als Winner setzen
+	   if(j == 1){
+		   for(int i = 0; i < playerNumber; i++){
+			   if(players.get(i).emptyHand == true && players.get(i).winner == false){
+				   setWinner(players.get(i));
+			   }
+		   }
+
+	   }
+	   else{System.out.println("Keinen Gewinner gefunden");}
+	   
 	   //Den einzigen Spieler mit Karten finden und als Looser setzen
 	   if(j == playerNumber-1){
 		   for(int i = 0; i < playerNumber; i++){
@@ -356,6 +367,12 @@ public class Durak {
 		   }
 	   }
 	   else{System.out.println("Keinen Verlierer gefunden");}
+   }
+   
+   //Ausgabe des Gewinners
+   void setWinner(Player winner){
+	   System.out.println("Gewonnen hat spieler nummer: " + winner.getId());
+	   winner.winner = true;
    }
    
    //Ausgabe des Verlierers und neustarten des Spiels
@@ -368,6 +385,8 @@ public class Durak {
 	   System.out.println("Spiel wird neu gestartet...");
 	   //Spiel neu starten
    }
+   
+   //-------------------------MAIN-------------------------------------
    
 	public static void main(String[] args) {
 		ArrayList<Player> playersTmp = new ArrayList<Player>();
@@ -447,16 +466,16 @@ public class Durak {
 		System.out.println("Table Size: " + durak.currentTable.size());
 		
 		
-		
+		//Testen ob bei leeren händen der richtige verlierer bestimmt wird
 		for(int i = 0; i < Attacker.getHand().size()+1; i++){
 			Attacker.getHand().remove(0);
 			Attacker.emptyHand = true;
 		}
 		
-		for(int i = 0; i < Defender.getHand().size()+1; i++){
+		/*for(int i = 0; i < Defender.getHand().size()+1; i++){
 			Defender.getHand().remove(0);
 			Defender.emptyHand = true;
-		}
+		}*/
 		
 		durak.checkLooser();
 	}
