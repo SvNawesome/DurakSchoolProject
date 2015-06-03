@@ -11,7 +11,7 @@ public class Player
 	private static int idCounter;
 	private int statusId;
 	private int id;
-	public boolean emptyHand, artificialIntelligence;
+	public boolean emptyHand, winner, artificialIntelligence;
 	
 	public Player(Deck deck) {
 		this.deck = deck.getDeck();
@@ -20,6 +20,8 @@ public class Player
 		idCounter = idCounter+1;
 		statusId = 0;
 		artificialIntelligence = false;
+		emptyHand = false;
+		winner = false;
 	}
 
 	

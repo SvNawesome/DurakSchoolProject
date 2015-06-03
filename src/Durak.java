@@ -13,7 +13,7 @@ public class Durak {
 	private Card removeCard;
 	
 	public Durak(){
-		
+		ArrayList<Player> players = new ArrayList<Player>();
 	}
 	
 	void setFirstAttacker(String trmpSuit, ArrayList<Player> players)
@@ -135,6 +135,7 @@ public class Durak {
 				}
 				//card.move(x,y);
 				players.get(player).removeCard(card);
+				if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 				currentCard = 0;
 
 		}
@@ -156,12 +157,14 @@ public class Durak {
 			}
 			//card.move(x,y);
 			players.get(player).removeCard(card);
+			if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 			currentCard =+2;
 		}
 		else 
 		{
 			System.out.println("Karte kann nicht gelegt werden ");
 		}
+		
 	}
 	
 	void placeCardDefender(Card card)
@@ -187,6 +190,7 @@ public class Durak {
 				currentTable.add(card);
 				//card.move(x,y);
 				players.get(player).removeCard(card);
+				if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 
 
 			}
@@ -200,26 +204,30 @@ public class Durak {
    
    void takeCards(int playerID)
    {
-	   for(int i = 0; i > currentTable.size(); i++)
+	   if(currentTable.size() != 0){
+	   for(int i = -1; i < currentTable.size(); i++)
 	   {
-		   players.get(playerID).addCard(currentTable.get(i));
-		   removeCard = currentTable.get(i);
+		   players.get(playerID).addCard(currentTable.get(0));
+		   removeCard = currentTable.get(0);
 		   currentTable.remove(removeCard);   
 	   } 
 	   roundStatus = 1;
 	   playerChange(players);
+	   }
    }
    
    void discardPile()
    {
-	   for(int i = 0; i > currentTable.size(); i++)
+	   if(currentTable.size() != 0){
+	   for(int i = -1; i < currentTable.size(); i++)
 	   {
-		   discardPile.add(currentTable.get(i));
-		   removeCard = currentTable.get(i);
+		   discardPile.add(currentTable.get(0));
+		   removeCard = currentTable.get(0);
 		   currentTable.remove(removeCard);
 	   }
 	   roundStatus = 2;
 	   playerChange(players);
+	   }
    }
    
    /*void placeCardAttackerKI()
@@ -328,42 +336,92 @@ public class Durak {
    }
 }*/
    
-   //ÃœberprÃ¼fen wer verliert
-   void checkLooser(int playerCount, int playerID){
+   //Ai greift immer mit der stärksten Karte an
+   //Gibt die Karte zurück mit der die Ai angreift
+   Card AiAttackCard(Player AiPlayer){
+	   Card card = AiPlayer.getHand(0);
+	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
+		   if(card.compareTo(AiPlayer.getHand(i)) == 1){
+			   card = AiPlayer.getHand(i);
+		   }
+	   }
+	   return card;
+   }
+   
+ //Ai verteidigt immer mit der stärksten Karte
+ //Gibt die Karte zurück mit der die Ai verteidigt
+   Card AiDefendCard(Player AiPlayer){
+	   Card card = AiPlayer.getHand(0);
+	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
+		   if(card.compareTo(AiPlayer.getHand(i)) == 1){
+			   card = AiPlayer.getHand(i);
+		   }
+	   }
+	   return card;
+   }
+   
+   //Ueberpruefen wer verliert
+   void checkLooser(){
 	   int j = 0;
 	   
 	   //Anzahl an Spielern ohne Karten ermitteln
-	   for(int i = 0; i < playerCount; i++){
+	   for(int i = 0; i < playerNumber; i++){
 		   if(players.get(i).emptyHand == true){
 			   j++;
 		   }
 	   }
 	   
+	   //Den einzigen Spieler ohne Karten finden und als Winner setzen
+	   if(j == 1){
+		   for(int i = 0; i < playerNumber; i++){
+			   if(players.get(i).emptyHand == true && players.get(i).winner == false){
+				   setWinner(players.get(i));
+			   }
+		   }
+
+	   }
+	   else{System.out.println("Keinen Gewinner gefunden");}
+	   
 	   //Den einzigen Spieler mit Karten finden und als Looser setzen
-	   if(j == playerCount-1){
-		   for(int i = 0; i < playerCount; i++){
+	   if(j == playerNumber-1){
+		   for(int i = 0; i < playerNumber; i++){
 			   if(players.get(i).emptyHand == false){
 				   setLooser(players.get(i));
 			   }
 		   }
 	   }
+	   else{System.out.println("Keinen Verlierer gefunden");}
    }
    
+   //Ausgabe des Gewinners
+   void setWinner(Player winner){
+	   System.out.println("Gewonnen hat spieler nummer: " + winner.getId());
+	   winner.winner = true;
+   }
+   
+   //Ausgabe des Verlierers und neustarten des Spiels
    void setLooser(Player looser){
 	   System.out.println("Verloren hat spieler nummer: " + looser.getId());
-	   //Spiel stoppen
-	   //Meldung wer gewonnen, verloren hat
-	   //Spiel neustarten (+ grafik)
+	   restart();
    }
    
+   void restart(){
+	   System.out.println("Spiel wird neu gestartet...");
+	   //Spiel neu starten
+   }
+   
+   //-------------------------MAIN-------------------------------------
+   
 	public static void main(String[] args) {
-		ArrayList<Player> players = new ArrayList<Player>();
+		ArrayList<Player> playersTmp = new ArrayList<Player>();
+		ArrayList<Card> discardPileTmp = new ArrayList<Card>();
+		
 		Deck deck = new Deck();
 		Player player1 = new Player(deck);
 		Player player2 = new Player(deck);
 		Player player3 = new Player(deck);
 		Dealer dealer = new Dealer(deck);
-		Table table = new Table();
+		//Table table = new Table();
 		//currentTable = table;
 		Durak durak = new Durak();
 		
@@ -371,42 +429,91 @@ public class Durak {
 		
 		durak.playerNumber = 3;
 		durak.roundStatus = 2;
+		durak.players = playersTmp;
+		durak.discardPile = discardPileTmp;
 		
 		System.out.println("SpielerIds:");
 		System.out.println(player1.getId());
 		System.out.println(player2.getId());
+		System.out.println(player3.getId());
 		
-		players.add(player1);
-		players.add(player2);
-		players.add(player3);
+		durak.players.add(player1);
+		durak.players.add(player2);
+		durak.players.add(player3);
 		
 		
-		String Trump = dealer.dealCards(players, deck);
+		durak.Trump = dealer.dealCards(durak.players, deck);
 		
-		System.out.println(Trump);
+		System.out.println(durak.Trump);
 		
-		durak.setFirstAttacker(Trump, players);
-		System.out.println("Angreifer ist: " + durak.getAttacker(players));
-		System.out.println("Verteidiger ist: " + durak.getDefender(players));
+		durak.setFirstAttacker(durak.Trump, durak.players);
+		System.out.println("Angreifer ist: " + durak.getAttacker(durak.players));
+		System.out.println("Verteidiger ist: " + durak.getDefender(durak.players));
 		
 		System.out.println("----player change-----");
-		durak.playerChange(players);
+		durak.playerChange(durak.players);
 
-		System.out.println("Angreifer ist: " + durak.getAttacker(players));
-		System.out.println("Verteidiger ist: " + durak.getDefender(players));
+		System.out.println("Angreifer ist: " + durak.getAttacker(durak.players));
+		System.out.println("Verteidiger ist: " + durak.getDefender(durak.players));
 		
 		
 		
 		
-		Attacker = players.get(durak.getAttacker(players));
-		Defender = players.get(durak.getDefender(players));
+		Attacker = durak.players.get(durak.getAttacker(durak.players));
+		Defender = durak.players.get(durak.getDefender(durak.players));
+		System.out.println("Attacker und Defender zugewiesen");
 		
-		durak.placeCardAttacker(Attacker.getHand(0));
+		
+		Card cardAt = new Card("6", "Spades");
+		Card cardDe = new Card("8", "Spades");
+		
+		//durak.placeCardAttacker(Attacker.getHand(0));
+		durak.placeCardAttacker(cardAt);
+		System.out.println("Place Card Attacker!");
+		
+		//durak.placeCardDefender(Defender.getHand(0));
+		durak.placeCardDefender(cardDe);
+		System.out.println("Place Card Defender!");
+		
+		
+		
+		System.out.println("Defender hand size: " + Defender.getHand().size());
+		durak.takeCards(Defender.getId());
+		System.out.println("Defender hand size: " + Defender.getHand().size());
+
+		for(int i = 0; i < durak.currentTable.size(); i++){
+			System.out.println(durak.currentTable.get(i));
+		}
+		
+		System.out.println("Table Size: " + durak.currentTable.size());
+		durak.discardPile();
+		System.out.println("Table Size: " + durak.currentTable.size());
+		
+		
+		//Testen ob bei leeren händen der richtige verlierer bestimmt wird
+		for(int i = 0; i < Attacker.getHand().size()+1; i++){
+			Attacker.getHand().remove(0);
+			Attacker.emptyHand = true;
+		}
+		
+		/*for(int i = 0; i < Defender.getHand().size()+1; i++){
+			Defender.getHand().remove(0);
+			Defender.emptyHand = true;
+		}*/
+		
+		durak.checkLooser();
+		
+		AI Ai = new AI(deck);
+		durak.players.add(Ai.player);
+		System.out.println("Id der KI: " + durak.players.get(3).getId());
+		
+		//angriffsaufruf der KI:
+		//durak.placeCardAttacker(durak.AiAttackCard(Ai.player));
 	}
    
 }
 // Angreifer bestimmen
 
-
+//test
 // Verteidiger bestimmen
 // Verteidigung durchfÃƒÆ’Ã‚Â¼hren (vergleich je 2er paare)s
