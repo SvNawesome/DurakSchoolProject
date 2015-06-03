@@ -1,9 +1,6 @@
 import java.util.*;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.*;
-import javafx.stage.Stage;
 import cardAssignment.*;
 import cardImages.ImageStorage;
 
@@ -12,7 +9,6 @@ public class Card extends ImageView{
 	//Initialisieren der benötigten Strings
 	private String rank;
 	private String suit;
-	private String color;
 	private String TRUMP;
 	
 	public static final int  card_width   =  150 ;
@@ -26,7 +22,6 @@ public class Card extends ImageView{
 		Random random = new Random();
 		this.rank = Assignment.ranks[random.nextInt(Assignment.ranks.length-1)];
 		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
-		this.color = Assignment.suitColors.get(suit);
 		
 		if ( suit == "Hearts" )
 		{
@@ -49,13 +44,13 @@ public class Card extends ImageView{
 		
 	}
 	// Konstruktor für eine bestimmte Karte
+	// Imageview evtl einfügen
 	public Card(String r, String s)
 	{
 		if(Arrays.asList(Assignment.ranks).contains(r) && Arrays.asList(Assignment.suits).contains(s))
 		{
 			this.rank = r;
 			this.suit = s;
-			this.color = Assignment.suitColors.get(suit);
 			System.out.println(Assignment.cardValues.get(rank));
 			
 			if ( suit == "Hearts" )
@@ -95,8 +90,8 @@ public class Card extends ImageView{
 		{
 			setImage(card_faceup_image);
 		}
-		System.out.println(card_faceup_image);
 	}
+	
 	//Methode für den Vergleich
 	// Return (-1) = Verteidiger hat einen höheren Wert (Somit ungültiger Zug)
 	// 		  ( 0) = Karten sind nciht vergleichbar

@@ -28,6 +28,7 @@ public class Deck {
 	}
 	
 	//Gibt die oberste Karte des Decks zurück
+	//evtl in drawcard umbenennen
 	public Card getCard() {
 		if(this.cardDeck.size()!=0)
 		{
@@ -44,6 +45,14 @@ public class Deck {
 	}
 
 	//Getter und Setter für Trumpf und Deck
+	public int checkEmptyDeck()
+	{
+		if(this.cardDeck.size() != 0)
+		{
+			return 1;
+		}
+		else return 0;
+	}
 	public String getTrump()
 	{
 		return Trump;

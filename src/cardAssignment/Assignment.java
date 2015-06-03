@@ -49,25 +49,4 @@ public class Assignment {
 			"Hearts",
 			"Diamonds"
 		};
-		
-	// Karten Farbe
-	// Karten Symbole (als Key), den passenden Farben zuordnen
-	public static final Map<String, String> suitColors;
-	static{
-		Map<String, String> cardColors = new HashMap<String, String>();
-			cardColors.put("Spades", "black");
-			cardColors.put("Clubs", "black");
-			cardColors.put("Hearts", "red");
-			cardColors.put("Diamonds", "red");
-			suitColors = Collections.unmodifiableMap(cardColors);
-			
-			
-		// Zum Testen der Zuordnung
-		for(String key: cardColors.keySet())
-		{
-			System.out.print("Key: " + key + " - ");
-			System.out.println("Value: " + cardColors.get(key) + "\n");
-		}
-	}
-
 }

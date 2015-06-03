@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import cardImages.ImageStorage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -30,7 +28,8 @@ public class GameController implements Initializable{
             root = FXMLLoader.load(getClass().getClassLoader().getResource("GameOptions.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Options");
-            stage.setScene(new Scene(root, 450, 450));
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
         	e.printStackTrace();

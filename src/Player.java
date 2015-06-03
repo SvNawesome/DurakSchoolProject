@@ -5,6 +5,7 @@ import javafx.scene.layout.HBox;
 
 public class Player
 {
+	//überlegen ob wir deck hier drin überhaupt brauchen
 	private ArrayList<Card> hand;
 	private Deck deck;
 	private static int idCounter;
@@ -70,9 +71,10 @@ public class Player
 		}
 	}
 	
-	void addCard(Card card)
+	Card addCard(Card card)
 	{
 		hand.add(card);
+		return card;
 	}
 	
 	void removeCard(Card card)
