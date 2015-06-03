@@ -336,15 +336,27 @@ public class Durak {
    }
 }*/
    
+   //Ai greift immer mit der stärksten Karte an
    //Gibt die Karte zurück mit der die Ai angreift
    Card AiAttackCard(Player AiPlayer){
 	   Card card = AiPlayer.getHand(0);
+	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
+		   if(card.compareTo(AiPlayer.getHand(i)) == 1){
+			   card = AiPlayer.getHand(i);
+		   }
+	   }
 	   return card;
    }
    
+ //Ai verteidigt immer mit der stärksten Karte
  //Gibt die Karte zurück mit der die Ai verteidigt
    Card AiDefendCard(Player AiPlayer){
 	   Card card = AiPlayer.getHand(0);
+	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
+		   if(card.compareTo(AiPlayer.getHand(i)) == 1){
+			   card = AiPlayer.getHand(i);
+		   }
+	   }
 	   return card;
    }
    
