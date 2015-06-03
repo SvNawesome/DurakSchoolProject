@@ -336,6 +336,18 @@ public class Durak {
    }
 }*/
    
+   //Gibt die Karte zurück mit der die Ai angreift
+   Card AiAttackCard(Player AiPlayer){
+	   Card card = AiPlayer.getHand(0);
+	   return card;
+   }
+   
+ //Gibt die Karte zurück mit der die Ai verteidigt
+   Card AiDefendCard(Player AiPlayer){
+	   Card card = AiPlayer.getHand(0);
+	   return card;
+   }
+   
    //Ueberpruefen wer verliert
    void checkLooser(){
 	   int j = 0;
@@ -478,6 +490,13 @@ public class Durak {
 		}*/
 		
 		durak.checkLooser();
+		
+		AI Ai = new AI(deck);
+		durak.players.add(Ai.player);
+		System.out.println("Id der KI: " + durak.players.get(3).getId());
+		
+		//angriffsaufruf der KI:
+		//durak.placeCardAttacker(durak.AiAttackCard(Ai.player));
 	}
    
 }
