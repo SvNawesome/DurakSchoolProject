@@ -11,6 +11,7 @@ public class Durak {
 	Table currentTable = new Table();
 	private ArrayList<Card> discardPile;
 	private Card removeCard;
+	private boolean loser;
 	
 	public Durak(){
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -374,7 +375,7 @@ public class Durak {
 	   //Den einzigen Spieler ohne Karten finden und als Winner setzen
 	   if(j == 1){
 		   for(int i = 0; i < playerNumber; i++){
-			   if(players.get(i).emptyHand == true && players.get(i).winner == false){
+			   if(players.get(i).emptyHand == true && players.get(i).winner == false ){
 				   setWinner(players.get(i));
 			   }
 		   }
@@ -387,6 +388,7 @@ public class Durak {
 		   for(int i = 0; i < playerNumber; i++){
 			   if(players.get(i).emptyHand == false){
 				   setLooser(players.get(i));
+				   loser = true;
 			   }
 		   }
 	   }
@@ -408,6 +410,55 @@ public class Durak {
    void restart(){
 	   System.out.println("Spiel wird neu gestartet...");
 	   //Spiel neu starten
+   }
+   
+   void run(){
+	   
+	   ArrayList<Player> playersTmp = new ArrayList<Player>();
+	   ArrayList<Card> discardPileTmp = new ArrayList<Card>();
+	   Deck deck = new Deck();
+	   Durak durak = new Durak();
+	   Dealer dealer = new Dealer(deck);
+	   if(playerCount == 4){
+		   Player player1 = new Player(deck);
+		   AI Ai1 = new AI(deck);
+		   AI Ai2 = new AI(deck);
+		   AI Ai3 = new AI(deck);
+		   
+		   durak.players.add(player1);
+		   durak.players.add(Ai1.player);
+		   durak.players.add(Ai2.player);
+		   durak.players.add(Ai3.player);
+			
+	   }else if(playerCount == 3){
+		   Player player1 = new Player(deck);
+		   AI Ai1 = new AI(deck);
+		   AI Ai2 = new AI(deck);
+		   
+		   durak.players.add(player1);
+		   durak.players.add(Ai1.player);
+		   durak.players.add(Ai2.player);
+		   
+	   }else if(playerCount == 2){
+		   Player player1 = new Player(deck);
+		   AI Ai1 = new AI(deck);
+		   
+		   durak.players.add(player1);
+		   durak.players.add(Ai1.player);
+		   
+	   }else{
+		   System.out.println("Zu wenig oder zu viele Spieler!");
+	   }
+	   
+	   playerNumber = playerCount;
+	   durak.players = playersTmp;
+	   durak.discardPile = discardPileTmp;
+	   durak.Trump = dealer.dealCards(durak.players, deck);
+	   durak.setFirstAttacker(durak.Trump, durak.players);
+	   while(loser != true){
+		   int cardPlaceCounter = 0;
+		   
+	   }
    }
    
    //-------------------------MAIN-------------------------------------

@@ -51,12 +51,12 @@ public class Card extends ImageView{
 		{
 			this.rank = r;
 			this.suit = s;
-<<<<<<< HEAD
+
 			System.out.println(Assignment.cardValues.get(rank));
-=======
-			this.color = Assignment.suitColors.get(suit);
+
+			//this.color = Assignment.suitColors.get(suit);
 			//System.out.println(Assignment.cardValues.get(rank));
->>>>>>> origin/master
+
 			
 			/*if ( suit == "Hearts" )
 			{
