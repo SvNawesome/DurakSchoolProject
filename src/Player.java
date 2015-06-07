@@ -11,7 +11,7 @@ public class Player
 	private static int idCounter;
 	private int statusId;
 	private int id;
-	public boolean emptyHand, winner, artificialIntelligence;
+	public boolean emptyHand, winner, artificialIntelligence,ai;
 	
 	public Player(Deck deck) {
 		this.deck = deck.getDeck();
@@ -22,6 +22,7 @@ public class Player
 		artificialIntelligence = false;
 		emptyHand = false;
 		winner = false;
+		ai = true;
 	}
 
 	
@@ -83,4 +84,14 @@ public class Player
 	{
 		hand.remove(card);
 	}
+	int getFirstCard(){
+		int card = 0;
+		for(int i = 0; i >= hand.size(); i++){
+			if(getHand(i) != null){
+				card = i;
+			}
+		}
+		return card;
+	}
+
 }
