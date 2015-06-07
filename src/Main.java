@@ -42,7 +42,7 @@ public class Main extends Application {
 		HBox player1Hand = new HBox();
 		Button startButton = new Button("Start");
 		Button exitButton = new Button("Exit");
-		Button takeFieldCards = new Button("Take Cards");
+		Button takeFieldCards = new Button("Draw Cards");
 		
 		
 		//Root Fenster settings
@@ -66,12 +66,14 @@ public class Main extends Application {
 		//TakeCard button überarbeitet prüft nur einmal
 		if(table.size() == 0)
 		{
-			takeFieldCards.setDisable(true);
+			takeFieldCards.setDisable(false);
 		}
 		else takeFieldCards.setDisable(false);
 		
 		//Player1Hand settings
-		
+		player1Hand.setPadding(new Insets(-50));
+		player1Hand.setAlignment(Pos.CENTER);
+		player1Hand.setSpacing(-66);
 		AnchorPane.setBottomAnchor(player1Hand, 0.0);
 		AnchorPane.setLeftAnchor(player1Hand, 100.0);
 		AnchorPane.setRightAnchor(player1Hand, 100.0);
@@ -97,12 +99,22 @@ public class Main extends Application {
 		});
 		
 		exitButton.setOnAction(new EventHandler<ActionEvent>()
-		{
+				{
 			@Override public void handle(ActionEvent e)
 			{
 				Platform.exit();
 			}
-		});
+				});
+
+		takeFieldCards.setOnAction(new EventHandler<ActionEvent>()
+				{
+			@Override public void handle(ActionEvent e)
+			{
+				Card card = deck.getCard();
+				card.turn_card();
+				player1Hand.getChildren().add(card);
+			}
+				});
 
 		
 		return root;

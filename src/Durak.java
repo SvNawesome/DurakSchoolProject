@@ -412,13 +412,14 @@ public class Durak {
 	   //Spiel neu starten
    }
    
-   void run(){
+   void run(int playerCount){
 	   
 	   ArrayList<Player> playersTmp = new ArrayList<Player>();
 	   ArrayList<Card> discardPileTmp = new ArrayList<Card>();
 	   Deck deck = new Deck();
 	   Durak durak = new Durak();
 	   Dealer dealer = new Dealer(deck);
+
 	   if(playerCount == 4){
 		   Player player1 = new Player(deck);
 		   AI Ai1 = new AI(deck);
