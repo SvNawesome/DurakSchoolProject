@@ -18,7 +18,7 @@
       </ToolBar>
       <BorderPane layoutX="1.0" layoutY="39.0" prefHeight="560.0" prefWidth="800.0">
          <bottom>
-            <HBox fx:id="HBoxPlayer1Hand" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER" />
+            <HBox fx:id="player1Hand" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
       <Canvas id="fieldBackground" height="555.0" layoutY="43.0" width="800.0" />
