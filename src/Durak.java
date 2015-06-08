@@ -329,40 +329,40 @@ public class Durak {
    }
 }*/
    
-   //Ai greift immer mit der stärksten Karte an
-   //Gibt die Karte zurück mit der die Ai angreift
-   Card AiAttackCard(Player AiPlayer){
-	   Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
-	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
-		   if(aiPrevCard == null){
-			   if(card.compareTo(AiPlayer.getHand(i)) == 1){
-			   card = AiPlayer.getHand(i);
-			   aiPrevCard = card;
-			   }		   
-		   }
-		   else{
-			   if(aiPrevCard.getSuit().equalsIgnoreCase(AiPlayer.getHand(i).getSuit())){
+	//Ai greift immer mit der stärksten Karte an
+	//Gibt die Karte zurück mit der die Ai angreift
+	Card AiAttackCard(Player AiPlayer){
+		Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
+		for(int i = 0; i < AiPlayer.getHand().size(); i++){
+			if(aiPrevCard == null){
+			    if(card.compareTo(AiPlayer.getHand(i)) == 1){
+			    card = AiPlayer.getHand(i);
+			    aiPrevCard = card;
+				}		   
+			}
+			else{
+				if(aiPrevCard.getSuit().equalsIgnoreCase(AiPlayer.getHand(i).getSuit())){
+					card = AiPlayer.getHand(i);
+					aiPrevCard = card;
+				    }
+			}
+		}
+		return card;
+	 }
+	
+	 //Ai verteidigt immer mit der stärksten Karte
+	 //Gibt die Karte zurück mit der die Ai verteidigt
+	   Card AiDefendCard(Player AiPlayer){
+		   Card card = AiPlayer.getHand(0);
+		   for(int i = 0; i < AiPlayer.getHand().size(); i++){
+			   
+				   if(card.compareTo(AiPlayer.getHand(i)) == 1){
 				   card = AiPlayer.getHand(i);
-				   aiPrevCard = card;
+				
 			   }
 		   }
+		   return card;
 	   }
-	   return card;
-   }
-   
- //Ai verteidigt immer mit der stärksten Karte
- //Gibt die Karte zurück mit der die Ai verteidigt
-   Card AiDefendCard(Player AiPlayer){
-	   Card card = AiPlayer.getHand(0);
-	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
-		   
-			   if(card.compareTo(AiPlayer.getHand(i)) == 1){
-			   card = AiPlayer.getHand(i);
-			
-		   }
-	   }
-	   return card;
-   }
    
    //Ueberpruefen wer verliert
    void checkLooser(){
@@ -370,6 +370,7 @@ public class Durak {
 	   
 	   //Anzahl an Spielern ohne Karten ermitteln
 	   for(int i = 0; i < playerNumber; i++){
+		   System.out.println(i);
 		   if(players.get(i).emptyHand == true){
 			   j++;
 		   }
@@ -435,17 +436,17 @@ public class Durak {
 		   }
 		   playerChange(players);
 	   }
+	   System.out.println("Round abgeschlossen");
    }
    
    
    void run(int playerCount){
 	   
-	   ArrayList<Player> playersTmp = new ArrayList<Player>();
-	   ArrayList<Card> discardPileTmp = new ArrayList<Card>();
 	   Deck deck = new Deck();
 	   Dealer dealer = new Dealer(deck);
 
-	   this.players = playersTmp;
+	   this.players = new ArrayList<Player>();
+
 	   
 	   if(playerCount == 4){
 		   Player player1 = new Player(deck);
@@ -460,14 +461,17 @@ public class Durak {
 		   this.players.add(Ai3.player);
 			
 	   }else if(playerCount == 3){
-		   Player player1 = new Player(deck);
+		   //Player player1 = new Player(deck);
 		   AI Ai1 = new AI(deck);
 		   AI Ai2 = new AI(deck);
+		   AI Ai3 = new AI(deck);
 		   
-		   this.players.add(player1);
-		   player1.ai = false;
+
+		   //this.players.add(player1);
+		   //player1.ai = false;
 		   this.players.add(Ai1.player);
 		   this.players.add(Ai2.player);
+		   this.players.add(Ai3.player);
 		   
 	   }else if(playerCount == 2){
 		   Player player1 = new Player(deck);
@@ -482,15 +486,20 @@ public class Durak {
 	   }
 	   
 	   playerNumber = playerCount;
-	   
-	   this.discardPile = discardPileTmp;
+
+	   this.discardPile = new ArrayList<Card>();
 	   this.Trump = dealer.dealCards(this.players, deck);
 	   this.setFirstAttacker(this.Trump, this.players);
+
+	   
+	   System.out.println(this.players);
+	   System.out.println("karten auf hand: " + this.players.get(1).getHand());
 	   
 	   while(loser != true){
 		   this.round(this.players);
-		   //checkLooser();
 	   }
+		   //checkLooser();
+
    }
    
    //-------------------------MAIN-------------------------------------
@@ -498,6 +507,7 @@ public class Durak {
 	public static void main(String[] args) {
 		
 		Durak durak = new Durak(3);
+
 		
 		
 		
