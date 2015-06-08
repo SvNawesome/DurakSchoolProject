@@ -11,7 +11,7 @@ public class Durak {
 	//private ArrayList<Card> currentTable;
 	Table currentTable = new Table();
 	private ArrayList<Card> discardPile;
-	private Card removeCard;
+	private Card removeCard, aiPrevCard;
 	private boolean loser;
 	
 	public Durak(){
@@ -122,41 +122,21 @@ public class Durak {
 		if(firstCard == 0)
 		{
 		currentTable.addCard(currentTable, card);
-		int player = 0;
-				for (int plsCount = 0; plsCount < players.size(); plsCount++)
-				{
-					ArrayList<Card> actualHand = players.get(plsCount).getHand();
-					for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
-					{
-						if(card == actualHand.get(crdCount))
-						{
-							player = plsCount;
-						}
-
-					}
-				}
+		int player = getAttacker(players);
+				
 				//card.move(x,y);
 				players.get(player).removeCard(card);
 				if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
-				currentCard = 0;
+				firstCard=+1;
+				
 
 		}
 		else if(card.getSuit().equalsIgnoreCase(currentTable.get(currentCard).getSuit()) || card.getRank().equalsIgnoreCase(currentTable.get(currentCard).getRank()))
 		{
 			currentTable.add(card);
-			int player = 0;
-			for (int plsCount = 0; plsCount < players.size(); plsCount++)
-			{
-				ArrayList<Card> actualHand = players.get(plsCount).getHand();
-				for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
-				{
-					if(card == actualHand.get(crdCount))
-					{
-						player = plsCount;
-					}
-
-				}
-			}
+			int player = getAttacker(players);
+			
+			
 			//card.move(x,y);
 			players.get(player).removeCard(card);
 			if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
@@ -341,10 +321,19 @@ public class Durak {
    //Ai greift immer mit der stärksten Karte an
    //Gibt die Karte zurück mit der die Ai angreift
    Card AiAttackCard(Player AiPlayer){
-	   Card card = AiPlayer.getHand(0);
+	   Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
 	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
-		   if(card.compareTo(AiPlayer.getHand(i)) == 1){
+		   if(aiPrevCard == null){
+			   if(card.compareTo(AiPlayer.getHand(i)) == 1){
 			   card = AiPlayer.getHand(i);
+			   aiPrevCard = card;
+			   }		   
+		   }
+		   else{
+			   if(aiPrevCard.getSuit().equalsIgnoreCase(AiPlayer.getHand(i).getSuit())){
+				   card = AiPlayer.getHand(i);
+				   aiPrevCard = card;
+			   }
 		   }
 	   }
 	   return card;
@@ -355,8 +344,10 @@ public class Durak {
    Card AiDefendCard(Player AiPlayer){
 	   Card card = AiPlayer.getHand(0);
 	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
-		   if(card.compareTo(AiPlayer.getHand(i)) == 1){
+		   
+			   if(card.compareTo(AiPlayer.getHand(i)) == 1){
 			   card = AiPlayer.getHand(i);
+			
 		   }
 	   }
 	   return card;
@@ -413,7 +404,34 @@ public class Durak {
 	   //Spiel neu starten
    }
    
+<<<<<<< HEAD
    void run(int playerCount, HBox hand1player){
+=======
+   void round(ArrayList<Player> players)
+   {
+	   int cardCounter = 0;
+	   Player	Attacker = players.get(getAttacker(players));
+	   Player	Defender = players.get(getDefender(players));
+	   if (Attacker.ai == true && Defender.ai == true)
+	   {
+		   while(roundStatus != 1 || roundStatus !=2 || cardCounter <= 12){
+			   placeCardAttacker(AiAttackCard(Attacker));
+			  // System.out.println(AiAttackCard(Attacker));
+			   cardCounter = cardCounter +1;
+			   placeCardDefender(AiDefendCard(Defender));
+			  // System.out.println(AiDefendCard(Defender));
+			   cardCounter = cardCounter +1;
+			   if(cardCounter == 2){
+				   roundStatus = 1;
+			   }
+		   }
+		   playerChange(players);
+	   }
+	   }
+   
+   
+   void run(int playerCount){
+>>>>>>> origin/master
 	   
 	   ArrayList<Player> playersTmp = new ArrayList<Player>();
 	   ArrayList<Card> discardPileTmp = new ArrayList<Card>();
@@ -428,6 +446,7 @@ public class Durak {
 		   AI Ai3 = new AI(deck);
 		   
 		   durak.players.add(player1);
+		   player1.ai = false;
 		   durak.players.add(Ai1.player);
 		   durak.players.add(Ai2.player);
 		   durak.players.add(Ai3.player);
@@ -438,6 +457,7 @@ public class Durak {
 		   AI Ai2 = new AI(deck);
 		   
 		   durak.players.add(player1);
+		   player1.ai = false;
 		   durak.players.add(Ai1.player);
 		   durak.players.add(Ai2.player);
 		   
@@ -446,6 +466,7 @@ public class Durak {
 		   AI Ai1 = new AI(deck);
 		   
 		   durak.players.add(player1);
+		   player1.ai = false;
 		   durak.players.add(Ai1.player);
 		   
 	   }else{
@@ -459,7 +480,7 @@ public class Durak {
 	   durak.setFirstAttacker(durak.Trump, durak.players);
 	   
 	   while(loser != true){
-		   int cardPlaceCounter = 0;
+		   durak.round(players);
 		   
 	   }
    }
@@ -545,22 +566,31 @@ public class Durak {
 		
 		
 		//Testen ob bei leeren händen der richtige verlierer bestimmt wird
-		for(int i = 0; i < Attacker.getHand().size()+1; i++){
+		/*for(int i = 0; i < Attacker.getHand().size()+1; i++){
 			Attacker.getHand().remove(0);
 			Attacker.emptyHand = true;
-		}
+		}*/
 		
 		/*for(int i = 0; i < Defender.getHand().size()+1; i++){
 			Defender.getHand().remove(0);
 			Defender.emptyHand = true;
 		}*/
 		
-		durak.checkLooser();
+		//durak.checkLooser();
 		
 		AI Ai = new AI(deck);
 		durak.players.add(Ai.player);
+		durak.setAttacker(durak.players.get(3));
+		AI Ai2 = new AI(deck);
+		durak.players.add(Ai.player);
+		durak.setDefender(durak.players.get(4));
+		durak.Trump = dealer.dealCards(durak.players, deck);
 		System.out.println("Id der KI: " + durak.players.get(3).getId());
-		
+		System.out.println("-------------------------------------");
+		System.out.println(durak.players.get(3).getHand(1));
+		System.out.println(durak.players.get(3).getHand(2));
+		System.out.println("-------------------------------------");
+		durak.round(durak.players);
 		//angriffsaufruf der KI:
 		//durak.placeCardAttacker(durak.AiAttackCard(Ai.player));
 	}
