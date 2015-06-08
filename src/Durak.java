@@ -487,6 +487,9 @@ public class Durak {
 	   durak.Trump = dealer.dealCards(durak.players, deck);
 	   durak.setFirstAttacker(durak.Trump, durak.players);
 	   
+	   System.out.println(durak.players);
+	   System.out.println("karten auf hand: " + durak.players.get(1).getHand());
+	   
 	   while(loser != true){
 		   durak.round(durak.players);
 		   checkLooser();

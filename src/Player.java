@@ -60,13 +60,15 @@ public class Player
 	}
 	
 	public Card getHand(int i) {
-		if(hand.get(i) != null){
-			return hand.get(i);
+		System.out.println(hand);
+		return hand.get(i);
+		/*if(this.hand.get(i) != null){
+			return this.hand.get(i);
 		}
 		else{ 
 			Card card = new Card();
 			return card;
-		}
+		}*/
 					
 	}
 
