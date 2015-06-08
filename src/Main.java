@@ -124,6 +124,7 @@ public class Main extends Application {
 				if(text.matches("[2-4]"))
 				{
 					System.out.println(playerCount.getText());
+					Durak durak = new Durak(Integer.parseInt(playerCount.getText()));
 					optionStage.close();
 					//Durak durak = new Durak(Integer.parseInt(playerCount.getText()));
 					//durak.run(Integer.parseInt(playerCount.getText()));

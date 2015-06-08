@@ -14,8 +14,10 @@ public class Durak {
 	private Card removeCard, aiPrevCard;
 	private boolean loser;
 	
-	public Durak (){
+	public Durak (int playerCount){
 		ArrayList<Player> players = new ArrayList<Player>();
+		System.out.println(players);
+		run(playerCount);
 		/*Deck deck = new Deck();
 		for(int i = 0 ; i < playerCount; i++)
 		{
@@ -441,10 +443,9 @@ public class Durak {
 	   ArrayList<Player> playersTmp = new ArrayList<Player>();
 	   ArrayList<Card> discardPileTmp = new ArrayList<Card>();
 	   Deck deck = new Deck();
-	   Durak durak = new Durak();
 	   Dealer dealer = new Dealer(deck);
 
-	   durak.players = playersTmp;
+	   this.players = playersTmp;
 	   
 	   if(playerCount == 4){
 		   Player player1 = new Player(deck);
@@ -452,29 +453,29 @@ public class Durak {
 		   AI Ai2 = new AI(deck);
 		   AI Ai3 = new AI(deck);
 		   
-		   durak.players.add(player1);
+		   this.players.add(player1);
 		   player1.ai = false;
-		   durak.players.add(Ai1.player);
-		   durak.players.add(Ai2.player);
-		   durak.players.add(Ai3.player);
+		   this.players.add(Ai1.player);
+		   this.players.add(Ai2.player);
+		   this.players.add(Ai3.player);
 			
 	   }else if(playerCount == 3){
 		   Player player1 = new Player(deck);
 		   AI Ai1 = new AI(deck);
 		   AI Ai2 = new AI(deck);
 		   
-		   durak.players.add(player1);
+		   this.players.add(player1);
 		   player1.ai = false;
-		   durak.players.add(Ai1.player);
-		   durak.players.add(Ai2.player);
+		   this.players.add(Ai1.player);
+		   this.players.add(Ai2.player);
 		   
 	   }else if(playerCount == 2){
 		   Player player1 = new Player(deck);
 		   AI Ai1 = new AI(deck);
 		   
-		   durak.players.add(player1);
+		   this.players.add(player1);
 		   player1.ai = false;
-		   durak.players.add(Ai1.player);
+		   this.players.add(Ai1.player);
 		   
 	   }else{
 		   System.out.println("Zu wenig oder zu viele Spieler!");
@@ -482,12 +483,12 @@ public class Durak {
 	   
 	   playerNumber = playerCount;
 	   
-	   durak.discardPile = discardPileTmp;
-	   durak.Trump = dealer.dealCards(durak.players, deck);
-	   durak.setFirstAttacker(durak.Trump, durak.players);
+	   this.discardPile = discardPileTmp;
+	   this.Trump = dealer.dealCards(this.players, deck);
+	   this.setFirstAttacker(this.Trump, this.players);
 	   
 	   while(loser != true){
-		   durak.round(durak.players);
+		   this.round(this.players);
 		   //checkLooser();
 	   }
    }
@@ -496,8 +497,7 @@ public class Durak {
    
 	public static void main(String[] args) {
 		
-		Durak durak = new Durak();
-		durak.run(3);
+		Durak durak = new Durak(3);
 		
 		
 		
