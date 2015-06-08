@@ -149,7 +149,7 @@ public class Durak {
 				
 
 		}
-		else if(card.getSuit().equalsIgnoreCase(currentTable.get(currentCard).getSuit()) || card.getRank().equalsIgnoreCase(currentTable.get(currentCard).getRank()))
+		else if(card.getRank().equalsIgnoreCase(currentTable.get(currentCard).getRank()))
 		{
 			currentTable.add(card);
 			int player = getAttacker(players);
@@ -176,18 +176,7 @@ public class Durak {
 			Card card2 = currentTable.get(currentTable.size()-1);
 			if(card.compareTo(card2) == 1) //compareTo benutzen!
 			{
-				for (int plsCount = 0; plsCount < players.size(); plsCount++)
-				{
-					ArrayList<Card> actualHand = players.get(plsCount).getHand();
-					for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
-					{
-						if(card == actualHand.get(crdCount))
-						{
-							player = plsCount;
-						}
-
-					}
-				}
+				
 				currentTable.add(card);
 				//card.move(x,y);
 				player = getDefender(players);
@@ -207,10 +196,10 @@ public class Durak {
    void takeCards(int playerID)
    {
 	   if(currentTable.size() != 0){
-	   for(int i = -1; i < currentTable.size(); i++)
+	   for(int i = 0; i < currentTable.size(); i++)
 	   {
-		   players.get(playerID).addCard(currentTable.get(0));
-		   removeCard = currentTable.get(0);
+		   players.get(playerID).addCard(currentTable.get(i));
+		   removeCard = currentTable.get(i);
 		   currentTable.remove(removeCard);   
 	   } 
 	   roundStatus = 1;
@@ -222,15 +211,16 @@ public class Durak {
    void discardPile()
    {
 	   if(currentTable.size() != 0){
-	   for(int i = -1; i < currentTable.size(); i++)
+	   for(int i = 0; i < currentTable.size(); i++)
 	   {
-		   discardPile.add(currentTable.get(0));
-		   removeCard = currentTable.get(0);
+		   discardPile.add(currentTable.get(i));
+		   removeCard = currentTable.get(i);
 		   currentTable.remove(removeCard);
 	   }
 	   roundStatus = 2;
 	   playerChange(players);
 	   }
+	   playerChange(players);
    }
    
    /*void placeCardAttackerKI()
@@ -427,28 +417,43 @@ public class Durak {
    }
    
    //Funktion für die Runden
-   void round(ArrayList<Player> players)
+   void round(ArrayList<Player> players,Deck deck)
    {
+	  players.get(0).fillHand(deck);
 	   int cardCounter = 0;
 	   Player Attacker = players.get(getAttacker(players));
 	   Player Defender = players.get(getDefender(players));
 	   if (Attacker.ai == true && Defender.ai == true)
 	   {
 		   while(roundStatus != 1 || roundStatus !=2 || cardCounter <= 12){
-			   placeCardAttacker(AiAttackCard(Attacker, Attacker.getId()));
-			   //System.out.println(AiAttackCard(Attacker));
-			   cardCounter = cardCounter +1;
-			   placeCardDefender(AiDefendCard(Defender));
-			   //System.out.println(AiDefendCard(Defender));
-			   cardCounter = cardCounter +1;
-			   if(cardCounter == 2){
-				   roundStatus = 1;
-			   }
-		   }
-		   discardPile();
-		   playerChange(players);
+			   try{
+					  placeCardAttacker(AiAttackCard(Attacker, Attacker.getId()));
+				     }
+				  catch(RuntimeException e){
+					discardPile();
+					System.out.println("Karten werden abgelegt!");
+					break;
+				  }
+				  // System.out.println(AiAttackCard(Attacker));
+				   cardCounter = cardCounter +1;
+				  try {
+					  placeCardDefender(AiDefendCard(Defender));
+				  }
+				  catch(RuntimeException e){
+					  takeCards(getDefender(players));
+					  System.out.println("Karten werden aufgenommen!");
+					break;
+				  }
+				  cardCounter = cardCounter +1;
+		  // playerChange(players);
 	   }
 	   System.out.println("Runde abgeschlossen");
+	   playerChange(players);
+	   /*for(int i =0; i > players.size(); i++){
+		   players.get(i).fillHand(deck);
+	   	}*/
+	   
+	   }
    }
    
    //Starten des Spiels
@@ -524,7 +529,7 @@ public class Durak {
 		   System.out.println("HAND: " + this.players.get(0).getHand());
 		   System.out.println("HAND: " + this.players.get(1).getHand());
 		   System.out.println("HAND: " + this.players.get(2).getHand());
-		   this.round(this.players);
+		   this.round(this.players,deck);
 		   this.checkLooser();
 	   } 
 
