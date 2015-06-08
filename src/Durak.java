@@ -18,6 +18,7 @@ public class Durak {
 		ArrayList<Player> players = new ArrayList<Player>();
 		System.out.println(players);
 		run(playerCount);
+		
 		/*Deck deck = new Deck();
 		for(int i = 0 ; i < playerCount; i++)
 		{
@@ -34,6 +35,7 @@ public class Durak {
 		Card prvCard = null;
 		
 		for (int plsCount = 0; plsCount < players.size(); plsCount++) {
+			System.out.println(players.get(plsCount).getHand());
 			ArrayList<Card> actualHand = players.get(plsCount).getHand();
 			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++) {
 				String actlRank = actualHand.get(crdCount).getRank();
@@ -331,8 +333,15 @@ public class Durak {
    
 	//Ai greift immer mit der stärksten Karte an
 	//Gibt die Karte zurück mit der die Ai angreift
-	Card AiAttackCard(Player AiPlayer){
-		Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
+	Card AiAttackCard(Player AiPlayer, int Id){
+		
+		
+		//Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
+		//Card card = AiPlayer.getHand(0);
+		System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand());
+		Card card = this.players.get(0).getHand(0);
+		//Card card = this.players.get(Id).getHand(0);
+		
 		for(int i = 0; i < AiPlayer.getHand().size(); i++){
 			if(aiPrevCard == null){
 			    if(card.compareTo(AiPlayer.getHand(i)) == 1){
@@ -424,7 +433,7 @@ public class Durak {
 	   if (Attacker.ai == true && Defender.ai == true)
 	   {
 		   while(roundStatus != 1 || roundStatus !=2 || cardCounter <= 12){
-			   placeCardAttacker(AiAttackCard(Attacker));
+			   placeCardAttacker(AiAttackCard(Attacker, Attacker.getId()));
 			  // System.out.println(AiAttackCard(Attacker));
 			   cardCounter = cardCounter +1;
 			   placeCardDefender(AiDefendCard(Defender));
@@ -497,8 +506,8 @@ public class Durak {
 	   
 	   while(loser != true){
 		   this.round(this.players);
-	   }
-		   //checkLooser();
+		   checkLooser();
+	   } 
 
    }
    
@@ -508,8 +517,7 @@ public class Durak {
 		
 		Durak durak = new Durak(3);
 
-		
-		
+
 		
 		//ALTE MAIN!!!
 		/*ArrayList<Player> playersTmp = new ArrayList<Player>();
