@@ -327,40 +327,40 @@ public class Durak {
    }
 }*/
    
-   //Ai greift immer mit der stärksten Karte an
-   //Gibt die Karte zurück mit der die Ai angreift
-   Card AiAttackCard(Player AiPlayer){
-	   Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
-	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
-		   if(aiPrevCard == null){
-			   if(card.compareTo(AiPlayer.getHand(i)) == 1){
-			   card = AiPlayer.getHand(i);
-			   aiPrevCard = card;
-			   }		   
-		   }
-		   else{
-			   if(aiPrevCard.getSuit().equalsIgnoreCase(AiPlayer.getHand(i).getSuit())){
+	//Ai greift immer mit der stärksten Karte an
+	//Gibt die Karte zurück mit der die Ai angreift
+	Card AiAttackCard(Player AiPlayer){
+		Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
+		for(int i = 0; i < AiPlayer.getHand().size(); i++){
+			if(aiPrevCard == null){
+			    if(card.compareTo(AiPlayer.getHand(i)) == 1){
+			    card = AiPlayer.getHand(i);
+			    aiPrevCard = card;
+				}		   
+			}
+			else{
+				if(aiPrevCard.getSuit().equalsIgnoreCase(AiPlayer.getHand(i).getSuit())){
+					card = AiPlayer.getHand(i);
+					aiPrevCard = card;
+				    }
+			}
+		}
+		return card;
+	 }
+	
+	 //Ai verteidigt immer mit der stärksten Karte
+	 //Gibt die Karte zurück mit der die Ai verteidigt
+	   Card AiDefendCard(Player AiPlayer){
+		   Card card = AiPlayer.getHand(0);
+		   for(int i = 0; i < AiPlayer.getHand().size(); i++){
+			   
+				   if(card.compareTo(AiPlayer.getHand(i)) == 1){
 				   card = AiPlayer.getHand(i);
-				   aiPrevCard = card;
+				
 			   }
 		   }
+		   return card;
 	   }
-	   return card;
-   }
-   
- //Ai verteidigt immer mit der stärksten Karte
- //Gibt die Karte zurück mit der die Ai verteidigt
-   Card AiDefendCard(Player AiPlayer){
-	   Card card = AiPlayer.getHand(0);
-	   for(int i = 0; i < AiPlayer.getHand().size(); i++){
-		   
-			   if(card.compareTo(AiPlayer.getHand(i)) == 1){
-			   card = AiPlayer.getHand(i);
-			
-		   }
-	   }
-	   return card;
-   }
    
    //Ueberpruefen wer verliert
    void checkLooser(){
@@ -434,6 +434,7 @@ public class Durak {
 		   }
 		   playerChange(players);
 	   }
+	   System.out.println("Round abgeschlossen");
    }
    
    
@@ -458,14 +459,16 @@ public class Durak {
 		   durak.players.add(Ai3.player);
 			
 	   }else if(playerCount == 3){
-		   Player player1 = new Player(deck);
+		   //Player player1 = new Player(deck);
 		   AI Ai1 = new AI(deck);
 		   AI Ai2 = new AI(deck);
+		   AI Ai3 = new AI(deck);
 		   
-		   durak.players.add(player1);
-		   player1.ai = false;
+		   //durak.players.add(player1);
+		   //player1.ai = false;
 		   durak.players.add(Ai1.player);
 		   durak.players.add(Ai2.player);
+		   durak.players.add(Ai3.player);
 		   
 	   }else if(playerCount == 2){
 		   Player player1 = new Player(deck);
@@ -480,14 +483,13 @@ public class Durak {
 	   }
 	   
 	   playerNumber = playerCount;
-	   
 	   durak.discardPile = new ArrayList<Card>();
 	   durak.Trump = dealer.dealCards(durak.players, deck);
 	   durak.setFirstAttacker(durak.Trump, durak.players);
 	   
 	   while(loser != true){
 		   durak.round(durak.players);
-		   //checkLooser();
+		   checkLooser();
 	   }
    }
    
