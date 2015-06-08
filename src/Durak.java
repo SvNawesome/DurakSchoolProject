@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import javafx.scene.layout.HBox;
 import cardAssignment.Assignment;
 
 public class Durak {
@@ -412,7 +413,7 @@ public class Durak {
 	   //Spiel neu starten
    }
    
-   void run(int playerCount){
+   void run(int playerCount, HBox hand1player){
 	   
 	   ArrayList<Player> playersTmp = new ArrayList<Player>();
 	   ArrayList<Card> discardPileTmp = new ArrayList<Card>();
@@ -456,6 +457,7 @@ public class Durak {
 	   durak.discardPile = discardPileTmp;
 	   durak.Trump = dealer.dealCards(durak.players, deck);
 	   durak.setFirstAttacker(durak.Trump, durak.players);
+	   
 	   while(loser != true){
 		   int cardPlaceCounter = 0;
 		   
