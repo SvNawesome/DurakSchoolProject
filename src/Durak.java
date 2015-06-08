@@ -14,7 +14,7 @@ public class Durak {
 	private Card removeCard, aiPrevCard;
 	private boolean loser;
 	
-	public Durak (int playerCount){
+	public Durak (){
 		ArrayList<Player> players = new ArrayList<Player>();
 		/*Deck deck = new Deck();
 		for(int i = 0 ; i < playerCount; i++)
@@ -416,8 +416,8 @@ public class Durak {
    void round(ArrayList<Player> players)
    {
 	   int cardCounter = 0;
-	   Player	Attacker = players.get(getAttacker(players));
-	   Player	Defender = players.get(getDefender(players));
+	   Player Attacker = players.get(getAttacker(players));
+	   Player Defender = players.get(getDefender(players));
 	   if (Attacker.ai == true && Defender.ai == true)
 	   {
 		   while(roundStatus != 1 || roundStatus !=2 || cardCounter <= 12){
@@ -433,7 +433,7 @@ public class Durak {
 		   }
 		   playerChange(players);
 	   }
-	   }
+   }
    
    
    void run(int playerCount){
@@ -441,9 +441,11 @@ public class Durak {
 	   ArrayList<Player> playersTmp = new ArrayList<Player>();
 	   ArrayList<Card> discardPileTmp = new ArrayList<Card>();
 	   Deck deck = new Deck();
-	   Durak durak = new Durak(playerCount);
+	   Durak durak = new Durak();
 	   Dealer dealer = new Dealer(deck);
 
+	   durak.players = playersTmp;
+	   
 	   if(playerCount == 4){
 		   Player player1 = new Player(deck);
 		   AI Ai1 = new AI(deck);
@@ -479,21 +481,28 @@ public class Durak {
 	   }
 	   
 	   playerNumber = playerCount;
-	   durak.players = playersTmp;
+	   
 	   durak.discardPile = discardPileTmp;
 	   durak.Trump = dealer.dealCards(durak.players, deck);
 	   durak.setFirstAttacker(durak.Trump, durak.players);
 	   
 	   while(loser != true){
-		   durak.round(players);
-		   
+		   durak.round(durak.players);
+		   //checkLooser();
 	   }
    }
    
    //-------------------------MAIN-------------------------------------
    
 	public static void main(String[] args) {
-		ArrayList<Player> playersTmp = new ArrayList<Player>();
+		
+		Durak durak = new Durak();
+		durak.run(3);
+		
+		
+		
+		//ALTE MAIN!!!
+		/*ArrayList<Player> playersTmp = new ArrayList<Player>();
 		ArrayList<Card> discardPileTmp = new ArrayList<Card>();
 		
 		Deck deck = new Deck();
@@ -579,7 +588,7 @@ public class Durak {
 		/*for(int i = 0; i < Defender.getHand().size()+1; i++){
 			Defender.getHand().remove(0);
 			Defender.emptyHand = true;
-		}*/
+		}
 		
 		//durak.checkLooser();
 		
@@ -597,7 +606,7 @@ public class Durak {
 		System.out.println("-------------------------------------");
 		durak.round(durak.players);
 		//angriffsaufruf der KI:
-		//durak.placeCardAttacker(durak.AiAttackCard(Ai.player));
+		//durak.placeCardAttacker(durak.AiAttackCard(Ai.player));*/
 	}
    
 }

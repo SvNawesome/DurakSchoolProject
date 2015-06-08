@@ -125,8 +125,8 @@ public class Main extends Application {
 				{
 					System.out.println(playerCount.getText());
 					optionStage.close();
-					Durak durak = new Durak(Integer.parseInt(playerCount.getText()));
-					durak.run(Integer.parseInt(playerCount.getText()));
+					//Durak durak = new Durak(Integer.parseInt(playerCount.getText()));
+					//durak.run(Integer.parseInt(playerCount.getText()));
 				}
 				else
 				{
