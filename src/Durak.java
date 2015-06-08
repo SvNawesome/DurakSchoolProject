@@ -368,6 +368,7 @@ public class Durak {
 	   
 	   //Anzahl an Spielern ohne Karten ermitteln
 	   for(int i = 0; i < playerNumber; i++){
+		   System.out.println(i);
 		   if(players.get(i).emptyHand == true){
 			   j++;
 		   }
@@ -438,13 +439,11 @@ public class Durak {
    
    void run(int playerCount){
 	   
-	   ArrayList<Player> playersTmp = new ArrayList<Player>();
-	   ArrayList<Card> discardPileTmp = new ArrayList<Card>();
 	   Deck deck = new Deck();
 	   Durak durak = new Durak();
 	   Dealer dealer = new Dealer(deck);
 
-	   durak.players = playersTmp;
+	   durak.players = new ArrayList<Player>();
 	   
 	   if(playerCount == 4){
 		   Player player1 = new Player(deck);
@@ -482,7 +481,7 @@ public class Durak {
 	   
 	   playerNumber = playerCount;
 	   
-	   durak.discardPile = discardPileTmp;
+	   durak.discardPile = new ArrayList<Card>();
 	   durak.Trump = dealer.dealCards(durak.players, deck);
 	   durak.setFirstAttacker(durak.Trump, durak.players);
 	   
@@ -496,6 +495,7 @@ public class Durak {
    
 	public static void main(String[] args) {
 		
+		//NEUE MAIN
 		Durak durak = new Durak();
 		durak.run(3);
 		
