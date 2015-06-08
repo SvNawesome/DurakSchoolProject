@@ -10,8 +10,8 @@ public class Durak {
 	//private ArrayList<Card> currentTable;
 	Table currentTable = new Table();
 	private ArrayList<Card> discardPile;
-	private Card removeCard, aiPrevCard;
-	private boolean loser;
+	private Card removeCard, aiPrevCard,attackcard,defendcard;
+	private boolean loser,attackcardset,defendcardset;
 	
 	public Durak (int playerCount){
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -417,7 +417,7 @@ public class Durak {
    }
    
    //Funktion für die Runden
-   void round(ArrayList<Player> players,Deck deck)
+   void round(ArrayList<Player> players,Deck deck) 
    {
 	   //players.get(0).fillHand(deck);
 	   int cardCounter = 0;
@@ -446,16 +446,58 @@ public class Durak {
 				  }
 				  cardCounter = cardCounter +1;
 		  // playerChange(players);
+		   }
 	   }
+		   else if(Attacker.ai == false && Defender.ai == true){
+			   while(roundStatus != 1 || roundStatus != 2 || cardCounter <=12){
+				   Card card = attackcard;
+				   placeCardAttacker(card);
+				   card = null;
+				   cardCounter = cardCounter +1;
+				
+				   
+				   
+				   try {
+						  placeCardDefender(AiDefendCard(Defender));
+					  }
+					  catch(RuntimeException e){
+						  takeCards(getDefender(players));
+						  System.out.println("Karten werden aufgenommen!");
+						break;
+					  }
+			   }
+		   }else if(Attacker.ai == true && Defender.ai == false){
+			   while(roundStatus != 1 || roundStatus != 2 || cardCounter <=12){
+				   try{
+						  placeCardAttacker(AiAttackCard(Attacker, Attacker.getId()));
+					     }
+					  catch(RuntimeException e){
+						discardPile();
+						System.out.println("Karten werden abgelegt!");
+						break;
+					  }
+				     cardCounter = cardCounter +1;
+					  // System.out.println(AiAttackCard(Attacker));
+				    
+					   
+					   Card card = defendcard;
+					   placeCardDefender(card);
+					   card = null;
+					   cardCounter = cardCounter +1;
+			   }
+		   }
+			   
 	   System.out.println("Runde abgeschlossen");
 	   playerChange(players);
 	   discardPile();
 	   for(int i =0; i > players.size(); i++){
 		   players.get(i).fillHand(deck);
-	   	}
-	   
 	   }
-   }
+	   }
+	   
+	   
+	   
+   
    
    //Starten des Spiels
    void run(int playerCount){
