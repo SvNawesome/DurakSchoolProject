@@ -198,8 +198,8 @@ public class Durak {
 	   if(currentTable.size() != 0){
 	   for(int i = 0; i < currentTable.size(); i++)
 	   {
-		   players.get(playerID).addCard(currentTable.get(i));
-		   removeCard = currentTable.get(i);
+		   players.get(playerID).addCard(currentTable.get(0));
+		   removeCard = currentTable.get(0);
 		   currentTable.remove(removeCard);   
 	   } 
 	   roundStatus = 1;
@@ -213,8 +213,8 @@ public class Durak {
 	   if(currentTable.size() != 0){
 	   for(int i = 0; i < currentTable.size(); i++)
 	   {
-		   discardPile.add(currentTable.get(i));
-		   removeCard = currentTable.get(i);
+		   discardPile.add(currentTable.get(0));
+		   removeCard = currentTable.get(0);
 		   currentTable.remove(removeCard);
 	   }
 	   roundStatus = 2;
@@ -329,7 +329,7 @@ public class Durak {
 		//Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
 		//Card card = AiPlayer.getHand(0);
 		System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand());
-		Card card = this.players.get(0).getHand(0);
+		Card card = this.players.get(getAttacker(players)).getHand(0);
 		//Card card = this.players.get(Id).getHand(0);
 		
 		for(int i = 0; i < AiPlayer.getHand().size(); i++){
@@ -419,7 +419,7 @@ public class Durak {
    //Funktion für die Runden
    void round(ArrayList<Player> players,Deck deck)
    {
-	  players.get(0).fillHand(deck);
+	   //players.get(0).fillHand(deck);
 	   int cardCounter = 0;
 	   Player Attacker = players.get(getAttacker(players));
 	   Player Defender = players.get(getDefender(players));
@@ -449,9 +449,10 @@ public class Durak {
 	   }
 	   System.out.println("Runde abgeschlossen");
 	   playerChange(players);
-	   /*for(int i =0; i > players.size(); i++){
+	   discardPile();
+	   for(int i =0; i > players.size(); i++){
 		   players.get(i).fillHand(deck);
-	   	}*/
+	   	}
 	   
 	   }
    }
