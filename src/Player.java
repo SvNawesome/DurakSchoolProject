@@ -60,20 +60,9 @@ public class Player
 	}
 	
 	public Card getHand(int i) {
-		//System.out.println(hand);
-		if(hand.get(i) != null)
-		{
-		return hand.get(i);
-		}
-		else return null;
-		/*if(this.hand.get(i) != null){
-			return this.hand.get(i);
-		}
-		else{ 
-			Card card = new Card();
-			return card;
-		}*/
-					
+		System.out.println(hand);
+		return hand.get(i);			
+
 	}
 
 	public void setHand(ArrayList<Card> hand) {
@@ -86,6 +75,7 @@ public class Player
 			while(hand.size() < 6){
 				hand.add(deck.getCard());//von stapel nehmen
 			}
+			System.out.println(hand);
 		}
 	}
 	
