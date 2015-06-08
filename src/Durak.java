@@ -190,6 +190,7 @@ public class Durak {
 				}
 				currentTable.add(card);
 				//card.move(x,y);
+				player = getDefender(players);
 				players.get(player).removeCard(card);
 				if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 
@@ -329,15 +330,6 @@ public class Durak {
 		   }
 	   }
    }
-   /*void checkClearHand()
-   {
-	   for (int plsCount = 0; plsCount < players.size(); plsCount++)
-	   {
-		   players.get(plsCount).getCardNumber();
-		   
-	   }
-   }
-}*/
    
 	//Ai greift immer mit der stärksten Karte an
 	//Gibt die Karte zurück mit der die Ai angreift
@@ -444,15 +436,16 @@ public class Durak {
 	   {
 		   while(roundStatus != 1 || roundStatus !=2 || cardCounter <= 12){
 			   placeCardAttacker(AiAttackCard(Attacker, Attacker.getId()));
-			  // System.out.println(AiAttackCard(Attacker));
+			   //System.out.println(AiAttackCard(Attacker));
 			   cardCounter = cardCounter +1;
 			   placeCardDefender(AiDefendCard(Defender));
-			  // System.out.println(AiDefendCard(Defender));
+			   //System.out.println(AiDefendCard(Defender));
 			   cardCounter = cardCounter +1;
 			   if(cardCounter == 2){
 				   roundStatus = 1;
 			   }
 		   }
+		   discardPile();
 		   playerChange(players);
 	   }
 	   System.out.println("Runde abgeschlossen");
@@ -528,8 +521,11 @@ public class Durak {
 	   //System.out.println("karten auf hand: " + this.players.get(1).getHand());
 	   
 	   while(loser != true){
+		   System.out.println("HAND: " + this.players.get(0).getHand());
+		   System.out.println("HAND: " + this.players.get(1).getHand());
+		   System.out.println("HAND: " + this.players.get(2).getHand());
 		   this.round(this.players);
-		   checkLooser();
+		   this.checkLooser();
 	   } 
 
    }
