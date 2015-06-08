@@ -53,8 +53,8 @@ public class Card extends ImageView{
 			this.suit = s;
 			//System.out.println(Assignment.cardValues.get(rank));
 
-			
-		/*	if ( suit == "Hearts" )
+			/*
+			if ( suit == "Hearts" )
 			{
 				card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
 			}
@@ -72,13 +72,13 @@ public class Card extends ImageView{
 			}
 
 			setImage(ImageStorage.card_back_image ) ; // Initially the card is face-down
-
+*/
 		}
 		else 
 		{
 			System.out.println("Invalid Card.");
-		}*/
-		}}
+		}
+		}
 	
 	
 	public void turn_card()

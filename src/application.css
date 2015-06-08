@@ -8,7 +8,7 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-opacity: 0.6;
 }
 
@@ -136,4 +136,9 @@
 
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color,30%);
+}
+
+.pane
+{
+	-fx-background-color: rgb(128,128,128)
 }

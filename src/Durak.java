@@ -14,8 +14,17 @@ public class Durak {
 	private Card removeCard, aiPrevCard;
 	private boolean loser;
 	
-	public Durak(){
+	public Durak (int playerCount){
 		ArrayList<Player> players = new ArrayList<Player>();
+		/*Deck deck = new Deck();
+		for(int i = 0 ; i < playerCount; i++)
+		{
+			Player player = new Player(deck);
+			System.out.println(player);
+			players.add(player);
+		}
+		System.out.println(players);
+		*/
 	}
 	
 	void setFirstAttacker(String trmpSuit, ArrayList<Player> players)
@@ -404,9 +413,6 @@ public class Durak {
 	   //Spiel neu starten
    }
    
-<<<<<<< HEAD
-   void run(int playerCount, HBox hand1player){
-=======
    void round(ArrayList<Player> players)
    {
 	   int cardCounter = 0;
@@ -431,12 +437,11 @@ public class Durak {
    
    
    void run(int playerCount){
->>>>>>> origin/master
 	   
 	   ArrayList<Player> playersTmp = new ArrayList<Player>();
 	   ArrayList<Card> discardPileTmp = new ArrayList<Card>();
 	   Deck deck = new Deck();
-	   Durak durak = new Durak();
+	   Durak durak = new Durak(playerCount);
 	   Dealer dealer = new Dealer(deck);
 
 	   if(playerCount == 4){
@@ -498,7 +503,7 @@ public class Durak {
 		Dealer dealer = new Dealer(deck);
 		//Table table = new Table();
 		//currentTable = table;
-		Durak durak = new Durak();
+		Durak durak = new Durak(3);
 		
 		Player Attacker, Defender;
 		
