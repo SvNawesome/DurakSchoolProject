@@ -32,8 +32,8 @@ public class Dealer {
 		Deck deck = new Deck();
 		
 		//Spieler erstellen und in eine Arrayliste packen
-		Player player1 = new Player(deck);
-		Player player2 = new Player(deck);
+		Player player1 = new Player();
+		Player player2 = new Player();
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);

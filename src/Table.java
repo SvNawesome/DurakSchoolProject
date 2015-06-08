@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import cardImages.ImageStorage;
 
 public class Table {
 	ArrayList<Card> table;
@@ -34,11 +33,13 @@ public class Table {
 		this.table.remove(card);
 	}
 	
+	//Rückgabe der größe des Tables
 	public int size()
 	{
 		return this.table.size();
 	}
 
+	//Prüfen ob auf dem Table eine bestimmte Karte is und diese zurück geben
 	public Card get(int currentCard) {
 		return table.get(currentCard);
 	}

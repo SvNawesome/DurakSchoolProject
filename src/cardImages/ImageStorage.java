@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javafx.scene.image.Image;
 
-public class ImageStorage {
+public class ImageStorage{
 	public static Image card_back_image = new Image("cardImages/card_back.png", 101, 145, false, false);
 
 	public static Image hearts6 = new Image("cardImages/hearts6.png", 101, 145, false, false);

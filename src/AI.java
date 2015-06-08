@@ -1,10 +1,9 @@
 
 public class AI {
-	private Deck deck;
 	public Player player;
 
-	public AI(Deck deck){
-		this.player = new Player(deck);
+	public AI(){
+		this.player = new Player();
 		this.player.artificialIntelligence = true;
 	}
 	

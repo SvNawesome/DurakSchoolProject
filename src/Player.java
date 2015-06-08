@@ -7,14 +7,12 @@ public class Player
 {
 	//überlegen ob wir deck hier drin überhaupt brauchen
 	private ArrayList<Card> hand;
-	private Deck deck;
 	private static int idCounter;
 	private int statusId;
 	private int id;
 	public boolean emptyHand, winner, artificialIntelligence,ai;
 	
-	public Player(Deck deck) {
-		this.deck = deck.getDeck();
+	public Player() {
 		this.hand = new ArrayList<Card>();
 		id = idCounter;
 		idCounter = idCounter+1;
@@ -25,12 +23,13 @@ public class Player
 		ai = true;
 	}
 
-	
+	//Getter der ID
 	public int getId()
 	{
 		return this.id;
 	}
 	
+	// setzen/bekommen des Statuses ( Angreifer oder Verteidiger)
 	public void setStatusId(int statusId)
 	{
 		/*if(statusId == 1 || statusId == 2)
@@ -41,6 +40,15 @@ public class Player
 		this.statusId = statusId;
 	}
 	
+	public int getStatusId()
+	{
+		return this.statusId;
+	}
+	public ArrayList<Card> getHand() {
+		return hand;
+	}
+	
+	//erstellen der Hand + Imageview, zurückgeben der Hand und setzen der Hand
 	public void createHand()
 	{
 		HBox handGUI = new HBox();
@@ -51,17 +59,13 @@ public class Player
 		}
 	}
 	
-	public int getStatusId()
-	{
-		return this.statusId;
-	}
-	public ArrayList<Card> getHand() {
-		return hand;
-	}
-	
 	public Card getHand(int i) {
-		System.out.println(hand);
+		//System.out.println(hand);
+		if(hand.get(i) != null)
+		{
 		return hand.get(i);
+		}
+		else return null;
 		/*if(this.hand.get(i) != null){
 			return this.hand.get(i);
 		}
@@ -76,6 +80,7 @@ public class Player
 		this.hand = hand;
 	}
 	
+	//Methode um die Hand mit dem KArten vom Deck zu füllen
 	public void fillHand(Deck deck){
 		if(hand.size() < 6){
 			while(hand.size() < 6){
@@ -83,6 +88,8 @@ public class Player
 			}
 		}
 	}
+	
+	//Karte der Hand hinzufügen oder entfernen
 	
 	Card addCard(Card card)
 	{
@@ -94,6 +101,8 @@ public class Player
 	{
 		hand.remove(card);
 	}
+	
+	//erste Karte der Hand ausgeben
 	int getFirstCard(){
 		int card = 0;
 		for(int i = 0; i >= hand.size(); i++){

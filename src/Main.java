@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Modality;
@@ -15,20 +14,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 
 
 public class Main extends Application {
 	
 	Deck deck = new Deck();
 	Dealer dealer = new Dealer(deck);
-	Player player1 = new Player(deck);
-	Player player2 = new Player(deck);
+	Player player1 = new Player();
+	Player player2 = new Player();
 	ArrayList<Player> players = new ArrayList<Player>();
 	Table table = new Table();
 
@@ -102,6 +97,8 @@ public class Main extends Application {
 		AnchorPane.setBottomAnchor(player1Hand, 0.0);
 		AnchorPane.setLeftAnchor(player1Hand, 100.0);
 		AnchorPane.setRightAnchor(player1Hand, 100.0);
+		
+		//nur zur überprüfung ob karten angezeigt werden
 		for(int i = 0; i < 6;i++)
 		{
 		player1.addCard(deck.getCard());
@@ -116,6 +113,7 @@ public class Main extends Application {
 		
 		// BUTTON FUNKTION
 		
+		//Akzeptieren der Spieleranzahl und Durak starten
 		acceptButton.setOnAction(new EventHandler<ActionEvent>()
 				{
 			@Override public void handle(ActionEvent e)
@@ -141,6 +139,7 @@ public class Main extends Application {
 			}
 				});
 		
+		//Weiterleitung zu Abfrage der Spieleranzahl
 		startButton.setOnAction (new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e){
 				System.out.println("Spiel startet");
@@ -151,6 +150,7 @@ public class Main extends Application {
 			}
 		});
 		
+		//Schließen der Anwendung
 		exitButton.setOnAction(new EventHandler<ActionEvent>()
 				{
 			@Override public void handle(ActionEvent e)
@@ -159,6 +159,7 @@ public class Main extends Application {
 			}
 				});
 
+		//nehmen der Karten vom Table // momentan umgeschrieben zum karten ziehen zum testen
 		takeFieldCards.setOnAction(new EventHandler<ActionEvent>()
 				{
 			@Override public void handle(ActionEvent e)
@@ -175,6 +176,7 @@ public class Main extends Application {
 	}
 
 
+	//starten des Fensters
 	@Override
 	public void start(Stage primaryStage) {
 		Scene scene = new Scene(createGui());

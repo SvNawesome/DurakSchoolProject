@@ -71,7 +71,7 @@ public class Deck {
 			return deck;
 	}
 	
-	//Add und Remove methoden für Deck 
+	//Add und Remove Methoden für das Deck 
 	public void addCard(Deck deck, Card card){
 		deck.add(card);
 	}
@@ -93,6 +93,7 @@ public class Deck {
 		
 	}
 	
+	//Ausgabe des Decks bearbeitet
 	public String toString()
 	{
 		String deckString = new String("[Top]\n");

@@ -11,6 +11,7 @@ public class Card extends ImageView{
 	private String suit;
 	private String TRUMP;
 	
+	//größe der karten
 	public static final int  card_width   =  150 ;
 	public static final int  card_height  =  215 ;
 	
@@ -23,6 +24,7 @@ public class Card extends ImageView{
 		this.rank = Assignment.ranks[random.nextInt(Assignment.ranks.length-1)];
 		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
 		
+		// Damit andere klassen ohne gui getestet werden können
 		/*if ( suit == "Hearts" )
 		{
 			card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
@@ -52,8 +54,8 @@ public class Card extends ImageView{
 			this.rank = r;
 			this.suit = s;
 			//System.out.println(Assignment.cardValues.get(rank));
-
-			/*
+		/*
+			//zuordnen des passenden Bildes
 			if ( suit == "Hearts" )
 			{
 				card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
@@ -72,7 +74,7 @@ public class Card extends ImageView{
 			}
 
 			setImage(ImageStorage.card_back_image ) ; // Initially the card is face-down
-*/
+	*/
 		}
 		else 
 		{
@@ -80,7 +82,7 @@ public class Card extends ImageView{
 		}
 		}
 	
-	
+	//Funktion zum umdrehen der Karte
 	public void turn_card()
 	{
 		if(getImage() == card_faceup_image)
@@ -94,34 +96,36 @@ public class Card extends ImageView{
 	}
 	
 	//Methode für den Vergleich
-	// Return (-1) = Verteidiger hat einen höheren Wert (Somit ungültiger Zug)
+	// Return ( 1) = Verteidiger hat einen höheren Wert (Somit ungültiger Zug)
 	// 		  ( 0) = Karten sind nciht vergleichbar
-	//		  ( 1) = Angreifer hat einen höheren Wert
+	//		  (-1) = Angreifer hat einen höheren Wert
 	public int comparing(Card defCard)
 	{
 		if(Assignment.cardValues.get(defCard.getRank()) > Assignment.cardValues.get(this.getRank()))
 		{
-			System.out.println("(" + defCard.rank + ") has more value than (" + this.rank + ")");
-			System.out.println("You can't attack with this card (" + this.rank + " / " + this.suit + ").");
-			return -1;
+			System.out.println("(Verteidiger)(" + defCard.rank + " "+ defCard.suit + ") has more value than (" + this.rank + " " + this.suit + ")(Angreifer)");
+			
+			return 1;
 		}
 		else if(Assignment.cardValues.get(defCard.getRank()) < Assignment.cardValues.get(this.getRank()))
 		{
-			System.out.println("(" + defCard.rank + ") has less value than (" + this.rank + ")");
-			return 1;
+			System.out.println("(Verteidiger)(" + defCard.rank + " "+ defCard.suit + ") has less value than (" + this.rank + " " + this.suit + ")(Angreifer)");
+			System.out.println("You can't attack with this card (" + this.rank + " / " + this.suit + ").");
+			return -1;
 		}
 		else
 		{
 			System.out.println("Cards not comparable.");
+			System.out.println("Angreifer Suit: " +this.suit+ " " + "Verteidiger Suit: " +defCard.suit);
 			return 0;
 		}
 	}
 	
 	//Methode um auf den Trumpf zu überprüfen durch Vergleich des Trumpf-Strings mit dem Suit-String
-	// Return (-1) = Nur der Verteidiger ist Trumpf
+	// Return ( 2) = Nur der Verteidiger ist Trumpf
 	// 		  ( 0) = Keine Karte ist Trumpf
 	//		  ( 1) = Beide Karten sind Trumpf
-	//	 	  ( 2) = Nur der Angreifer ist Trumpf
+	//	 	  (-1) = Nur der Angreifer ist Trumpf
 	public int checkTrump(String TRUMP, Card defCard)
 	{
 		if(defCard.getSuit().equalsIgnoreCase(TRUMP) && this.getSuit().equalsIgnoreCase(TRUMP))
@@ -134,12 +138,13 @@ public class Card extends ImageView{
 			if(defCard.getSuit().equalsIgnoreCase(TRUMP))
 			{
 				System.out.println("Verteidiger ist Trumpf");
-				return -1;
+				return 2;
 			}
 			else if(this.getSuit().equalsIgnoreCase(TRUMP))
 			{
 				System.out.println("Angreifer ist Trumpf");
-				return 2;
+				System.out.println("Zug nicht möglich");
+				return -1;
 			}
 		}
 		return 0;
@@ -195,6 +200,8 @@ public class Card extends ImageView{
 		deck.setTrump("Hearts");
 		
 		String TRUMP = deck.getTrump();
+
+		System.out.println("----" + TRUMP + "----");
 		
 		Card randomCard = new Card();
 		
@@ -222,8 +229,8 @@ public class Card extends ImageView{
 		System.out.println("---------------");
 		System.out.println("Verteidiger höher als Angreifer");
 		herz7.compareTo(herzAce);
-		
-		System.out.println(herz7);
+		System.out.println("Angreifer Trumpf verteidiger nicht");
+		spade7.compareTo(herzAce);
 		
 	}
 

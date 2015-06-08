@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 
-import javafx.scene.layout.HBox;
 import cardAssignment.Assignment;
 
 public class Durak {
-	private int currentPlayerId, playerCount, roundStatus, playerNumber;
+	private int currentPlayerId, roundStatus, playerNumber;
 	private int firstCard, firstPlayer;
 	private String Trump;
 	private ArrayList<Player> players;
@@ -29,10 +28,13 @@ public class Durak {
 		*/
 	}
 	
+	
+	//Den ersten Angreifer setzen
 	void setFirstAttacker(String trmpSuit, ArrayList<Player> players)
 	{	
 		Card prvCard = null;
 		
+		//raussuchen wer den niedrigsten Trump hat
 		for (int plsCount = 0; plsCount < players.size(); plsCount++) {
 			ArrayList<Card> actualHand = players.get(plsCount).getHand();
 			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++) {
@@ -53,6 +55,8 @@ public class Durak {
 				
 			}
 		}
+		
+		//Testausgabe
 		System.out.println(prvCard.getRank() +  "   " + prvCard.getSuit());
 		System.out.println("Wert des Firstplayer:");
 		System.out.println(firstPlayer);
@@ -75,6 +79,7 @@ public class Durak {
 		//setDefender((firstPlayer+1) % 4);
 	}
 	
+	//Setter und Getter für Angreifer und Verteidiger
 	void setAttacker(Player player)
 	{
 		player.setStatusId(1);
@@ -125,7 +130,7 @@ public class Durak {
 // Karten vergleichen (aufrufen)
 
 	
-
+	//Setzen der angreifenden Karte
 	void placeCardAttacker(Card card)
 	{
 		int currentCard = 0;
@@ -160,6 +165,7 @@ public class Durak {
 		
 	}
 	
+	//setzen der verteidigendenn Karte
 	void placeCardDefender(Card card)
 	{
 		
@@ -189,12 +195,12 @@ public class Durak {
 			}
 			else if(card.compareTo(card2) == -1)
 			{
-				System.out.println("You can't defend with this card ");
+				System.out.println("You can't defend with this card " + card2);
 			}
 		}
 	}
 		
-   
+   //aufnehmen der Karten vom Feld
    void takeCards(int playerID)
    {
 	   if(currentTable.size() != 0){
@@ -209,6 +215,7 @@ public class Durak {
 	   }
    }
    
+   //verwerfen der Karten vom Tisch
    void discardPile()
    {
 	   if(currentTable.size() != 0){
@@ -275,6 +282,7 @@ public class Durak {
 		}
 	}*/
    
+   //Durchwechseln der Spieler
    void playerChange(ArrayList<Player> players)
    {
 	   int attacker, defender;
@@ -411,11 +419,13 @@ public class Durak {
 	   restart();
    }
    
+   //neu starten des Spiels
    void restart(){
 	   System.out.println("Spiel wird neu gestartet...");
 	   //Spiel neu starten
    }
    
+   //Funktion für die Runden
    void round(ArrayList<Player> players)
    {
 	   int cardCounter = 0;
@@ -436,23 +446,36 @@ public class Durak {
 		   }
 		   playerChange(players);
 	   }
-	   System.out.println("Round abgeschlossen");
+	   System.out.println("Runde abgeschlossen");
    }
    
-   
+   //Starten des Spiels
    void run(int playerCount){
 	   
 	   Deck deck = new Deck();
 	   Dealer dealer = new Dealer(deck);
-
 	   this.players = new ArrayList<Player>();
-
+	   
+	   //evtl statt den If-Abfragen
+	   //int firsttime = 1;
+	   /*------------------------------------
+	    * for(int i = 1; i < playerCount;i++)
+	    * { 
+	    * 	if(firsttime)
+	    * {
+	    * 	Player player1 = new Player(deck);
+	    * 	firsttime = 0;
+	    * }
+	    * 	AI Ai = new AI(deck);
+	    * }
+	    * 
+	    */
 	   
 	   if(playerCount == 4){
-		   Player player1 = new Player(deck);
-		   AI Ai1 = new AI(deck);
-		   AI Ai2 = new AI(deck);
-		   AI Ai3 = new AI(deck);
+		   Player player1 = new Player();
+		   AI Ai1 = new AI();
+		   AI Ai2 = new AI();
+		   AI Ai3 = new AI();
 		   
 		   this.players.add(player1);
 		   player1.ai = false;
@@ -462,9 +485,9 @@ public class Durak {
 			
 	   }else if(playerCount == 3){
 		   //Player player1 = new Player(deck);
-		   AI Ai1 = new AI(deck);
-		   AI Ai2 = new AI(deck);
-		   AI Ai3 = new AI(deck);
+		   AI Ai1 = new AI();
+		   AI Ai2 = new AI();
+		   AI Ai3 = new AI();
 		   
 
 		   //this.players.add(player1);
@@ -474,8 +497,8 @@ public class Durak {
 		   this.players.add(Ai3.player);
 		   
 	   }else if(playerCount == 2){
-		   Player player1 = new Player(deck);
-		   AI Ai1 = new AI(deck);
+		   Player player1 = new Player();
+		   AI Ai1 = new AI();
 		   
 		   this.players.add(player1);
 		   player1.ai = false;
@@ -493,7 +516,7 @@ public class Durak {
 
 	   
 	   System.out.println(this.players);
-	   System.out.println("karten auf hand: " + this.players.get(1).getHand());
+	   //System.out.println("karten auf hand: " + this.players.get(1).getHand());
 	   
 	   while(loser != true){
 		   this.round(this.players);
