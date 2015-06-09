@@ -103,20 +103,20 @@ public class Card extends ImageView{
 	{
 		if(Assignment.cardValues.get(defCard.getRank()) > Assignment.cardValues.get(this.getRank()))
 		{
-			System.out.println("(Verteidiger)(" + defCard.rank + " "+ defCard.suit + ") has more value than (" + this.rank + " " + this.suit + ")(Angreifer)");
+			//System.out.println("(Verteidiger)(" + defCard.rank + " "+ defCard.suit + ") has more value than (" + this.rank + " " + this.suit + ")(Angreifer)");
 			
 			return 1;
 		}
 		else if(Assignment.cardValues.get(defCard.getRank()) < Assignment.cardValues.get(this.getRank()))
 		{
-			System.out.println("(Verteidiger)(" + defCard.rank + " "+ defCard.suit + ") has less value than (" + this.rank + " " + this.suit + ")(Angreifer)");
-			System.out.println("You can't attack with this card (" + this.rank + " / " + this.suit + ").");
+			//System.out.println("(Verteidiger)(" + defCard.rank + " "+ defCard.suit + ") has less value than (" + this.rank + " " + this.suit + ")(Angreifer)");
+			//System.out.println("You can't attack with this card (" + this.rank + " / " + this.suit + ").");
 			return -1;
 		}
 		else
 		{
-			System.out.println("Cards not comparable.");
-			System.out.println("Angreifer Suit: " +this.suit+ " " + "Verteidiger Suit: " +defCard.suit);
+			//System.out.println("Cards not comparable.");
+			//System.out.println("Angreifer Suit: " +this.suit+ " " + "Verteidiger Suit: " +defCard.suit);
 			return 0;
 		}
 	}
