@@ -117,7 +117,7 @@ public class Durak {
 		return 0;
 	}
 	
-	//muss ﾃθ津つｼberarbeitet werden wegen den neuen Set/Get Methoden
+	//muss ueberarbeitet werden wegen den neuen Set/Get Methoden
 	
 //	public final void changeCurrentPlayer(ArrayList<Player> players)
 //	{
@@ -405,11 +405,11 @@ public class Durak {
 	   }
 	   else{System.out.println("Keinen Verlierer gefunden");}
 	   
-	   //Spieler ohne Karten aus Array Lchen
+	   //Spieler ohne Karten aus Array Loeschen
 	   for(int i = 0; i < playerNumber; i++){
 		   if(players.get(i).emptyHand == true){
 			   players.remove(i);
-			   playerNumber = playerNumber - i;
+			   playerNumber = playerNumber - 1;
 		   }
 	   }
    }
@@ -433,7 +433,7 @@ public class Durak {
 	   //Spiel neu starten
    }
    
-   //Funktion fﾃδｼr die Runden
+   //Funktion fuer die Runden
    void round(ArrayList<Player> players,Deck deck) 
    {
 	   //players.get(0).fillHand(deck);
@@ -586,9 +586,9 @@ public class Durak {
 	   //System.out.println("karten auf hand: " + this.players.get(1).getHand());
 	   
 	   while(loser != true){
-		   System.out.println("HAND: " + this.players.get(0).getHand());
-		   System.out.println("HAND: " + this.players.get(1).getHand());
-		   System.out.println("HAND: " + this.players.get(2).getHand());
+		   //System.out.println("HAND: " + this.players.get(0).getHand());
+		   //System.out.println("HAND: " + this.players.get(1).getHand());
+		   //System.out.println("HAND: " + this.players.get(2).getHand());
 		   this.round(this.players,deck);
 		   this.checkLooser();
 	   } 
@@ -716,4 +716,4 @@ public class Durak {
 
 //test
 // Verteidiger bestimmen
-// Verteidigung durchfﾃθ津と津�ﾃや凖θ津や堙�堙つｼhren (vergleich je 2er paare)s
+// Verteidigung durchfuehren (vergleich je 2er paare)s
