@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import cardAssignment.Assignment;
 
@@ -473,6 +474,17 @@ public class Durak {
 				   cardCounter = cardCounter +1;
 				
 				   
+				   try{
+					   	  Scanner scan = new Scanner(System.in);
+					   	  int cardPos = scan.nextInt();
+						  placeCardAttacker(Attacker.getHand(cardPos));
+					     }
+					  catch(RuntimeException e){
+						discardPile();
+						System.out.println("Karten werden abgelegt!");
+						break;
+					  }
+				   
 				   
 				   try {
 						  placeCardDefender(AiDefendCard(Defender,Defender.getId()));
@@ -493,6 +505,18 @@ public class Durak {
 						System.out.println("Karten werden abgelegt!");
 						break;
 					  }
+				   
+				   try{
+					   	  Scanner scan = new Scanner(System.in);
+					   	  int cardPos = scan.nextInt();
+						  placeCardAttacker(Defender.getHand(cardPos));
+					     }
+					  catch(RuntimeException e){
+						takeCards(getDefender(players));
+						System.out.println("Karten werden aufgenommen!");
+						break;
+					  }
+				   
 				     cardCounter = cardCounter +1;
 					  // System.out.println(AiAttackCard(Attacker));
 				    
