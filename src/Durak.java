@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import cardAssignment.Assignment;
 
 public class Durak {
-	private int currentPlayerId, roundStatus, playerNumber,firstPlayer;
-	private int firstCard = 0;
+	private int currentPlayerId, roundStatus, playerNumber;
+	private int firstCard,firstPlayer;
 	private String Trump;
 	private ArrayList<Player> players;
 	//private ArrayList<Card> currentTable;
@@ -136,7 +136,8 @@ public class Durak {
 	void placeCardAttacker(Card card)
 	{
 		int currentCard = 0;
-		if(currentTable.size() == 0)
+		int firstCard = 0;
+		if(firstCard == 0)
 		{
 		currentTable.addCard(currentTable, card);
 		int player = getAttacker(players);
@@ -202,7 +203,6 @@ public class Durak {
 		   currentTable.remove(removeCard);   
 	   } 
 	   roundStatus = 1;
-	   firstCard = 0;
 	   playerChange(players);
 	   }
    }
@@ -218,10 +218,8 @@ public class Durak {
 		   currentTable.remove(removeCard);
 	   }
 	   roundStatus = 2;
-	   firstCard = 0;
 	   playerChange(players);
 	   }
-	   firstCard = 0;
 	   playerChange(players);
    }
    
