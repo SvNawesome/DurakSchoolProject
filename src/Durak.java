@@ -328,7 +328,9 @@ public class Durak {
 		
 		//Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
 		//Card card = AiPlayer.getHand(0);
+		System.out.println("--------------SPIELER GREIFT AN MIT--------------");
 		System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand());
+		System.out.println("-------------------------------------------------");
 		Card card = this.players.get(getAttacker(players)).getHand(0);
 		//Card card = this.players.get(Id).getHand(0);
 		
@@ -351,8 +353,11 @@ public class Durak {
 	
 	 //Ai verteidigt immer mit der stärksten Karte
 	 //Gibt die Karte zurück mit der die Ai verteidigt
-	   Card AiDefendCard(Player AiPlayer){
+	   Card AiDefendCard(Player AiPlayer, int Id){
 		   Card card = AiPlayer.getHand(0);
+		   System.out.println("--------------SPIELER VERTEIDIGT MIT--------------");
+		   System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand());
+		   System.out.println("--------------------------------------------------");
 		   for(int i = 0; i < AiPlayer.getHand().size(); i++){
 			   
 				   if(card.compareTo(AiPlayer.getHand(i)) == 1){
@@ -372,6 +377,8 @@ public class Durak {
 		   System.out.println(i);
 		   if(players.get(i).emptyHand == true){
 			   j++;
+			   System.out.println("Ausgabe J");
+			   System.out.println(j);
 		   }
 	   }
 	   
@@ -437,7 +444,7 @@ public class Durak {
 				  // System.out.println(AiAttackCard(Attacker));
 				   cardCounter = cardCounter +1;
 				  try {
-					  placeCardDefender(AiDefendCard(Defender));
+					  placeCardDefender(AiDefendCard(Defender, Defender.getId()));
 				  }
 				  catch(RuntimeException e){
 					  takeCards(getDefender(players));
@@ -458,7 +465,7 @@ public class Durak {
 				   
 				   
 				   try {
-						  placeCardDefender(AiDefendCard(Defender));
+						  placeCardDefender(AiDefendCard(Defender,Defender.getId()));
 					  }
 					  catch(RuntimeException e){
 						  takeCards(getDefender(players));

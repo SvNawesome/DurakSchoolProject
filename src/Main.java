@@ -20,20 +20,20 @@ import javafx.scene.layout.HBox;
 
 public class Main extends Application {
 	
-	Deck deck = new Deck();
+	/*Deck deck = new Deck();
 	Dealer dealer = new Dealer(deck);
 	Player player1 = new Player();
 	Player player2 = new Player();
 	ArrayList<Player> players = new ArrayList<Player>();
-	Table table = new Table();
+	Table table = new Table();*/
 
 	//VIELLEICHT LISTENER FÜR NEUE KARTEN // DENKE ABER NICHT ZWINGEND NOTWENDIG
 	private Parent createGui()
 	{
 		Stage optionStage;
 		
-		players.add(player1);
-		players.add(player2);
+		//players.add(player1);
+		//players.add(player2);
 		
 		
 		//Instanziierungen
@@ -84,11 +84,11 @@ public class Main extends Application {
 		AnchorPane.setRightAnchor(gameTBar, 0.0);
 
 		//TakeCard button überarbeitet prüft nur einmal
-		if(table.size() == 0)
+	/*	if(table.size() == 0)
 		{
 			takeFieldCards.setDisable(false);
 		}
-		else takeFieldCards.setDisable(false);
+		else takeFieldCards.setDisable(false);*/
 		
 		//Player1Hand settings
 		player1Hand.setPadding(new Insets(-50));
@@ -99,7 +99,7 @@ public class Main extends Application {
 		AnchorPane.setRightAnchor(player1Hand, 100.0);
 		
 		//nur zur überprüfung ob karten angezeigt werden
-		for(int i = 0; i < 6;i++)
+	/*	for(int i = 0; i < 6;i++)
 		{
 		player1.addCard(deck.getCard());
 		}
@@ -109,7 +109,7 @@ public class Main extends Application {
 			cards.turn_card();
 			player1Hand.getChildren().add(cards);
 		}
-		
+		*/
 		
 		// BUTTON FUNKTION
 		
@@ -160,6 +160,7 @@ public class Main extends Application {
 				});
 
 		//nehmen der Karten vom Table // momentan umgeschrieben zum karten ziehen zum testen
+		/*
 		takeFieldCards.setOnAction(new EventHandler<ActionEvent>()
 				{
 			@Override public void handle(ActionEvent e)
@@ -169,6 +170,7 @@ public class Main extends Application {
 				player1Hand.getChildren().add(card);
 			}
 				});
+				*/
 
 		
 		return root;
