@@ -91,11 +91,9 @@ public class Durak {
 		//setDefender((firstPlayer+1) % 4);
 	}
 	
-<<<<<<< HEAD
+
 	//Setter und Getter fuer Angreifer und Verteidiger
-=======
-	//Setter und Getter fï¾ƒÎ´ï½¼r Angreifer und Verteidiger
->>>>>>> origin/master
+
 	void setAttacker(Player player)
 	{
 		player.setStatusId(1);
@@ -130,9 +128,6 @@ public class Durak {
 		}
 		return 0;
 	}
-	
-<<<<<<< HEAD
-=======
 
 	//muss ueberarbeitet werden wegen den neuen Set/Get Methoden
 	
@@ -144,7 +139,6 @@ public class Durak {
 //		}
 //	}
 	
->>>>>>> origin/master
 
 // Spiellogik
 // Karten vergleichen (aufrufen)
@@ -592,15 +586,10 @@ public class Durak {
    
 	public static void main(String[] args) {
 		
-<<<<<<< HEAD
-		Durak durak = new Durak(2);
-=======
+		Durak durak = new Durak(3);
 		/* Notizen Sven
 		 * Evtl getter/setter für deck spieler karten usw.
 		 */
-		
-		Durak durak = new Durak(3);
->>>>>>> origin/master
 
 
 		
