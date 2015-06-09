@@ -12,7 +12,8 @@ public class Durak {
 	Table currentTable = new Table();
 	private ArrayList<Card> discardPile;
 	private Card removeCard, aiPrevCard,attackcard,defendcard;
-	private boolean loser,attackcardset,defendcardset;
+	private boolean looser,attackcardset,defendcardset;
+	private Deck deck;
 	
 	public Durak (int playerCount){
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -30,6 +31,14 @@ public class Durak {
 		*/
 	}
 	
+	void setDeck(Deck deck)
+	{
+		this.deck = deck.getDeck();
+	}
+	Deck getDeck()
+	{
+		return this.deck;
+	}
 	
 	//Den ersten Angreifer setzen
 	void setFirstAttacker(String trmpSuit, ArrayList<Player> players)
@@ -82,7 +91,11 @@ public class Durak {
 		//setDefender((firstPlayer+1) % 4);
 	}
 	
+<<<<<<< HEAD
 	//Setter und Getter fuer Angreifer und Verteidiger
+=======
+	//Setter und Getter fï¾ƒÎ´ï½¼r Angreifer und Verteidiger
+>>>>>>> origin/master
 	void setAttacker(Player player)
 	{
 		player.setStatusId(1);
@@ -118,6 +131,20 @@ public class Durak {
 		return 0;
 	}
 	
+<<<<<<< HEAD
+=======
+
+	//muss ueberarbeitet werden wegen den neuen Set/Get Methoden
+	
+//	public final void changeCurrentPlayer(ArrayList<Player> players)
+//	{
+//		if (players. == 1)
+//		{
+//			setDefender(currentPlayerId);
+//		}
+//	}
+	
+>>>>>>> origin/master
 
 // Spiellogik
 // Karten vergleichen (aufrufen)
@@ -260,8 +287,8 @@ public class Durak {
 	   }
    }
    
-	//Ai greift immer mit der stﾃδ､rksten Karte an
-	//Gibt die Karte zurﾃδｼck mit der die Ai angreift
+	//Ai greift immer mit der stï¾ƒÎ´ï½¤rksten Karte an
+	//Gibt die Karte zurï¾ƒÎ´ï½¼ck mit der die Ai angreift
 	Card AiAttackCard(Player AiPlayer, int Id){
 		
 		
@@ -290,8 +317,8 @@ public class Durak {
 		return card;
 	 }
 	
-	 //Ai verteidigt immer mit der stﾃ､rksten Karte
-	 //Gibt die Karte zurﾃｼck mit der die Ai verteidigt
+	 //Ai verteidigt immer mit der stï¾ƒï½¤rksten Karte
+	 //Gibt die Karte zurï¾ƒï½¼ck mit der die Ai verteidigt
 	   Card AiDefendCard(Player AiPlayer, int Id){
 
 		   Card card = AiPlayer.getHand(0);
@@ -338,12 +365,13 @@ public class Durak {
 		   for(int i = 0; i < playerNumber; i++){
 			   if(players.get(i).emptyHand == false){
 				   setLooser(players.get(i));
-				   loser = true;
+				   looser = true;
 			   }
 		   }
 	   }
 	   else{System.out.println("Keinen Verlierer gefunden");}
 	   
+
 	   //Spieler ohne Karten aus Array Loeschen
 	   for(int i = 0; i < playerNumber; i++){
 		   if(players.get(i).emptyHand == true){
@@ -372,6 +400,7 @@ public class Durak {
 	   //Spiel neu starten
    }
    
+
    //Funktion fuer die Runden
    void round(ArrayList<Player> players,Deck deck) 
    {
@@ -482,6 +511,7 @@ public class Durak {
    void run(int playerCount){
 	   
 	   Deck deck = new Deck();
+	   this.setDeck(deck);
 	   Dealer dealer = new Dealer(deck);
 	   this.players = new ArrayList<Player>();
 	   
@@ -547,10 +577,11 @@ public class Durak {
 	   System.out.println(this.players);
 	   //System.out.println("karten auf hand: " + this.players.get(1).getHand());
 	   
-	   while(loser != true){
-		   //System.out.println("HAND: " + this.players.get(0).getHand());
-		   //System.out.println("HAND: " + this.players.get(1).getHand());
-		   //System.out.println("HAND: " + this.players.get(2).getHand());
+	   while(looser != true){
+		   System.out.println("HAND: " + this.players.get(0).getHand());
+		   System.out.println("HAND: " + this.players.get(1).getHand());
+		   System.out.println("HAND: " + this.players.get(2).getHand());
+
 		   this.round(this.players,deck);
 		   this.checkLooser();
 	   } 
@@ -561,7 +592,15 @@ public class Durak {
    
 	public static void main(String[] args) {
 		
+<<<<<<< HEAD
 		Durak durak = new Durak(2);
+=======
+		/* Notizen Sven
+		 * Evtl getter/setter für deck spieler karten usw.
+		 */
+		
+		Durak durak = new Durak(3);
+>>>>>>> origin/master
 
 
 		
@@ -643,7 +682,7 @@ public class Durak {
 		System.out.println("Table Size: " + durak.currentTable.size());
 		
 		
-		//Testen ob bei leeren hﾃδ､nden der richtige verlierer bestimmt wird
+		//Testen ob bei leeren hï¾ƒÎ´ï½¤nden der richtige verlierer bestimmt wird
 		/*for(int i = 0; i < Attacker.getHand().size()+1; i++){
 			Attacker.getHand().remove(0);
 			Attacker.emptyHand = true;
@@ -678,4 +717,5 @@ public class Durak {
 
 //test
 // Verteidiger bestimmen
+
 // Verteidigung durchfuehren (vergleich je 2er paare)s
