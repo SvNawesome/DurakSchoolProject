@@ -291,7 +291,7 @@ public class Durak {
 			   }
 			   setDefender(players.get((defender+2)%4));
 			   while(players.get(getDefender(players)).emptyHand == true){
-			   	setDefender(players.get((Defender+1)%4));
+			   	setDefender(players.get((defender+1)%4));
 			   }
 		   }
 		   else if(roundStatus == 2)
@@ -302,7 +302,7 @@ public class Durak {
 			   }
 			   setDefender(players.get((defender+1)%4));
 			   while(players.get(getDefender(players)).emptyHand == true){
-			   	setDefender(players.get((Defender+1)%4));
+			   	setDefender(players.get((defender+1)%4));
 			   }
 		   }
 	   }
@@ -316,7 +316,7 @@ public class Durak {
 			   }
 			   setDefender(players.get((defender+2)%3));
 			   while(players.get(getDefender(players)).emptyHand == true){
-			   	setDefender(players.get((Defender+1)%4));
+			   	setDefender(players.get((defender+1)%4));
 			   }
 		   }
 		   else if(roundStatus == 2)
@@ -327,7 +327,7 @@ public class Durak {
 			   }
 			   setDefender(players.get((defender+1)%3));
 			   while(players.get(getDefender(players)).emptyHand == true){
-			   	setDefender(players.get((Defender+1)%4));
+			   	setDefender(players.get((defender+1)%4));
 			   }
 		   }
 	   }
