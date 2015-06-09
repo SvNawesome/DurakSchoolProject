@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import cardAssignment.Assignment;
 
 public class Durak {
-	private int currentPlayerId, roundStatus, playerNumber,firstPlayer;
-	private int firstCard = 0;
+	private int currentPlayerId, roundStatus, playerNumber;
+	private int firstCard,firstPlayer;
 	private String Trump;
 	private ArrayList<Player> players;
 	//private ArrayList<Card> currentTable;
@@ -126,7 +127,8 @@ public class Durak {
 		return 0;
 	}
 	
-	//muss ï¾ƒÎ¸æ´¥ã�¤ï½¼berarbeitet werden wegen den neuen Set/Get Methoden
+
+	//muss ueberarbeitet werden wegen den neuen Set/Get Methoden
 	
 //	public final void changeCurrentPlayer(ArrayList<Player> players)
 //	{
@@ -145,7 +147,8 @@ public class Durak {
 	void placeCardAttacker(Card card)
 	{
 		int currentCard = 0;
-		if(currentTable.size() == 0)
+		int firstCard = 0;
+		if(firstCard == 0)
 		{
 		currentTable.addCard(currentTable, card);
 		int player = getAttacker(players);
@@ -211,7 +214,6 @@ public class Durak {
 		   currentTable.remove(removeCard);   
 	   } 
 	   roundStatus = 1;
-	   firstCard = 0;
 	   playerChange(players);
 	   }
    }
@@ -227,10 +229,8 @@ public class Durak {
 		   currentTable.remove(removeCard);
 	   }
 	   roundStatus = 2;
-	   firstCard = 0;
 	   playerChange(players);
 	   }
-	   firstCard = 0;
 	   playerChange(players);
    }
    
@@ -416,11 +416,12 @@ public class Durak {
 	   }
 	   else{System.out.println("Keinen Verlierer gefunden");}
 	   
-	   //Spieler ohne Karten aus Array Lî’›chen
+
+	   //Spieler ohne Karten aus Array Loeschen
 	   for(int i = 0; i < playerNumber; i++){
 		   if(players.get(i).emptyHand == true){
 			   players.remove(i);
-			   playerNumber = playerNumber - i;
+			   playerNumber = playerNumber - 1;
 		   }
 	   }
    }
@@ -444,7 +445,8 @@ public class Durak {
 	   //Spiel neu starten
    }
    
-   //Funktion fï¾ƒÎ´ï½¼r die Runden
+
+   //Funktion fuer die Runden
    void round(ArrayList<Player> players,Deck deck) 
    {
 	   //players.get(0).fillHand(deck);
@@ -484,6 +486,17 @@ public class Durak {
 				   cardCounter = cardCounter +1;
 				
 				   
+				   try{
+					   	  Scanner scan = new Scanner(System.in);
+					   	  int cardPos = scan.nextInt();
+						  placeCardAttacker(Attacker.getHand(cardPos));
+					     }
+					  catch(RuntimeException e){
+						discardPile();
+						System.out.println("Karten werden abgelegt!");
+						break;
+					  }
+				   
 				   
 				   try {
 						  placeCardDefender(AiDefendCard(Defender,Defender.getId()));
@@ -504,6 +517,18 @@ public class Durak {
 						System.out.println("Karten werden abgelegt!");
 						break;
 					  }
+				   
+				   try{
+					   	  Scanner scan = new Scanner(System.in);
+					   	  int cardPos = scan.nextInt();
+						  placeCardAttacker(Defender.getHand(cardPos));
+					     }
+					  catch(RuntimeException e){
+						takeCards(getDefender(players));
+						System.out.println("Karten werden aufgenommen!");
+						break;
+					  }
+				   
 				     cardCounter = cardCounter +1;
 					  // System.out.println(AiAttackCard(Attacker));
 				    
@@ -601,6 +626,7 @@ public class Durak {
 		   System.out.println("HAND: " + this.players.get(0).getHand());
 		   System.out.println("HAND: " + this.players.get(1).getHand());
 		   System.out.println("HAND: " + this.players.get(2).getHand());
+
 		   this.round(this.players,deck);
 		   this.checkLooser();
 	   } 
@@ -732,4 +758,5 @@ public class Durak {
 
 //test
 // Verteidiger bestimmen
-// Verteidigung durchfï¾ƒÎ¸æ´¥ã�¨æ´¥ï¿½ï¾ƒã‚„å‡–Î¸æ´¥ã‚„å ™ï¿½å ™ã�¤ï½¼hren (vergleich je 2er paare)s
+
+// Verteidigung durchfuehren (vergleich je 2er paare)s
