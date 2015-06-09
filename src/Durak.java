@@ -11,7 +11,8 @@ public class Durak {
 	Table currentTable = new Table();
 	private ArrayList<Card> discardPile;
 	private Card removeCard, aiPrevCard,attackcard,defendcard;
-	private boolean loser,attackcardset,defendcardset;
+	private boolean looser,attackcardset,defendcardset;
+	private Deck deck;
 	
 	public Durak (int playerCount){
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -29,6 +30,14 @@ public class Durak {
 		*/
 	}
 	
+	void setDeck(Deck deck)
+	{
+		this.deck = deck.getDeck();
+	}
+	Deck getDeck()
+	{
+		return this.deck;
+	}
 	
 	//Den ersten Angreifer setzen
 	void setFirstAttacker(String trmpSuit, ArrayList<Player> players)
@@ -81,7 +90,7 @@ public class Durak {
 		//setDefender((firstPlayer+1) % 4);
 	}
 	
-	//Setter und Getter fﾃδｼr Angreifer und Verteidiger
+	//Setter und Getter fï¾ƒÎ´ï½¼r Angreifer und Verteidiger
 	void setAttacker(Player player)
 	{
 		player.setStatusId(1);
@@ -117,7 +126,7 @@ public class Durak {
 		return 0;
 	}
 	
-	//muss ﾃθ津つｼberarbeitet werden wegen den neuen Set/Get Methoden
+	//muss ï¾ƒÎ¸æ´¥ã�¤ï½¼berarbeitet werden wegen den neuen Set/Get Methoden
 	
 //	public final void changeCurrentPlayer(ArrayList<Player> players)
 //	{
@@ -323,8 +332,8 @@ public class Durak {
 	   }
    }
    
-	//Ai greift immer mit der stﾃδ､rksten Karte an
-	//Gibt die Karte zurﾃδｼck mit der die Ai angreift
+	//Ai greift immer mit der stï¾ƒÎ´ï½¤rksten Karte an
+	//Gibt die Karte zurï¾ƒÎ´ï½¼ck mit der die Ai angreift
 	Card AiAttackCard(Player AiPlayer, int Id){
 		
 		
@@ -353,8 +362,8 @@ public class Durak {
 		return card;
 	 }
 	
-	 //Ai verteidigt immer mit der stﾃ､rksten Karte
-	 //Gibt die Karte zurﾃｼck mit der die Ai verteidigt
+	 //Ai verteidigt immer mit der stï¾ƒï½¤rksten Karte
+	 //Gibt die Karte zurï¾ƒï½¼ck mit der die Ai verteidigt
 	   Card AiDefendCard(Player AiPlayer, int Id){
 
 		   Card card = AiPlayer.getHand(0);
@@ -401,13 +410,13 @@ public class Durak {
 		   for(int i = 0; i < playerNumber; i++){
 			   if(players.get(i).emptyHand == false){
 				   setLooser(players.get(i));
-				   loser = true;
+				   looser = true;
 			   }
 		   }
 	   }
 	   else{System.out.println("Keinen Verlierer gefunden");}
 	   
-	   //Spieler ohne Karten aus Array Lchen
+	   //Spieler ohne Karten aus Array Lî’›chen
 	   for(int i = 0; i < playerNumber; i++){
 		   if(players.get(i).emptyHand == true){
 			   players.remove(i);
@@ -435,7 +444,7 @@ public class Durak {
 	   //Spiel neu starten
    }
    
-   //Funktion fﾃδｼr die Runden
+   //Funktion fï¾ƒÎ´ï½¼r die Runden
    void round(ArrayList<Player> players,Deck deck) 
    {
 	   //players.get(0).fillHand(deck);
@@ -522,6 +531,7 @@ public class Durak {
    void run(int playerCount){
 	   
 	   Deck deck = new Deck();
+	   this.setDeck(deck);
 	   Dealer dealer = new Dealer(deck);
 	   this.players = new ArrayList<Player>();
 	   
@@ -587,7 +597,7 @@ public class Durak {
 	   System.out.println(this.players);
 	   //System.out.println("karten auf hand: " + this.players.get(1).getHand());
 	   
-	   while(loser != true){
+	   while(looser != true){
 		   System.out.println("HAND: " + this.players.get(0).getHand());
 		   System.out.println("HAND: " + this.players.get(1).getHand());
 		   System.out.println("HAND: " + this.players.get(2).getHand());
@@ -600,6 +610,10 @@ public class Durak {
    //-------------------------MAIN-------------------------------------
    
 	public static void main(String[] args) {
+		
+		/* Notizen Sven
+		 * Evtl getter/setter für deck spieler karten usw.
+		 */
 		
 		Durak durak = new Durak(3);
 
@@ -683,7 +697,7 @@ public class Durak {
 		System.out.println("Table Size: " + durak.currentTable.size());
 		
 		
-		//Testen ob bei leeren hﾃδ､nden der richtige verlierer bestimmt wird
+		//Testen ob bei leeren hï¾ƒÎ´ï½¤nden der richtige verlierer bestimmt wird
 		/*for(int i = 0; i < Attacker.getHand().size()+1; i++){
 			Attacker.getHand().remove(0);
 			Attacker.emptyHand = true;
@@ -718,4 +732,4 @@ public class Durak {
 
 //test
 // Verteidiger bestimmen
-// Verteidigung durchfﾃθ津と津�ﾃや凖θ津や堙�堙つｼhren (vergleich je 2er paare)s
+// Verteidigung durchfï¾ƒÎ¸æ´¥ã�¨æ´¥ï¿½ï¾ƒã‚„å‡–Î¸æ´¥ã‚„å ™ï¿½å ™ã�¤ï½¼hren (vergleich je 2er paare)s

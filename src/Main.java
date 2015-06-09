@@ -19,13 +19,15 @@ import javafx.scene.layout.HBox;
 
 
 public class Main extends Application {
-	
-	/*Deck deck = new Deck();
+	/*
+	Deck deck = new Deck();
 	Dealer dealer = new Dealer(deck);
 	Player player1 = new Player();
 	Player player2 = new Player();
 	ArrayList<Player> players = new ArrayList<Player>();
-	Table table = new Table();*/
+	Table table = new Table();
+	*/
+	HBox player1Hand = new HBox();
 
 	//VIELLEICHT LISTENER FÜR NEUE KARTEN // DENKE ABER NICHT ZWINGEND NOTWENDIG
 	private Parent createGui()
@@ -40,7 +42,7 @@ public class Main extends Application {
 		AnchorPane root = new AnchorPane();
 		ToolBar tBar = new ToolBar();
 		ToolBar gameTBar = new ToolBar();
-		HBox player1Hand = new HBox();
+//		HBox player1Hand = new HBox();
 		Button startButton = new Button("Start");
 		Button exitButton = new Button("Exit");
 		Button takeFieldCards = new Button("Draw Cards");
@@ -84,11 +86,12 @@ public class Main extends Application {
 		AnchorPane.setRightAnchor(gameTBar, 0.0);
 
 		//TakeCard button überarbeitet prüft nur einmal
-	/*	if(table.size() == 0)
+		/*if(table.size() == 0)
 		{
 			takeFieldCards.setDisable(false);
 		}
-		else takeFieldCards.setDisable(false);*/
+		else takeFieldCards.setDisable(false);
+		*/
 		
 		//Player1Hand settings
 		player1Hand.setPadding(new Insets(-50));
@@ -99,7 +102,7 @@ public class Main extends Application {
 		AnchorPane.setRightAnchor(player1Hand, 100.0);
 		
 		//nur zur überprüfung ob karten angezeigt werden
-	/*	for(int i = 0; i < 6;i++)
+		/*for(int i = 0; i < 6;i++)
 		{
 		player1.addCard(deck.getCard());
 		}
@@ -110,6 +113,7 @@ public class Main extends Application {
 			player1Hand.getChildren().add(cards);
 		}
 		*/
+		
 		
 		// BUTTON FUNKTION
 		
@@ -177,6 +181,11 @@ public class Main extends Application {
 		
 	}
 
+/*	private void createGame(Durak durak)
+	{
+		player1Hand.getChildren().add(durak.getDeck().getCard());
+	}
+	*/
 
 	//starten des Fensters
 	@Override
