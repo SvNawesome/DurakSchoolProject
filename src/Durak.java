@@ -81,7 +81,7 @@ public class Durak {
 		//setDefender((firstPlayer+1) % 4);
 	}
 	
-	//Setter und Getter für Angreifer und Verteidiger
+	//Setter und Getter fÃ¼r Angreifer und Verteidiger
 	void setAttacker(Player player)
 	{
 		player.setStatusId(1);
@@ -117,7 +117,7 @@ public class Durak {
 		return 0;
 	}
 	
-	//muss Ã¼berarbeitet werden wegen den neuen Set/Get Methoden
+	//muss ÃƒÂ¼berarbeitet werden wegen den neuen Set/Get Methoden
 	
 //	public final void changeCurrentPlayer(ArrayList<Player> players)
 //	{
@@ -136,7 +136,7 @@ public class Durak {
 	void placeCardAttacker(Card card)
 	{
 		int currentCard = 0;
-		if(firstCard == 0)
+		if(currentTable.size() == 0)
 		{
 		currentTable.addCard(currentTable, card);
 		int player = getAttacker(players);
@@ -347,8 +347,8 @@ public class Durak {
 	   }
    }
    
-	//Ai greift immer mit der stärksten Karte an
-	//Gibt die Karte zurück mit der die Ai angreift
+	//Ai greift immer mit der stÃ¤rksten Karte an
+	//Gibt die Karte zurÃ¼ck mit der die Ai angreift
 	Card AiAttackCard(Player AiPlayer, int Id){
 		
 		
@@ -377,8 +377,8 @@ public class Durak {
 		return card;
 	 }
 	
-	 //Ai verteidigt immer mit der st�rksten Karte
-	 //Gibt die Karte zur�ck mit der die Ai verteidigt
+	 //Ai verteidigt immer mit der stärksten Karte
+	 //Gibt die Karte zurück mit der die Ai verteidigt
 	   Card AiDefendCard(Player AiPlayer, int Id){
 
 		   Card card = AiPlayer.getHand(0);
@@ -450,7 +450,7 @@ public class Durak {
 	   //Spiel neu starten
    }
    
-   //Funktion für die Runden
+   //Funktion fÃ¼r die Runden
    void round(ArrayList<Player> players,Deck deck) 
    {
 	   //players.get(0).fillHand(deck);
@@ -698,7 +698,7 @@ public class Durak {
 		System.out.println("Table Size: " + durak.currentTable.size());
 		
 		
-		//Testen ob bei leeren händen der richtige verlierer bestimmt wird
+		//Testen ob bei leeren hÃ¤nden der richtige verlierer bestimmt wird
 		/*for(int i = 0; i < Attacker.getHand().size()+1; i++){
 			Attacker.getHand().remove(0);
 			Attacker.emptyHand = true;
@@ -733,4 +733,4 @@ public class Durak {
 
 //test
 // Verteidiger bestimmen
-// Verteidigung durchfÃÆÃÂ¼hren (vergleich je 2er paare)s
+// Verteidigung durchfÃƒÂƒÃ†Â’ÃƒÂ‚Ã‚Â¼hren (vergleich je 2er paare)s
