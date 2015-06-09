@@ -379,6 +379,7 @@ public class Durak {
    void setWinner(Player winner){
 	   System.out.println("Gewonnen hat spieler nummer: " + winner.getId());
 	   winner.winner = true;
+	   this.looser = true;
    }
    
    //Ausgabe des Verlierers und neustarten des Spiels
@@ -572,9 +573,9 @@ public class Durak {
 	   //System.out.println("karten auf hand: " + this.players.get(1).getHand());
 	   
 	   while(looser != true){
-		   System.out.println("HAND: " + this.players.get(0).getHand());
-		   System.out.println("HAND: " + this.players.get(1).getHand());
-		   System.out.println("HAND: " + this.players.get(2).getHand());
+		   //System.out.println("HAND: " + this.players.get(0).getHand());
+		   //System.out.println("HAND: " + this.players.get(1).getHand());
+		   //System.out.println("HAND: " + this.players.get(2).getHand());
 
 		   this.round(this.players,deck);
 		   this.checkLooser();
