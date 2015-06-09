@@ -81,7 +81,7 @@ public class Durak {
 		//setDefender((firstPlayer+1) % 4);
 	}
 	
-	//Setter und Getter fÃ¼r Angreifer und Verteidiger
+	//Setter und Getter fﾃδｼr Angreifer und Verteidiger
 	void setAttacker(Player player)
 	{
 		player.setStatusId(1);
@@ -117,7 +117,7 @@ public class Durak {
 		return 0;
 	}
 	
-	//muss ÃƒÂ¼berarbeitet werden wegen den neuen Set/Get Methoden
+	//muss ﾃθ津つｼberarbeitet werden wegen den neuen Set/Get Methoden
 	
 //	public final void changeCurrentPlayer(ArrayList<Player> players)
 //	{
@@ -288,24 +288,12 @@ public class Durak {
 		   if(roundStatus == 1)
 		   {
 			   setAttacker(players.get((attacker+2)%4));
-			   while(players.get(getAttacker(players)).winner == true){
-			   	setAttacker(players.get((attacker+1)%4));
-			   }
 			   setDefender(players.get((defender+2)%4));
-			   while(players.get(getDefender(players)).emptyHand == true){
-			   	setDefender(players.get((defender+1)%4));
-			   }
 		   }
 		   else if(roundStatus == 2)
 		   {
 			   setAttacker(players.get((attacker+1)%4));
-			   while(players.get(getAttacker(players)).winner == true){
-			   	setAttacker(players.get((attacker+1)%4));
-			   }
 			   setDefender(players.get((defender+1)%4));
-			   while(players.get(getDefender(players)).emptyHand == true){
-			   	setDefender(players.get((defender+1)%4));
-			   }
 		   }
 	   }
 	   else if(playerNumber == 3)
@@ -313,24 +301,12 @@ public class Durak {
 		   if(roundStatus == 1)
 		   {
 			   setAttacker(players.get((attacker+2)%3));
-			   while(players.get(getAttacker(players)).winner == true){
-			   	setAttacker(players.get((attacker+1)%4));
-			   }
 			   setDefender(players.get((defender+2)%3));
-			   while(players.get(getDefender(players)).emptyHand == true){
-			   	setDefender(players.get((defender+1)%4));
-			   }
 		   }
 		   else if(roundStatus == 2)
 		   {
 			   setAttacker(players.get((attacker+1)%3));
-			   while(players.get(getAttacker(players)).winner == true){
-			   	setAttacker(players.get((attacker+1)%4));
-			   }
 			   setDefender(players.get((defender+1)%3));
-			   while(players.get(getDefender(players)).emptyHand == true){
-			   	setDefender(players.get((defender+1)%4));
-			   }
 		   }
 	   }
 	   else if(playerNumber == 2)
@@ -347,8 +323,8 @@ public class Durak {
 	   }
    }
    
-	//Ai greift immer mit der stÃ¤rksten Karte an
-	//Gibt die Karte zurÃ¼ck mit der die Ai angreift
+	//Ai greift immer mit der stﾃδ､rksten Karte an
+	//Gibt die Karte zurﾃδｼck mit der die Ai angreift
 	Card AiAttackCard(Player AiPlayer, int Id){
 		
 		
@@ -377,8 +353,8 @@ public class Durak {
 		return card;
 	 }
 	
-	 //Ai verteidigt immer mit der stärksten Karte
-	 //Gibt die Karte zurück mit der die Ai verteidigt
+	 //Ai verteidigt immer mit der stﾃ､rksten Karte
+	 //Gibt die Karte zurﾃｼck mit der die Ai verteidigt
 	   Card AiDefendCard(Player AiPlayer, int Id){
 
 		   Card card = AiPlayer.getHand(0);
@@ -431,10 +407,11 @@ public class Durak {
 	   }
 	   else{System.out.println("Keinen Verlierer gefunden");}
 	   
-	   //Spieler ohne Karten aus Array L�schen
+	   //Spieler ohne Karten aus Array Lchen
 	   for(int i = 0; i < playerNumber; i++){
 		   if(players.get(i).emptyHand == true){
 			   players.remove(i);
+			   playerNumber = playerNumber - i;
 		   }
 	   }
    }
@@ -458,7 +435,7 @@ public class Durak {
 	   //Spiel neu starten
    }
    
-   //Funktion fÃ¼r die Runden
+   //Funktion fﾃδｼr die Runden
    void round(ArrayList<Player> players,Deck deck) 
    {
 	   //players.get(0).fillHand(deck);
@@ -706,7 +683,7 @@ public class Durak {
 		System.out.println("Table Size: " + durak.currentTable.size());
 		
 		
-		//Testen ob bei leeren hÃ¤nden der richtige verlierer bestimmt wird
+		//Testen ob bei leeren hﾃδ､nden der richtige verlierer bestimmt wird
 		/*for(int i = 0; i < Attacker.getHand().size()+1; i++){
 			Attacker.getHand().remove(0);
 			Attacker.emptyHand = true;
@@ -741,4 +718,4 @@ public class Durak {
 
 //test
 // Verteidiger bestimmen
-// Verteidigung durchfÃƒÂƒÃ†Â’ÃƒÂ‚Ã‚Â¼hren (vergleich je 2er paare)s
+// Verteidigung durchfﾃθ津と津�ﾃや凖θ津や堙�堙つｼhren (vergleich je 2er paare)s
