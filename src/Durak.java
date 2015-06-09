@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import cardAssignment.Assignment;
 
 public class Durak {
-	private int currentPlayerId, roundStatus, playerNumber;
-	private int firstCard, firstPlayer;
+	private int currentPlayerId, roundStatus, playerNumber,firstPlayer;
+	private int firstCard = 0;
 	private String Trump;
 	private ArrayList<Player> players;
 	//private ArrayList<Card> currentTable;
@@ -81,7 +81,7 @@ public class Durak {
 		//setDefender((firstPlayer+1) % 4);
 	}
 	
-	//Setter und Getter f�r Angreifer und Verteidiger
+	//Setter und Getter für Angreifer und Verteidiger
 	void setAttacker(Player player)
 	{
 		player.setStatusId(1);
@@ -117,7 +117,7 @@ public class Durak {
 		return 0;
 	}
 	
-	//muss überarbeitet werden wegen den neuen Set/Get Methoden
+	//muss Ã¼berarbeitet werden wegen den neuen Set/Get Methoden
 	
 //	public final void changeCurrentPlayer(ArrayList<Player> players)
 //	{
@@ -136,7 +136,6 @@ public class Durak {
 	void placeCardAttacker(Card card)
 	{
 		int currentCard = 0;
-		int firstCard = 0;
 		if(firstCard == 0)
 		{
 		currentTable.addCard(currentTable, card);
@@ -203,6 +202,7 @@ public class Durak {
 		   currentTable.remove(removeCard);   
 	   } 
 	   roundStatus = 1;
+	   firstCard = 0;
 	   playerChange(players);
 	   }
    }
@@ -218,8 +218,10 @@ public class Durak {
 		   currentTable.remove(removeCard);
 	   }
 	   roundStatus = 2;
+	   firstCard = 0;
 	   playerChange(players);
 	   }
+	   firstCard = 0;
 	   playerChange(players);
    }
    
@@ -286,12 +288,24 @@ public class Durak {
 		   if(roundStatus == 1)
 		   {
 			   setAttacker(players.get((attacker+2)%4));
+			   while(players.get(getAttacker(players)).winner == true){
+			   	setAttacker(players.get((attacker+1)%4));
+			   }
 			   setDefender(players.get((defender+2)%4));
+			   while(players.get(getDefender(players)).emptyHand == true){
+			   	setDefender(players.get((defender+1)%4));
+			   }
 		   }
 		   else if(roundStatus == 2)
 		   {
 			   setAttacker(players.get((attacker+1)%4));
+			   while(players.get(getAttacker(players)).winner == true){
+			   	setAttacker(players.get((attacker+1)%4));
+			   }
 			   setDefender(players.get((defender+1)%4));
+			   while(players.get(getDefender(players)).emptyHand == true){
+			   	setDefender(players.get((defender+1)%4));
+			   }
 		   }
 	   }
 	   else if(playerNumber == 3)
@@ -299,12 +313,24 @@ public class Durak {
 		   if(roundStatus == 1)
 		   {
 			   setAttacker(players.get((attacker+2)%3));
+			   while(players.get(getAttacker(players)).winner == true){
+			   	setAttacker(players.get((attacker+1)%4));
+			   }
 			   setDefender(players.get((defender+2)%3));
+			   while(players.get(getDefender(players)).emptyHand == true){
+			   	setDefender(players.get((defender+1)%4));
+			   }
 		   }
 		   else if(roundStatus == 2)
 		   {
 			   setAttacker(players.get((attacker+1)%3));
+			   while(players.get(getAttacker(players)).winner == true){
+			   	setAttacker(players.get((attacker+1)%4));
+			   }
 			   setDefender(players.get((defender+1)%3));
+			   while(players.get(getDefender(players)).emptyHand == true){
+			   	setDefender(players.get((defender+1)%4));
+			   }
 		   }
 	   }
 	   else if(playerNumber == 2)
@@ -321,8 +347,8 @@ public class Durak {
 	   }
    }
    
-	//Ai greift immer mit der st�rksten Karte an
-	//Gibt die Karte zur�ck mit der die Ai angreift
+	//Ai greift immer mit der stärksten Karte an
+	//Gibt die Karte zurück mit der die Ai angreift
 	Card AiAttackCard(Player AiPlayer, int Id){
 		
 		
@@ -354,6 +380,7 @@ public class Durak {
 	 //Ai verteidigt immer mit der st�rksten Karte
 	 //Gibt die Karte zur�ck mit der die Ai verteidigt
 	   Card AiDefendCard(Player AiPlayer, int Id){
+
 		   Card card = AiPlayer.getHand(0);
 		   System.out.println("--------------SPIELER VERTEIDIGT MIT--------------");
 		   System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand());
@@ -423,7 +450,7 @@ public class Durak {
 	   //Spiel neu starten
    }
    
-   //Funktion f�r die Runden
+   //Funktion für die Runden
    void round(ArrayList<Player> players,Deck deck) 
    {
 	   //players.get(0).fillHand(deck);
@@ -671,7 +698,7 @@ public class Durak {
 		System.out.println("Table Size: " + durak.currentTable.size());
 		
 		
-		//Testen ob bei leeren h�nden der richtige verlierer bestimmt wird
+		//Testen ob bei leeren händen der richtige verlierer bestimmt wird
 		/*for(int i = 0; i < Attacker.getHand().size()+1; i++){
 			Attacker.getHand().remove(0);
 			Attacker.emptyHand = true;
@@ -706,4 +733,4 @@ public class Durak {
 
 //test
 // Verteidiger bestimmen
-// Verteidigung durchfÃƒÂ¼hren (vergleich je 2er paare)s
+// Verteidigung durchfÃÆÃÂ¼hren (vergleich je 2er paare)s
