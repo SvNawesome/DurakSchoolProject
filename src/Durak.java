@@ -430,6 +430,13 @@ public class Durak {
 		   }
 	   }
 	   else{System.out.println("Keinen Verlierer gefunden");}
+	   
+	   //Spieler ohne Karten aus Array Löschen
+	   for(int i = 0; i < playerNumber; i++){
+		   if(players.get(i).emptyHand == true){
+			   players.remove(i);
+		   }
+	   }
    }
    
    //Ausgabe des Gewinners
@@ -447,6 +454,7 @@ public class Durak {
    //neu starten des Spiels
    void restart(){
 	   System.out.println("Spiel wird neu gestartet...");
+	   //Durak durak = new Durak(3);
 	   //Spiel neu starten
    }
    
