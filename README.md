@@ -10,7 +10,7 @@ A little Project for the School
  - Bots brauchen eine Wait Anweisung
  - evtl playerchange noch falsch
   - playerCount mit der ArrayList players anpassen
- - Syso von der asugespielten Karte gibt die **ganze** Hand wieder
+ - Syso von der ausgespielten Karte gibt die **ganze** Hand wieder
 - Gui
   - erneutes Spiel nach beendigung des vorigen führt zu einem **Absturz**
   - Fehlende Verbindung zwischen Gui und Logik
