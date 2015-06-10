@@ -389,8 +389,6 @@ public class Durak {
 		   System.out.println(i);
 		   if(players.get(i).emptyHand == true){
 			   j++;
-			   System.out.println("Ausgabe J");
-			   System.out.println(j);
 		   }
 	   }
 	   
@@ -622,10 +620,12 @@ public class Durak {
 	   System.out.println(this.players);
 	   //System.out.println("karten auf hand: " + this.players.get(1).getHand());
 	   
+	   
 	   while(looser != true){
-		   System.out.println("HAND: " + this.players.get(0).getHand());
-		   System.out.println("HAND: " + this.players.get(1).getHand());
-		   System.out.println("HAND: " + this.players.get(2).getHand());
+		   //System.out.println("HAND: " + this.players.get(0).getHand());
+		   //System.out.println("HAND: " + this.players.get(1).getHand());
+		   //System.out.println("HAND: " + this.players.get(2).getHand());
+		   
 
 		   this.round(this.players,deck);
 		   this.checkLooser();
