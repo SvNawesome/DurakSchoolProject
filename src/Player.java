@@ -60,7 +60,7 @@ public class Player
 	}
 	
 	public Card getHand(int i) {
-		System.out.println(hand);
+		//System.out.println(hand);
 		return hand.get(i);			
 
 	}

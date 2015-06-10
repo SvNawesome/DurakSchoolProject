@@ -14,6 +14,7 @@ public class Durak {
 	private Card removeCard, aiPrevCard,attackcard,defendcard;
 	private boolean looser,attackcardset,defendcardset;
 	private Deck deck;
+	Scanner scan = new Scanner(System.in);
 	
 	public Durak (int playerCount){
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -44,21 +45,30 @@ public class Durak {
 	void setFirstAttacker(String trmpSuit, ArrayList<Player> players)
 	{	
 		Card prvCard = null;
+		int firstTrump = 0;
 		
-		//raussuchen wer den niedrigsten Trump hat
+		//raussuchen wer den niedrigsten Trumpf hat
 		for (int plsCount = 0; plsCount < players.size(); plsCount++) {
-			System.out.println(players.get(plsCount).getHand());
+			System.out.println("SpielerID "+ plsCount + " Hand: " +players.get(plsCount).getHand());
 			ArrayList<Card> actualHand = players.get(plsCount).getHand();
 			for (int crdCount = 0; crdCount < actualHand.size(); crdCount++) {
 				String actlRank = actualHand.get(crdCount).getRank();
 				String actlSuit = actualHand.get(crdCount).getSuit();
 				Card actlCard = new Card(actlRank, actlSuit);
 				
+				
+				
 				if(prvCard==null)
 				{
 					prvCard = new Card(actlRank, actlSuit);
 				}
 				
+				else if(actualHand.get(crdCount).getSuit().equalsIgnoreCase(trmpSuit) && firstTrump == 0)
+				{
+					prvCard = actualHand.get(crdCount);
+					this.firstPlayer = plsCount;
+					firstTrump = 1;
+				}
 				else if(Assignment.cardValues.get(actlCard.getRank()) < Assignment.cardValues.get(prvCard.getRank()) && actualHand.get(crdCount).getSuit().equalsIgnoreCase(trmpSuit))
 				{
 					prvCard = actualHand.get(crdCount);
@@ -302,9 +312,6 @@ public class Durak {
 		
 		//Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
 		//Card card = AiPlayer.getHand(0);
-		System.out.println("--------------SPIELER GREIFT AN MIT--------------");
-		System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand());
-		System.out.println("-------------------------------------------------");
 		Card card = this.players.get(getAttacker(players)).getHand(0);
 		//Card card = this.players.get(Id).getHand(0);
 		
@@ -322,6 +329,9 @@ public class Durak {
 				    }
 			}
 		}
+		System.out.println("--------------SPIELER GREIFT AN MIT--------------");
+		System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + card);
+		System.out.println("-------------------------------------------------");
 		return card;
 	 }
 	
@@ -331,7 +341,7 @@ public class Durak {
 
 		   Card card = AiPlayer.getHand(0);
 		   System.out.println("--------------SPIELER VERTEIDIGT MIT--------------");
-		   System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand());
+		   System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + card);
 		   System.out.println("--------------------------------------------------");
 		   for(int i = 0; i < AiPlayer.getHand().size(); i++){
 			   
@@ -451,11 +461,12 @@ public class Durak {
 				   
 				   try{
 					   	  
-					   System.out.println("--------PICK A CARD TO DEFEND------");
+					   System.out.println("--------PICK A CARD TO ATTACK------");
 					   System.out.println(this.players.get(0).getHand());
-					   Scanner scan = new Scanner(System.in);
+					   
 					   	  int cardPos = scan.nextInt();
 						  placeCardAttacker(Attacker.getHand(cardPos));
+						  
 					     }
 					  catch(RuntimeException e){
 						discardPile();
@@ -485,11 +496,11 @@ public class Durak {
 					  }
 				   
 				   try{
-					   System.out.println("--------PICK A CARD TO ATTACK------");
+					   System.out.println("--------PICK A CARD TO DEFEND------");
 					   System.out.println(this.players.get(0).getHand());
-					   	  Scanner scan = new Scanner(System.in);
 					   	  int cardPos = scan.nextInt();
 						  placeCardAttacker(Defender.getHand(cardPos));
+						  scan.close();
 					     }
 					  catch(RuntimeException e){
 						takeCards(getDefender(players));

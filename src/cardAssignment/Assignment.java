@@ -33,11 +33,11 @@ public class Assignment {
 		cardValues = Collections.unmodifiableMap(cardMap);
 		
 		//zum Testen wird die Map durchgegangen für jeden gesetzen Key
-		for(String key: cardMap.keySet())
-		{
-			System.out.print("Key: " + key + " - ");
-			System.out.println("Value: " + cardMap.get(key) + "\n");
-		}
+//		for(String key: cardMap.keySet())
+//		{
+//			System.out.print("Key: " + key + " - ");
+//			System.out.println("Value: " + cardMap.get(key) + "\n");
+//		}
 
 	}
 	
