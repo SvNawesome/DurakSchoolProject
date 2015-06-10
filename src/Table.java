@@ -24,8 +24,8 @@ public class Table {
 	{
 		this.table.add(card);
 		//Grob geschrieben
-		Image card_Image = card.card_faceup_image;
-		ImageView ivTable = new ImageView(card_Image);
+		//Image card_Image = card.card_faceup_image;
+		//ImageView ivTable = new ImageView(card_Image);
 	}
 	
 	public void remove(Card card)

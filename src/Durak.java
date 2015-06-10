@@ -91,7 +91,9 @@ public class Durak {
 		//setDefender((firstPlayer+1) % 4);
 	}
 	
-	//Setter und Getter fï¾ƒÎ´ï½¼r Angreifer und Verteidiger
+
+	//Setter und Getter fuer Angreifer und Verteidiger
+
 	void setAttacker(Player player)
 	{
 		player.setStatusId(1);
@@ -126,7 +128,6 @@ public class Durak {
 		}
 		return 0;
 	}
-	
 
 	//muss ueberarbeitet werden wegen den neuen Set/Get Methoden
 	
@@ -233,58 +234,6 @@ public class Durak {
 	   }
 	   playerChange(players);
    }
-   
-   /*void placeCardAttackerKI()
-	{
-		int currentCard = 0;
-		int firstCard = 0;
-		if(firstCard == 0)
-		{
-			if()
-		currentTable.add(card);
-		int player = 0;
-				for (int plsCount = 0; plsCount < players.size(); plsCount++)
-				{
-					ArrayList<Card> actualHand = players.get(plsCount).getHand();
-					for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
-					{
-						if(card == actualHand.get(crdCount))
-						{
-							player = plsCount;
-						}
-
-					}
-				}
-				//card.move(x,y);
-				players.get(player).removeCard(card);
-				currentCard = 0;
-
-		}
-		else if(card.getSuit().equalsIgnoreCase(currentTable.get(currentCard).getSuit()) || card.getRank().equalsIgnoreCase(currentTable.get(currentCard).getRank()))
-		{
-			currentTable.add(card);
-			int player = 0;
-			for (int plsCount = 0; plsCount < players.size(); plsCount++)
-			{
-				ArrayList<Card> actualHand = players.get(plsCount).getHand();
-				for (int crdCount = 0; crdCount < actualHand.size(); crdCount++)
-				{
-					if(card == actualHand.get(crdCount))
-					{
-						player = plsCount;
-					}
-
-				}
-			}
-			//card.move(x,y);
-			players.get(player).removeCard(card);
-			currentCard =+2;
-		}
-		else 
-		{
-			System.out.println("Karte kann nicht gelegt werden ");
-		}
-	}*/
    
    //Durchwechseln der Spieler
    void playerChange(ArrayList<Player> players)
@@ -428,6 +377,7 @@ public class Durak {
    void setWinner(Player winner){
 	   System.out.println("Gewonnen hat spieler nummer: " + winner.getId());
 	   winner.winner = true;
+	   this.looser = true;
    }
    
    //Ausgabe des Verlierers und neustarten des Spiels
@@ -625,7 +575,6 @@ public class Durak {
 		   //System.out.println("HAND: " + this.players.get(0).getHand());
 		   //System.out.println("HAND: " + this.players.get(1).getHand());
 		   //System.out.println("HAND: " + this.players.get(2).getHand());
-		   
 
 		   this.round(this.players,deck);
 		   this.checkLooser();
@@ -637,11 +586,10 @@ public class Durak {
    
 	public static void main(String[] args) {
 		
+		Durak durak = new Durak(3);
 		/* Notizen Sven
 		 * Evtl getter/setter für deck spieler karten usw.
 		 */
-		
-		Durak durak = new Durak(3);
 
 
 		
