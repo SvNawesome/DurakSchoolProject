@@ -16,10 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 
 public class Main extends Application {
-	/*
+	 /*
 	Deck deck = new Deck();
 	Dealer dealer = new Dealer(deck);
 	Player player1 = new Player();
@@ -27,8 +28,53 @@ public class Main extends Application {
 	ArrayList<Player> players = new ArrayList<Player>();
 	Table table = new Table();
 	*/
-	HBox player1Hand = new HBox();
+	static HBox player1Hand = new HBox();
+	static HBox ai1Hand = new HBox();
+	static VBox ai2Hand = new VBox();
+	static VBox ai3Hand = new VBox();
+	static HBox bottomCardTable = new HBox();
+	static HBox topCardTable = new HBox();
 
+	
+	static HBox getPlayer1Hand()
+	{
+		return player1Hand;
+	}
+	public void setPlayer1Hand(HBox player1Hand) {
+		Main.player1Hand = player1Hand;
+	}
+
+	public static HBox getAi1Hand() {
+		return ai1Hand;
+	}
+	public static void setAi1Hand(HBox ai1Hand) {
+		Main.ai1Hand = ai1Hand;
+	}
+	public static VBox getAi2Hand() {
+		return ai2Hand;
+	}
+	public static void setAi2Hand(VBox ai2Hand) {
+		Main.ai2Hand = ai2Hand;
+	}
+	public static VBox getAi3Hand() {
+		return ai3Hand;
+	}
+	public static void setAi3Hand(VBox ai3Hand) {
+		Main.ai3Hand = ai3Hand;
+	}
+	public static HBox getBottomCardTable() {
+		return bottomCardTable;
+	}
+	public static void setBottomCardTable(HBox bottomCardTable) {
+		Main.bottomCardTable = bottomCardTable;
+	}
+	public static HBox getTopCardTable() {
+		return topCardTable;
+	}
+	public static void setTopCardTable(HBox topCardTable) {
+		Main.topCardTable = topCardTable;
+	}
+	
 	//VIELLEICHT LISTENER FÜR NEUE KARTEN // DENKE ABER NICHT ZWINGEND NOTWENDIG
 	private Parent createGui()
 	{
@@ -42,7 +88,7 @@ public class Main extends Application {
 		AnchorPane root = new AnchorPane();
 		ToolBar tBar = new ToolBar();
 		ToolBar gameTBar = new ToolBar();
-//		HBox player1Hand = new HBox();
+		System.out.println(player1Hand);
 		Button startButton = new Button("Start");
 		Button exitButton = new Button("Exit");
 		Button takeFieldCards = new Button("Draw Cards");
@@ -69,7 +115,7 @@ public class Main extends Application {
 		
 		//Root Fenster settings
 		root.getStyleClass().add("background");
-		root.getChildren().addAll(tBar, gameTBar, player1Hand);
+		root.getChildren().addAll(tBar, gameTBar, player1Hand, ai1Hand, ai2Hand, ai3Hand, bottomCardTable, topCardTable);
 		
 		//Toolbar settings
 		tBar.getItems().addAll(startButton, exitButton);
@@ -93,13 +139,35 @@ public class Main extends Application {
 		else takeFieldCards.setDisable(false);
 		*/
 		
-		//Player1Hand settings
+		//Player1Hand setting
 		player1Hand.setPadding(new Insets(-50));
 		player1Hand.setAlignment(Pos.CENTER);
 		player1Hand.setSpacing(-66);
 		AnchorPane.setBottomAnchor(player1Hand, 0.0);
 		AnchorPane.setLeftAnchor(player1Hand, 100.0);
 		AnchorPane.setRightAnchor(player1Hand, 100.0);
+		
+		//Ai1Hand setting
+				//TODO//
+		//Ai2Hand setting
+				//TODO//
+		//Ai3Hand setting
+				//TODO//
+		
+		// bottomCardTable
+		//bottomCardTable.setPadding(new Insets(-50));
+		bottomCardTable.setAlignment(Pos.CENTER);
+		bottomCardTable.setSpacing(0);
+		AnchorPane.setTopAnchor(bottomCardTable, 200.0);
+		AnchorPane.setLeftAnchor(bottomCardTable, 300.0);
+		AnchorPane.setRightAnchor(bottomCardTable, 300.0);
+		// topCardTable
+		topCardTable.setAlignment(Pos.CENTER);
+		topCardTable.setSpacing(0);
+		AnchorPane.setTopAnchor(topCardTable, 210.0);
+		AnchorPane.setLeftAnchor(topCardTable, 340.0);
+		AnchorPane.setRightAnchor(topCardTable, 300.0);
+		
 		
 		//nur zur überprüfung ob karten angezeigt werden
 		/*for(int i = 0; i < 6;i++)

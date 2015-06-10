@@ -25,7 +25,7 @@ public class Card extends ImageView{
 		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
 		
 		// Damit andere klassen ohne gui getestet werden können
-		/*if ( suit == "Hearts" )
+		if ( suit == "Hearts" )
 		{
 			card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
 		}
@@ -43,7 +43,7 @@ public class Card extends ImageView{
 		}
 
 		setImage( ImageStorage.card_back_image ) ; // Initially the card is face-down
-		*/
+		
 	}
 	// Konstruktor für eine bestimmte Karte
 	// Imageview evtl einfügen
@@ -54,7 +54,7 @@ public class Card extends ImageView{
 			this.rank = r;
 			this.suit = s;
 			//System.out.println(Assignment.cardValues.get(rank));
-		/*
+		
 			//zuordnen des passenden Bildes
 			if ( suit == "Hearts" )
 			{
@@ -74,7 +74,7 @@ public class Card extends ImageView{
 			}
 
 			setImage(ImageStorage.card_back_image ) ; // Initially the card is face-down
-	*/
+	
 		}
 		else 
 		{
@@ -207,6 +207,11 @@ public class Card extends ImageView{
 		
 		System.out.println(randomCard);
 		
+		Card zehnClubs = new Card("10", "Clubs");
+		Card neunClubs = new Card("9", "Clubs");
+		System.out.println(zehnClubs.compareTo(neunClubs));
+		
+		/*
 		Card herzAce = new Card("Ace", "Hearts");
 		Card herz7 = new Card("7", "Hearts");
 		Card spade7 = new Card("7", "Spades");
@@ -231,7 +236,7 @@ public class Card extends ImageView{
 		herz7.compareTo(herzAce);
 		System.out.println("Angreifer Trumpf verteidiger nicht");
 		spade7.compareTo(herzAce);
-		
+		*/
 	}
 
 }
