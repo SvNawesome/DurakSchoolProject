@@ -5,7 +5,9 @@ import cardAssignment.Assignment;
 
 public class Durak {
 	private int currentPlayerId, roundStatus, playerNumber;
-	private int firstCard,firstPlayer;
+	private int firstCard = 0;
+	private int firstCard2 = 0;
+	private int firstPlayer,j;
 	private String Trump;
 	private ArrayList<Player> players;
 	//private ArrayList<Card> currentTable;
@@ -169,39 +171,39 @@ public class Durak {
 
 	
 	//Setzen der angreifenden Karte
-	void placeCardAttacker(Card card)
-	{
-		int currentCard = 0;
-		int firstCard = 0;
-		if(firstCard == 0)
+		void placeCardAttacker(Card card)
 		{
-		currentTable.addCard(currentTable, card);
-		int player = getAttacker(players);
+			
+			if(firstCard2 == 0)
+			{
+			currentTable.addCard(currentTable, card);
+			int player = getAttacker(players);
+					
+					//card.move(x,y);
+					players.get(player).removeCard(card);
+					//if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
+					firstCard2=+1;
+					
+
+			}
+			else if(card.getRank().equalsIgnoreCase(currentTable.get(currentTable.size()-1).getRank()) || card.getRank().equalsIgnoreCase(aiPrevCard.getRank()))
+			{
+				currentTable.add(card);
+				int player = getAttacker(players);
+				
 				
 				//card.move(x,y);
 				players.get(player).removeCard(card);
-				if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
-				firstCard=+1;
+				//if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 				
-
-		}
-		else if(card.getRank().equalsIgnoreCase(currentTable.get(currentCard).getRank()))
-		{
-			currentTable.add(card);
-			int player = getAttacker(players);
+			}
+			else 
+			{
+				System.out.println("Karte kann nicht gelegt werden ");
+				throw new RuntimeException();
+			}
 			
-			
-			//card.move(x,y);
-			players.get(player).removeCard(card);
-			if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
-			currentCard =+2;
 		}
-		else 
-		{
-			System.out.println("Karte kann nicht gelegt werden ");
-		}
-		
-	}
 	
 	//setzen der verteidigendenn Karte
 	void placeCardDefender(Card card)
@@ -210,20 +212,21 @@ public class Durak {
 		int player = 0;
 		{
 			Card card2 = currentTable.get(currentTable.size()-1);
-			if(card.compareTo(card2) == 1) //compareTo benutzen!
+			if(card2.comparing(card) == 1) //compareTo benutzen!
 			{
 				
 				currentTable.add(card);
 				//card.move(x,y);
 				player = getDefender(players);
 				players.get(player).removeCard(card);
-				if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
+				//if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 
 
 			}
-			else if(card.compareTo(card2) == -1)
+			else if(card2.compareTo(card) == -1)
 			{
-				System.out.println("You can't defend with this card " + card2);
+				System.out.println("You can't defend with this card " + card);
+				throw new RuntimeException(); 
 			}
 		}
 	}
@@ -256,6 +259,7 @@ public class Durak {
 	   roundStatus = 2;
 	   playerChange(players);
 	   }
+	   roundStatus = 2;
 	   playerChange(players);
    }
    
@@ -305,97 +309,135 @@ public class Durak {
 	   }
    }
    
-	//Ai greift immer mit der stï¾ƒÎ´ï½¤rksten Karte an
-	//Gibt die Karte zurï¾ƒÎ´ï½¼ck mit der die Ai angreift
+	//Ai greift zuerst immer mit der ersten Karte an danach je nach Karten auf dem Spielfeld
+	//Gibt die Karte zurÃ¯Â¾Æ’ÃŽÂ´Ã¯Â½Â¼ck mit der die Ai angreift
 	Card AiAttackCard(Player AiPlayer, int Id){
 		
 		
 		//Card card = AiPlayer.getHand(AiPlayer.getFirstCard());
 		//Card card = AiPlayer.getHand(0);
-		Card card = this.players.get(getAttacker(players)).getHand(0);
+		//System.out.println("--------------SPIELER GREIFT AN MIT--------------");
+		//System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand());
+		//System.out.println("-------------------------------------------------");
 		//Card card = this.players.get(Id).getHand(0);
 		
-		for(int i = 0; i < AiPlayer.getHand().size(); i++){
-			if(aiPrevCard == null){
-			    if(card.compareTo(AiPlayer.getHand(i)) == 1){
-			    card = AiPlayer.getHand(i);
+		
+		    // erste Karte wird geleget
+			if(firstCard == 0){
+			   Card card = this.players.get(getAttacker(players)).getHand(0);
 			    aiPrevCard = card;
-				}		   
+			    firstCard =+1;
+			    System.out.println("--------------SPIELER GREIFT AN MIT--------------");
+				System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(0));
+				System.out.println("-------------------------------------------------");
+			   return card;
+						   
 			}
+			// Restliche Karten werden gelegt
 			else{
-				if(aiPrevCard.getSuit().equalsIgnoreCase(AiPlayer.getHand(i).getSuit())){
-					card = AiPlayer.getHand(i);
-					aiPrevCard = card;
+				
+				for(int i = 0; i < AiPlayer.getHand().size(); i++){
+					
+				if(aiPrevCard.getRank().equalsIgnoreCase(AiPlayer.getHand(i).getRank()) || (aiPrevCard.getRank().equalsIgnoreCase(currentTable.get(currentTable.size() -1).getRank()))){
+					Card card = AiPlayer.getHand(i);
+					
+					System.out.println("--------------SPIELER GREIFT AN MIT--------------");
+					System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(i));
+					System.out.println("-------------------------------------------------");
+					return card;
 				    }
+				else{
+					System.out.println("Keine Karten zum Angreifen mehr!");
+		
+					if(i == AiPlayer.getHand().size()){
+					throw new RuntimeException();
+					}
+				}
+				
 			}
 		}
-		System.out.println("--------------SPIELER GREIFT AN MIT--------------");
-		System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + card);
-		System.out.println("-------------------------------------------------");
-		return card;
+		return null;
+		
+		
 	 }
 	
-	 //Ai verteidigt immer mit der stï¾ƒï½¤rksten Karte
-	 //Gibt die Karte zurï¾ƒï½¼ck mit der die Ai verteidigt
+	 //Ai verteidigt mit der ersten karte mit der es möglich ist 
+	 //Gibt die Karte zurÃ¯Â¾Æ’Ã¯Â½Â¼ck mit der die Ai verteidigt
 	   Card AiDefendCard(Player AiPlayer, int Id){
-
-		   Card card = AiPlayer.getHand(0);
-		   System.out.println("--------------SPIELER VERTEIDIGT MIT--------------");
-		   System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + card);
-		   System.out.println("--------------------------------------------------");
+		  /// int crdcnt = 0;
+		   //Card card = AiPlayer.getHand(0);
+		  // System.out.println("--------------SPIELER VERTEIDIGT MIT--------------");
+		   //System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand());
+		   //System.out.println("--------------------------------------------------");
 		   for(int i = 0; i < AiPlayer.getHand().size(); i++){
+			       
 			   
-				   if(card.compareTo(AiPlayer.getHand(i)) == 1){
-				   card = AiPlayer.getHand(i);
+				   if((aiPrevCard.comparing(AiPlayer.getHand(i)) == 1 && aiPrevCard.getSuit().equalsIgnoreCase(AiPlayer.getHand(i).getSuit())) || (aiPrevCard.checkTrump(Trump, AiPlayer.getHand(i)) == 2) || ((aiPrevCard.checkTrump(Trump, AiPlayer.getHand(i)) == 1) && aiPrevCard.comparing(AiPlayer.getHand(i)) == 1 )){
+				   Card  card = AiPlayer.getHand(i);
+				   System.out.println("--------------SPIELER VERTEIDIGT MIT--------------");
+				   System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(i));
+				   System.out.println("--------------------------------------------------");
+				   return card;
 				
+			   }else{
+				   
+				  // if(crdcnt == 6){
+				   throw new RuntimeException();
+				   }
 			   }
-		   }
-		   return card;
+				   
+		   
+		   return null;
 	   }
    
    //Ueberpruefen wer verliert
-   void checkLooser(){
-	   int j = 0;
-	   
-	   //Anzahl an Spielern ohne Karten ermitteln
-	   for(int i = 0; i < playerNumber; i++){
-		   System.out.println(i);
-		   if(players.get(i).emptyHand == true){
-			   j++;
-		   }
-	   }
-	   
-	   //Den einzigen Spieler ohne Karten finden und als Winner setzen
-	   if(j == 1){
+	   void checkLooser(){
+		   //int j = 0;
+		   
+		   //Anzahl an Spielern ohne Karten ermitteln
 		   for(int i = 0; i < playerNumber; i++){
-			   if(players.get(i).emptyHand == true && players.get(i).winner == false ){
-				   setWinner(players.get(i));
+			   System.out.println(i);
+			   if(players.get(i).emptyHand == true){
+				   j++;
+				   System.out.println("Ausgabe J");
+				   System.out.println(j);
 			   }
 		   }
+		   
+		   //Den einzigen Spieler ohne Karten finden und als Winner setzen
+		   if(j == 1){
+			   for(int i = 0; i < playerNumber; i++){
+				   if(players.get(i).emptyHand == true && players.get(i).winner == false ){
+					   setWinner(players.get(i));
+				   }
+			   }
 
-	   }
-	   else{System.out.println("Keinen Gewinner gefunden");}
-	   
-	   //Den einzigen Spieler mit Karten finden und als Looser setzen
-	   if(j == playerNumber){
+		   }
+		   else{System.out.println("Keinen Gewinner gefunden");}
+		   
+		   //Den einzigen Spieler mit Karten finden und als Looser setzen
+		   if(j == playerNumber-1 || j == 2 ){
+			   for(int i = 0; i < playerNumber; i++){
+				  if(players.get(i).emptyHand == false){
+					   setLooser(players.get(i));
+					   looser = true;
+					   
+				   }
+			   }
+		   }
+		   else{System.out.println("Keinen Verlierer gefunden");}
+		   
+	       
+		   //Spieler ohne Karten aus Array Loeschen
 		   for(int i = 0; i < playerNumber; i++){
-			   if(players.get(i).emptyHand == false){
-				   setLooser(players.get(i));
-				   looser = true;
+			   if(players.get(i).emptyHand == true){
+				  if(playerNumber >=3){
+				   players.remove(i);
+				   playerNumber = playerNumber - 1;
+			   }
 			   }
 		   }
 	   }
-	   else{System.out.println("Keinen Verlierer gefunden");}
-	   
-
-	   //Spieler ohne Karten aus Array Loeschen
-	   for(int i = 0; i < playerNumber; i++){
-		   if(players.get(i).emptyHand == true){
-			   players.remove(i);
-			   playerNumber = playerNumber - 1;
-		   }
-	   }
-   }
    
    //Ausgabe des Gewinners
    void setWinner(Player winner){
@@ -431,9 +473,11 @@ public class Durak {
 		   while(roundStatus != 1 || roundStatus !=2 || cardCounter <= 12){
 			   try{
 					  placeCardAttacker(AiAttackCard(Attacker, Attacker.getId()));
+					
 				     }
 				  catch(RuntimeException e){
 					discardPile();
+					
 					System.out.println("Karten werden abgelegt!");
 					break;
 				  }
@@ -460,13 +504,9 @@ public class Durak {
 				
 				   
 				   try{
-					   	  
-					   System.out.println("--------PICK A CARD TO ATTACK------");
-					   System.out.println(this.players.get(0).getHand());
-					   
+					   	  Scanner scan = new Scanner(System.in);
 					   	  int cardPos = scan.nextInt();
 						  placeCardAttacker(Attacker.getHand(cardPos));
-						  
 					     }
 					  catch(RuntimeException e){
 						discardPile();
@@ -496,11 +536,9 @@ public class Durak {
 					  }
 				   
 				   try{
-					   System.out.println("--------PICK A CARD TO DEFEND------");
-					   System.out.println(this.players.get(0).getHand());
+					   	  Scanner scan = new Scanner(System.in);
 					   	  int cardPos = scan.nextInt();
 						  placeCardAttacker(Defender.getHand(cardPos));
-						  scan.close();
 					     }
 					  catch(RuntimeException e){
 						takeCards(getDefender(players));
@@ -520,14 +558,27 @@ public class Durak {
 		   }
 			   
 	   System.out.println("Runde abgeschlossen");
-	   playerChange(players);
-	   discardPile();
-	   for(int i =0; i > players.size(); i++){
+	  
+	  /*
+	   for(int i =0; i < players.size(); i++){
+		   System.out.println("------------Hand vorher: ---------------");
+		   System.out.println(players.get(i).getHand());
 		   players.get(i).fillHand(deck);
+		   System.out.println("------------Spieler :---------------");
+		   System.out.println(players.get(i));
+		   System.out.println("------------Hand nacher:---------------");
+		   System.out.println(players.get(i).getHand());
+		   System.out.println("--------------------------------------");
+		   
+	   }*/
+	   for(int j = 0; j < players.size(); j++){
+		   if(players.get(j).getHand().size() == 0){
+			   players.get(j).emptyHand = true;
+		   }
 	   }
+	   firstCard  = 0;
+	   firstCard2 = 0;
 	   }
-	   
-	   
 	   
    
    
