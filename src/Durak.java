@@ -82,7 +82,21 @@ public class Durak {
 		setAttacker(tmpPlayer);
 		System.out.println("nacher:");
 		System.out.println(players.get(firstPlayer).getStatusId());
-		setDefender(players.get((this.firstPlayer+1)%3));
+		
+		System.out.println("playersize");
+		System.out.println(players.size());
+		switch(players.size()) {
+		case 2:
+			setDefender(players.get((this.firstPlayer+1)%2));
+			break;
+		case 3:
+			setDefender(players.get((this.firstPlayer+1)%3));
+			break;
+		case 4:
+			setDefender(players.get((this.firstPlayer+1)%4));
+			break;
+		}
+			
 		
 			
 		
@@ -353,7 +367,7 @@ public class Durak {
 	   else{System.out.println("Keinen Gewinner gefunden");}
 	   
 	   //Den einzigen Spieler mit Karten finden und als Looser setzen
-	   if(j == playerNumber-1){
+	   if(j == playerNumber){
 		   for(int i = 0; i < playerNumber; i++){
 			   if(players.get(i).emptyHand == false){
 				   setLooser(players.get(i));
@@ -383,6 +397,7 @@ public class Durak {
    //Ausgabe des Verlierers und neustarten des Spiels
    void setLooser(Player looser){
 	   System.out.println("Verloren hat spieler nummer: " + looser.getId());
+	   players.clear();
 	   restart();
    }
    
@@ -435,7 +450,10 @@ public class Durak {
 				
 				   
 				   try{
-					   	  Scanner scan = new Scanner(System.in);
+					   	  
+					   System.out.println("--------PICK A CARD TO DEFEND------");
+					   System.out.println(this.players.get(0).getHand());
+					   Scanner scan = new Scanner(System.in);
 					   	  int cardPos = scan.nextInt();
 						  placeCardAttacker(Attacker.getHand(cardPos));
 					     }
@@ -467,6 +485,8 @@ public class Durak {
 					  }
 				   
 				   try{
+					   System.out.println("--------PICK A CARD TO ATTACK------");
+					   System.out.println(this.players.get(0).getHand());
 					   	  Scanner scan = new Scanner(System.in);
 					   	  int cardPos = scan.nextInt();
 						  placeCardAttacker(Defender.getHand(cardPos));
@@ -536,7 +556,8 @@ public class Durak {
 		   this.players.add(Ai3.player);
 			
 	   }else if(playerCount == 3){
-		   //Player player1 = new Player(deck);
+		   //Player player1 = new Player();
+		   //player1.ai = false;
 		   AI Ai1 = new AI();
 		   AI Ai2 = new AI();
 		   AI Ai3 = new AI();
