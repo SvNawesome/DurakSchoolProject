@@ -575,8 +575,12 @@ public class Durak {
 				
 				   
 				   try{
-					   	  Scanner scan = new Scanner(System.in);
-					   	  int cardPos = scan.nextInt();
+					   int cardPos = 100;
+					   Scanner scan = new Scanner(System.in);
+					   while(cardPos > Attacker.getHand().size()){
+						   System.out.println("Spielen sie eine gültige Karte aus!");
+						   cardPos = scan.nextInt();
+					   }
 						  placeCardAttacker(Attacker.getHand(cardPos));
 					     }
 					  catch(RuntimeException e){
@@ -607,9 +611,13 @@ public class Durak {
 					  }
 				   
 				   try{
-					   	  Scanner scan = new Scanner(System.in);
-					   	  int cardPos = scan.nextInt();
-						  placeCardAttacker(Defender.getHand(cardPos));
+					   int cardPos = 100;
+					   Scanner scan = new Scanner(System.in);
+					   while(cardPos > Defender.getHand().size()){
+						   System.out.println("Spielen sie eine gültige Karte aus!");
+						   cardPos = scan.nextInt();
+					   }
+					   placeCardAttacker(Defender.getHand(cardPos));
 					     }
 					  catch(RuntimeException e){
 						takeCards(getDefender(players));
@@ -753,7 +761,7 @@ public class Durak {
    
 	public static void main(String[] args) {
 		
-		Durak durak = new Durak(3);
+		Durak durak = new Durak(4);
 		/* Notizen Sven
 		 * Evtl getter/setter für deck spieler karten usw.
 		 */
