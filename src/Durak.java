@@ -576,7 +576,6 @@ public class Durak {
 				   
 				   try{
 					   int cardPos = 100;
-					   Scanner scan = new Scanner(System.in);
 					   while(cardPos > Attacker.getHand().size()){
 						   System.out.println("Spielen sie eine gültige Karte aus!");
 						   cardPos = scan.nextInt();
@@ -612,7 +611,6 @@ public class Durak {
 				   
 				   try{
 					   int cardPos = 100;
-					   Scanner scan = new Scanner(System.in);
 					   while(cardPos > Defender.getHand().size()){
 						   System.out.println("Spielen sie eine gültige Karte aus!");
 						   cardPos = scan.nextInt();
