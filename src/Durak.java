@@ -76,6 +76,10 @@ public class Durak {
 				if(prvCard==null)
 				{
 					prvCard = new Card(actlRank, actlSuit);
+					if(actlSuit == trmpSuit)
+					{
+						firstTrump = 1;
+					}
 				}
 				
 				else if(actualHand.get(crdCount).getSuit().equalsIgnoreCase(trmpSuit) && firstTrump == 0)
@@ -145,9 +149,7 @@ public class Durak {
 		{
 			if(player.getStatusId() == 1)
 			{
-				System.out.println(player.getId());
 				int playerPosition = players.indexOf(player);
-				System.out.println(players.indexOf(player.getId()));
 				return playerPosition;
 			}
 		}
@@ -188,29 +190,29 @@ public class Durak {
 
 	
 	//Setzen der angreifenden Karte
-		void placeCardAttacker(Card card)
+		void placeCardAttacker(Card attCard)
 		{
 			
 			if(firstCard2 == 0)
 			{
-			currentTable.addCard(currentTable, card);
+			currentTable.addCard(currentTable, attCard);
 			int player = getAttacker(players);
 					
 					//card.move(x,y);
-					players.get(player).removeCard(card);
+					players.get(player).removeCard(attCard);
 					//if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 					firstCard2=+1;
 					
 
 			}
-			else if(card.getRank().equalsIgnoreCase(currentTable.get(currentTable.size()-1).getRank()) || card.getRank().equalsIgnoreCase(aiPrevCard.getRank()))
+			else if(attCard.getRank().equalsIgnoreCase(currentTable.get(currentTable.size()-1).getRank()) || attCard.getRank().equalsIgnoreCase(aiPrevCard.getRank()))
 			{
-				currentTable.add(card);
+				currentTable.add(attCard);
 				int player = getAttacker(players);
 				
 				
 				//card.move(x,y);
-				players.get(player).removeCard(card);
+				players.get(player).removeCard(attCard);
 				//if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 				
 			}
@@ -223,26 +225,28 @@ public class Durak {
 		}
 	
 	//setzen der verteidigendenn Karte
-	void placeCardDefender(Card card)
+	void placeCardDefender(Card defCard)
 	{
-		
+		System.out.println("PlaceDefender");
 		int player = 0;
 		{
-			Card card2 = currentTable.get(currentTable.size()-1);
-			if(card2.comparing(card) == 1) //compareTo benutzen!
+			System.out.println("Tisch / defCard");
+			System.out.println(currentTable.get(currentTable.size()-1) + "/" + defCard);
+			System.out.println("------------------------");
+			Card attCard = currentTable.get(currentTable.size()-1);
+			if(attCard.comparing(defCard) == 1) //compareTo benutzen!
 			{
-				
-				currentTable.add(card);
+				currentTable.add(defCard);
 				//card.move(x,y);
 				player = getDefender(players);
-				players.get(player).removeCard(card);
+				players.get(player).removeCard(defCard);
 				//if(players.get(player).getHand().size() == 0){players.get(player).emptyHand = true;}
 
 
 			}
-			else if(card2.compareTo(card) == -1)
+			else if(attCard.compareTo(Trump, defCard) == -1)
 			{
-				System.out.println("You can't defend with this card " + card);
+				System.out.println("You can't defend with this card " + defCard);
 				throw new RuntimeException(); 
 			}
 		}
@@ -344,8 +348,11 @@ public class Durak {
 			   Card card = this.players.get(getAttacker(players)).getHand(0);
 			    aiPrevCard = card;
 			    firstCard =+1;
+			    System.out.println("Trumpf: " +Trump);
+			    System.out.println("Angreifer Hand: " +this.players.get(Id).getHand());
+			    System.out.println("Verteidiger Hand: " + this.players.get(getDefender(players)).getHand());
 			    System.out.println("--------------SPIELER GREIFT AN MIT--------------");
-				System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(0));
+				System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(0) +" Verteidiger: "+ getDefender(players));
 				System.out.println("-------------------------------------------------");
 			   return card;
 						   
@@ -354,13 +361,24 @@ public class Durak {
 			else{
 				
 				for(int i = 0; i < AiPlayer.getHand().size(); i++){
+//					System.out.println("Wert I");
+//					System.out.println(i);
+//					System.out.println("Ai Hand Size");
+//					System.out.println(AiPlayer.getHand().size());
+//					System.out.println("PREVCARD");
+//					System.out.println(aiPrevCard.getRank());
+//					System.out.println("ActlCARD");
+//					System.out.println(AiPlayer.getHand(i).getRank());
 					
 				if(aiPrevCard.getRank().equalsIgnoreCase(AiPlayer.getHand(i).getRank()) || (aiPrevCard.getRank().equalsIgnoreCase(currentTable.get(currentTable.size() -1).getRank()))){
 					Card card = AiPlayer.getHand(i);
 					aiPrevCard = card;
 					
+					System.out.println("Trumpf: " +Trump);
+					System.out.println("Angreifer Hand: " +this.players.get(Id).getHand());
+				    System.out.println("Verteidiger Hand: " + this.players.get(getDefender(players)).getHand());
 					System.out.println("--------------SPIELER GREIFT AN MIT--------------");
-					System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(i));
+					System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(i) +" Verteidiger: "+ getDefender(players));
 					System.out.println("-------------------------------------------------");
 					return card;
 				    }
@@ -410,21 +428,9 @@ public class Durak {
    
    //Ueberpruefen wer verliert
 	   void checkLooser(){
-		   System.out.println("-----Ausgabe J---------");
-		   System.out.println("----------"+ j + "---------------");
-		   System.out.println("---------------------");
-		   
-		   System.out.println("---- aktuelle Spielerzahl-------");
-		   System.out.println("----------"+ playerNumber+"--------------");
-		   System.out.println("---------------------");
-		   
 		   //Anzahl an Spielern ohne Karten ermitteln
 		   for(int i = 0; i < playerNumber; i++){
-			   System.out.println(i);
 			   if(players.get(i).emptyHand == true){
-				   
-				   System.out.println("Ausgabe J");
-				   System.out.println(j);
 				   j = j + 1;
 			   }
 		   }
@@ -459,13 +465,9 @@ public class Durak {
 					   System.out.println(players.get(i).getHand());
 					   if(players.get((i+1)%2).emptyHand == false){
 						   System.out.println("Beide haben noch Karten");
-						   System.out.println("PLAYERSIZE");
-						   System.out.println(players.size());
 						  // setLooser(players.get(i+1));
 						   System.out.println("Hand Spieler");
 						   System.out.println(players.get(i+1).getHand());
-						   System.out.println("SpielerAnzahl");
-						   System.out.println(playerNumber);
 						   //looser = true;
 						   break;
 					   }else{
@@ -521,22 +523,8 @@ public class Durak {
    {
 	   //players.get(0).fillHand(deck);
 	   int cardCounter = 0;
-	   System.out.println("Spieler");
-	   System.out.println(players);
-	   System.out.println(players.get(0));
-	   System.out.println(players.get(1));
-	   
-	   System.out.println("ID Angreifer");
-	   System.out.println(getAttacker(players));
-	   System.out.println("Angreifer Id");
-	   System.out.println(players.get(getAttacker(players)).getId());
 	   
 	   Player Attacker = players.get(getAttacker(players));
-	   
-	   System.out.println("ID Verteidiger");
-	   System.out.println(getDefender(players));
-	   System.out.println("Verteidiger Id");
-	   System.out.println(players.get(getDefender(players)).getId());
 	   
 	   Player Defender = players.get(getDefender(players));
 	   if (Attacker.ai == true && Defender.ai == true)
@@ -731,17 +719,138 @@ public class Durak {
 	   
 	   System.out.println(this.players);
 	   //System.out.println("karten auf hand: " + this.players.get(1).getHand());
-	  /* 
-	   Card rndmCard = new Card();
-	   rndmCard.turn_card();
-	   player1Hand.getChildren().add(rndmCard);
-	   Card rndmCard2 = new Card();
-	   rndmCard2.turn_card();
-	   bottomCardTable.getChildren().add(rndmCard2);
-	   Card rndmCard3 = new Card();
-	   rndmCard3.turn_card();
-	   topCardTable.getChildren().add(rndmCard3);
-	   */
+	   
+	   //zum rotieren benutzen
+//	   rndmCard.setRotate(90);
+//	   rndmCard.turn_card();
+//	   player1Hand.getChildren().add(rndmCard);
+	   
+	   
+	   //FELDKARTEN //------KARTEN IM FELD NOTFALLS RESIZEN
+	   Card field1card1 = new Card();
+	   field1card1.turn_card();
+	   bottomCardTable.getChildren().add(field1card1);
+	   
+	   Card field1card2 = new Card();
+	   field1card2.turn_card();
+	   bottomCardTable.getChildren().add(field1card2);
+	   
+	   Card field1card3 = new Card();
+	   field1card3.turn_card();
+	   bottomCardTable.getChildren().add(field1card3);
+	   
+	   
+	   Card field2card1 = new Card();
+	   field2card1.turn_card();
+	   topCardTable.getChildren().add(field2card1);
+	   
+	   Card field2card2 = new Card();
+	   field2card2.turn_card();
+	   topCardTable.getChildren().add(field2card2);
+	   
+	   Card field2card3 = new Card();
+	   field2card3.turn_card();
+	   topCardTable.getChildren().add(field2card3);
+	   
+	   //////HÄNDE\\\\\\
+	   
+	   
+	   //PLAYER 1 HAND  --------------------------------
+	   Card player1Card1 = new Card();
+	   player1Card1.turn_card();
+	   player1Hand.getChildren().add(player1Card1);
+	   
+	   Card player1Card2 = new Card();
+	   player1Card2.turn_card();
+	   player1Hand.getChildren().add(player1Card2);
+	   
+	   Card player1Card3 = new Card();
+	   player1Card3.turn_card();
+	   player1Hand.getChildren().add(player1Card3);
+	   
+	   Card player1Card4 = new Card();
+	   player1Card4.turn_card();
+	   player1Hand.getChildren().add(player1Card4);
+	   
+	   Card player1Card5 = new Card();
+	   player1Card5.turn_card();
+	   player1Hand.getChildren().add(player1Card5);
+	   
+	   Card player1Card6 = new Card();
+	   player1Card6.turn_card();
+	   player1Hand.getChildren().add(player1Card6);
+	   
+	   //AI 1 HAND	   --------------------------------
+	   Card ai1Card1 = new Card();
+	   ai1Hand.getChildren().add(ai1Card1);
+	   
+	   Card ai1Card2 = new Card();
+	   ai1Hand.getChildren().add(ai1Card2);
+	   
+	   Card ai1Card3 = new Card();
+	   ai1Hand.getChildren().add(ai1Card3);
+	   
+	   Card ai1Card4 = new Card();
+	   ai1Hand.getChildren().add(ai1Card4);
+	   
+	   Card ai1Card5 = new Card();
+	   ai1Hand.getChildren().add(ai1Card5);
+	   
+	   Card ai1Card6 = new Card();
+	   ai1Hand.getChildren().add(ai1Card6);
+	   
+	   //AI 2 HAND   --------------------------------
+	   Card ai2Card1 = new Card();
+	   ai2Card1.setRotate(90);
+	   ai2Hand.getChildren().add(ai2Card1);
+	   
+	   Card ai2Card2 = new Card();
+	   ai2Card2.setRotate(90);
+	   ai2Hand.getChildren().add(ai2Card2);
+	   
+	   Card ai2Card3 = new Card();
+	   ai2Card3.setRotate(90);
+	   ai2Hand.getChildren().add(ai2Card3);
+	   
+	   Card ai2Card4 = new Card();
+	   ai2Card4.setRotate(90);
+	   ai2Hand.getChildren().add(ai2Card4);
+	   
+	   Card ai2Card5 = new Card();
+	   ai2Card5.setRotate(90);
+	   ai2Hand.getChildren().add(ai2Card5);
+	   
+	   Card ai2Card6 = new Card();
+	   ai2Card6.setRotate(90);
+	   ai2Hand.getChildren().add(ai2Card6);
+	   
+	   //AI 3 HAND   ------------------------------------
+	   Card ai3Card1 = new Card();
+	   ai3Card1.setRotate(90);
+	   ai3Hand.getChildren().add(ai3Card1);
+	   
+	   Card ai3Card2 = new Card();
+	   ai3Card2.setRotate(90);
+	   ai3Hand.getChildren().add(ai3Card2);
+	   
+	   Card ai3Card3 = new Card();
+	   ai3Card3.setRotate(90);
+	   ai3Hand.getChildren().add(ai3Card3);
+	   
+	   Card ai3Card4 = new Card();
+	   ai3Card4.setRotate(90);
+	   ai3Hand.getChildren().add(ai3Card4);
+	   
+	   Card ai3Card5 = new Card();
+	   ai3Card5.setRotate(90);
+	   ai3Hand.getChildren().add(ai3Card5);
+	   
+	   Card ai3Card6 = new Card();
+	   ai3Card6.setRotate(90);
+	   ai3Hand.getChildren().add(ai3Card6);
+	   
+	   //---------------ENDE----------------
+	   
 
 	   
 	   while(looser != true){

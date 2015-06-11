@@ -25,7 +25,7 @@ public class Card extends ImageView{
 		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
 		
 		// Damit andere klassen ohne gui getestet werden können
-		/*if ( suit == "Hearts" )
+		if ( suit == "Hearts" )
 		{
 			card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
 		}
@@ -43,7 +43,7 @@ public class Card extends ImageView{
 		}
 
 		setImage( ImageStorage.card_back_image ) ; // Initially the card is face-down
-		*/
+		
 	}
 	// Konstruktor für eine bestimmte Karte
 	// Imageview evtl einfügen
@@ -56,7 +56,7 @@ public class Card extends ImageView{
 			//System.out.println(Assignment.cardValues.get(rank));
 		
 			//zuordnen des passenden Bildes
-			/*if ( suit == "Hearts" )
+			if ( suit == "Hearts" )
 			{
 				card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
 			}
@@ -74,7 +74,7 @@ public class Card extends ImageView{
 			}
 
 			setImage(ImageStorage.card_back_image ) ; // Initially the card is face-down
-			*/
+	
 		}
 		else 
 		{
@@ -110,7 +110,7 @@ public class Card extends ImageView{
 		else if(Assignment.cardValues.get(defCard.getRank()) < Assignment.cardValues.get(this.getRank()))
 		{
 			//System.out.println("(Verteidiger)(" + defCard.rank + " "+ defCard.suit + ") has less value than (" + this.rank + " " + this.suit + ")(Angreifer)");
-			//System.out.println("You can't attack with this card (" + this.rank + " / " + this.suit + ").");
+			//System.out.println("You can't defend with this card (" + defCard.rank + " / " + defCard.suit + ").");
 			return -1;
 		}
 		else
@@ -137,7 +137,7 @@ public class Card extends ImageView{
 		{
 			if(defCard.getSuit().equalsIgnoreCase(TRUMP))
 			{
-				System.out.println("Verteidiger ist Trumpf");
+				System.out.println("Nur Verteidiger ist Trumpf");
 				return 2;
 			}
 			else if(this.getSuit().equalsIgnoreCase(TRUMP))
@@ -155,8 +155,7 @@ public class Card extends ImageView{
 	//Erste if-Abfrage für den Fall ob beide Trumpf sind (Rückgabewert = geschlagen oder nicht möglich)
 	//Zweite if-Abfrage ob der Angreifer Trumpf ist wenn ja 1(geschlagen) return
 	//Ansonsten 0 für nicht möglich
-	public int compareTo(Card defCard) {
-
+	public int compareTo(String TRUMP, Card defCard) {
 		if(this.checkTrump(TRUMP, defCard) == 1 || this.checkTrump(TRUMP, defCard) == 0)
 		{
 			return this.comparing(defCard);
@@ -206,10 +205,6 @@ public class Card extends ImageView{
 		Card randomCard = new Card();
 		
 		System.out.println(randomCard);
-		
-		Card zehnClubs = new Card("10", "Clubs");
-		Card neunClubs = new Card("9", "Clubs");
-		System.out.println(zehnClubs.compareTo(neunClubs));
 		
 		/*
 		Card herzAce = new Card("Ace", "Hearts");

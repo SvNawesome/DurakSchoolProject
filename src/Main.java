@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -86,6 +87,7 @@ public class Main extends Application {
 		
 		//Instanziierungen
 		AnchorPane root = new AnchorPane();
+		BorderPane gameField = new BorderPane();
 		ToolBar tBar = new ToolBar();
 		ToolBar gameTBar = new ToolBar();
 		System.out.println(player1Hand);
@@ -110,12 +112,24 @@ public class Main extends Application {
 		pane.getChildren().addAll(playerLabel, playerCount, acceptButton);
 		optionStage = new Stage();
 		optionStage.setScene(scene2);
+		optionStage.setResizable(false);
 		optionStage.initModality(Modality.APPLICATION_MODAL);
 		
 		
 		//Root Fenster settings
 		root.getStyleClass().add("background");
-		root.getChildren().addAll(tBar, gameTBar, player1Hand, ai1Hand, ai2Hand, ai3Hand, bottomCardTable, topCardTable);
+		root.getChildren().addAll(gameField, tBar, gameTBar, bottomCardTable, topCardTable);
+		
+		//BorderPane settingsa
+		gameField.getStyleClass().add("background");
+		gameField.setPrefSize(800, 600);
+		gameField.setTop(ai1Hand);
+		gameField.setBottom(player1Hand);
+		gameField.setLeft(ai2Hand);
+		gameField.setRight(ai3Hand);
+		AnchorPane.setTopAnchor(gameField, 0.0);
+		
+
 		
 		//Toolbar settings
 		tBar.getItems().addAll(startButton, exitButton);
@@ -143,31 +157,41 @@ public class Main extends Application {
 		player1Hand.setPadding(new Insets(-50));
 		player1Hand.setAlignment(Pos.CENTER);
 		player1Hand.setSpacing(-66);
-		AnchorPane.setBottomAnchor(player1Hand, 0.0);
-		AnchorPane.setLeftAnchor(player1Hand, 100.0);
-		AnchorPane.setRightAnchor(player1Hand, 100.0);
+
 		
 		//Ai1Hand setting
-				//TODO//
+		ai1Hand.setPadding(new Insets(-50));
+		ai1Hand.setAlignment(Pos.CENTER);
+		ai1Hand.setSpacing(-66);
+
+		
 		//Ai2Hand setting
-				//TODO//
+		ai2Hand.setPadding(new Insets(-50));
+		ai2Hand.setAlignment(Pos.CENTER);
+		ai2Hand.setSpacing(-110);
+
+		
 		//Ai3Hand setting
-				//TODO//
+		ai3Hand.setPadding(new Insets(-50));
+		ai3Hand.setAlignment(Pos.CENTER);
+		ai3Hand.setSpacing(-110);
+
 		
 		// bottomCardTable
 		//bottomCardTable.setPadding(new Insets(-50));
 		bottomCardTable.setAlignment(Pos.CENTER);
-		bottomCardTable.setSpacing(0);
+		bottomCardTable.setSpacing(30);
 		AnchorPane.setTopAnchor(bottomCardTable, 200.0);
 		AnchorPane.setLeftAnchor(bottomCardTable, 300.0);
 		AnchorPane.setRightAnchor(bottomCardTable, 300.0);
-		
+
 		// topCardTable
 		topCardTable.setAlignment(Pos.CENTER);
-		topCardTable.setSpacing(0);
+		topCardTable.setSpacing(30);
 		AnchorPane.setTopAnchor(topCardTable, 210.0);
 		AnchorPane.setLeftAnchor(topCardTable, 340.0);
 		AnchorPane.setRightAnchor(topCardTable, 300.0);
+
 		
 		
 		//nur zur überprüfung ob karten angezeigt werden
