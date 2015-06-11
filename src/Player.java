@@ -24,6 +24,10 @@ public class Player
 	}
 
 	//Getter der ID
+	public void setId(int id)
+	{
+		this.id = id;
+	}
 	public int getId()
 	{
 		return this.id;

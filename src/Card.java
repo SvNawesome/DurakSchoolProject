@@ -25,7 +25,7 @@ public class Card extends ImageView{
 		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
 		
 		// Damit andere klassen ohne gui getestet werden können
-		if ( suit == "Hearts" )
+		/*if ( suit == "Hearts" )
 		{
 			card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
 		}
@@ -43,7 +43,7 @@ public class Card extends ImageView{
 		}
 
 		setImage( ImageStorage.card_back_image ) ; // Initially the card is face-down
-		
+		*/
 	}
 	// Konstruktor für eine bestimmte Karte
 	// Imageview evtl einfügen
@@ -56,7 +56,7 @@ public class Card extends ImageView{
 			//System.out.println(Assignment.cardValues.get(rank));
 		
 			//zuordnen des passenden Bildes
-			if ( suit == "Hearts" )
+			/*if ( suit == "Hearts" )
 			{
 				card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
 			}
@@ -74,7 +74,7 @@ public class Card extends ImageView{
 			}
 
 			setImage(ImageStorage.card_back_image ) ; // Initially the card is face-down
-	
+			*/
 		}
 		else 
 		{

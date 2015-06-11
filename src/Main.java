@@ -161,6 +161,7 @@ public class Main extends Application {
 		AnchorPane.setTopAnchor(bottomCardTable, 200.0);
 		AnchorPane.setLeftAnchor(bottomCardTable, 300.0);
 		AnchorPane.setRightAnchor(bottomCardTable, 300.0);
+		
 		// topCardTable
 		topCardTable.setAlignment(Pos.CENTER);
 		topCardTable.setSpacing(0);
