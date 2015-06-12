@@ -1,6 +1,10 @@
 import java.util.*;
 
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.image.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import cardAssignment.*;
 import cardImages.ImageStorage;
 
@@ -9,7 +13,8 @@ public class Card extends ImageView{
 	//Initialisieren der benötigten Strings
 	private String rank;
 	private String suit;
-	private String TRUMP;
+	HBox player1Hand = Main.player1Hand;
+	HBox bottomCardTable = Main.bottomCardTable;
 	
 	//größe der karten
 	public static final int  card_width   =  150 ;
@@ -20,6 +25,48 @@ public class Card extends ImageView{
 	//Konstruktor für eine Zufallskarte
 	public Card()
 	{
+		Card thisCard = this;
+		
+		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent m) {
+				Main.clickCounter = Main.clickCounter%2;
+				System.out.println(Main.clickCounter);
+
+				if(Main.clickCounter == 0)
+				{
+					for(Node cardInHand: player1Hand.getChildren())
+					{
+						Card card = (Card) cardInHand;
+						if(card == thisCard)
+						{
+							Durak.playerTurn(card);
+							Main.clickCounter +=1;
+							break;
+						}
+						else Main.clickCounter = 0;
+					}
+				}
+				else if(Main.clickCounter == 1)
+				{
+					for(Node cardInHand: bottomCardTable.getChildren())
+					{
+						Card card = (Card) cardInHand;
+						if(card == thisCard)
+						{
+							Durak.playerTurn(card);
+							Main.clickCounter +=1;
+							break;
+						}
+						else Main.clickCounter = 1;
+					}
+					
+				}
+				m.consume();
+			}
+		});
+		
 		Random random = new Random();
 		this.rank = Assignment.ranks[random.nextInt(Assignment.ranks.length-1)];
 		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
@@ -43,12 +90,56 @@ public class Card extends ImageView{
 		}
 
 		setImage( ImageStorage.card_back_image ) ; // Initially the card is face-down
+		setX(100);
 		
 	}
+	
 	// Konstruktor für eine bestimmte Karte
 	// Imageview evtl einfügen
 	public Card(String r, String s)
 	{
+		Card thisCard = this;
+		
+		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent m) {
+				Main.clickCounter = Main.clickCounter%2;
+				System.out.println(Main.clickCounter);
+
+				if(Main.clickCounter == 0)
+				{
+					for(Node cardInHand: player1Hand.getChildren())
+					{
+						Card card = (Card) cardInHand;
+						if(card == thisCard)
+						{
+							Durak.playerTurn(card);
+							Main.clickCounter +=1;
+							break;
+						}
+						else Main.clickCounter = 0;
+					}
+				}
+				else if(Main.clickCounter == 1)
+				{
+					for(Node cardInHand: bottomCardTable.getChildren())
+					{
+						Card card = (Card) cardInHand;
+						if(card == thisCard)
+						{
+							Durak.playerTurn(card);
+							Main.clickCounter +=1;
+							break;
+						}
+						else Main.clickCounter = 1;
+					}
+					
+				}
+				m.consume();
+			}
+		});
+		
 		if(Arrays.asList(Assignment.ranks).contains(r) && Arrays.asList(Assignment.suits).contains(s))
 		{
 			this.rank = r;
@@ -128,6 +219,7 @@ public class Card extends ImageView{
 	//	 	  (-1) = Nur der Angreifer ist Trumpf
 	public int checkTrump(String TRUMP, Card defCard)
 	{
+		System.out.println("AttCard: " + this + "defCard: " + defCard + "Trump: " + TRUMP);
 		if(defCard.getSuit().equalsIgnoreCase(TRUMP) && this.getSuit().equalsIgnoreCase(TRUMP))
 		{
 			System.out.println("Beide Karten sind Trumpf");

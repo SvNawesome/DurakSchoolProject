@@ -9,10 +9,12 @@ public class Durak {
 	private int currentPlayerId, roundStatus, playerNumber;
 	private int firstCard = 0;
 	private int firstCard2 = 0;
+	static Card firstSelectedCard;
+	static Card secondSelectedCard;
 	private int firstPlayer;
 	private int j = 0;
-	private String Trump;
-	private ArrayList<Player> players;
+	private static String Trump;
+	private static ArrayList<Player> players;
 	//private ArrayList<Card> currentTable;
 	Table currentTable = new Table();
 	private ArrayList<Card> discardPile;
@@ -345,14 +347,14 @@ public class Durak {
 		
 		    // erste Karte wird geleget
 			if(firstCard == 0){
-			   Card card = this.players.get(getAttacker(players)).getHand(0);
+			   Card card = Durak.players.get(getAttacker(players)).getHand(0);
 			    aiPrevCard = card;
 			    firstCard =+1;
 			    System.out.println("Trumpf: " +Trump);
-			    System.out.println("Angreifer Hand: " +this.players.get(Id).getHand());
-			    System.out.println("Verteidiger Hand: " + this.players.get(getDefender(players)).getHand());
+			    System.out.println("Angreifer Hand: " +Durak.players.get(Id).getHand());
+			    System.out.println("Verteidiger Hand: " + Durak.players.get(getDefender(players)).getHand());
 			    System.out.println("--------------SPIELER GREIFT AN MIT--------------");
-				System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(0) +" Verteidiger: "+ getDefender(players));
+				System.out.println(Durak.players.get(Id) + " -> Id: " + Id + " ---- " + Durak.players.get(Id).getHand(0) +" Verteidiger: "+ getDefender(players));
 				System.out.println("-------------------------------------------------");
 			   return card;
 						   
@@ -375,10 +377,10 @@ public class Durak {
 					aiPrevCard = card;
 					
 					System.out.println("Trumpf: " +Trump);
-					System.out.println("Angreifer Hand: " +this.players.get(Id).getHand());
-				    System.out.println("Verteidiger Hand: " + this.players.get(getDefender(players)).getHand());
+					System.out.println("Angreifer Hand: " +Durak.players.get(Id).getHand());
+				    System.out.println("Verteidiger Hand: " + Durak.players.get(getDefender(players)).getHand());
 					System.out.println("--------------SPIELER GREIFT AN MIT--------------");
-					System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(i) +" Verteidiger: "+ getDefender(players));
+					System.out.println(Durak.players.get(Id) + " -> Id: " + Id + " ---- " + Durak.players.get(Id).getHand(i) +" Verteidiger: "+ getDefender(players));
 					System.out.println("-------------------------------------------------");
 					return card;
 				    }
@@ -411,7 +413,7 @@ public class Durak {
 				   if((aiPrevCard.comparing(AiPlayer.getHand(i)) == 1 && aiPrevCard.getSuit().equalsIgnoreCase(AiPlayer.getHand(i).getSuit())) || (aiPrevCard.checkTrump(Trump, AiPlayer.getHand(i)) == 2) || ((aiPrevCard.checkTrump(Trump, AiPlayer.getHand(i)) == 1) && aiPrevCard.comparing(AiPlayer.getHand(i)) == 1 )){
 				   Card  card = AiPlayer.getHand(i);
 				   System.out.println("--------------SPIELER VERTEIDIGT MIT--------------");
-				   System.out.println(this.players.get(Id) + " -> Id: " + Id + " ---- " + this.players.get(Id).getHand(i));
+				   System.out.println(Durak.players.get(Id) + " -> Id: " + Id + " ---- " + Durak.players.get(Id).getHand(i));
 				   System.out.println("--------------------------------------------------");
 				   return card;
 				
@@ -649,7 +651,27 @@ public class Durak {
 	   firstCard2 = 0;
 	   }
 	   
-   
+   static void playerTurn(Card card)
+   {
+	   System.out.println("PLAYERTURN");
+	   System.out.println("Trump: " + Trump);
+	   if(Main.clickCounter == 0)
+	   {
+		   firstSelectedCard = card;
+	   }
+	   else if(Main.clickCounter==1)
+	   {
+		   secondSelectedCard = card;
+		   System.out.println(firstSelectedCard + " " +secondSelectedCard);
+		   System.out.println("Ergebnis des Vergleichs: " + secondSelectedCard.compareTo(Trump, firstSelectedCard));
+		   if(secondSelectedCard.compareTo(Trump, firstSelectedCard) ==1)
+		   {
+		   }
+	   
+	   }
+	   System.out.println("Karte: " + card);
+	   System.out.println("First selected card: " + firstSelectedCard);
+   }
    
    //Starten des Spiels
    void run(int playerCount){
@@ -657,7 +679,7 @@ public class Durak {
 	   Deck deck = new Deck();
 	   this.setDeck(deck);
 	   Dealer dealer = new Dealer(deck);
-	   this.players = new ArrayList<Player>();
+	   Durak.players = new ArrayList<Player>();
 	   
 	   //evtl statt den If-Abfragen
 	   //int firsttime = 1;
@@ -680,11 +702,11 @@ public class Durak {
 		   AI Ai2 = new AI();
 		   AI Ai3 = new AI();
 		   
-		   this.players.add(player1);
+		   Durak.players.add(player1);
 		   player1.ai = false;
-		   this.players.add(Ai1.player);
-		   this.players.add(Ai2.player);
-		   this.players.add(Ai3.player);
+		   Durak.players.add(Ai1.player);
+		   Durak.players.add(Ai2.player);
+		   Durak.players.add(Ai3.player);
 			
 	   }else if(playerCount == 3){
 		   //Player player1 = new Player();
@@ -696,17 +718,17 @@ public class Durak {
 
 		   //this.players.add(player1);
 		   //player1.ai = false;
-		   this.players.add(Ai1.player);
-		   this.players.add(Ai2.player);
-		   this.players.add(Ai3.player);
+		   Durak.players.add(Ai1.player);
+		   Durak.players.add(Ai2.player);
+		   Durak.players.add(Ai3.player);
 		   
 	   }else if(playerCount == 2){
 		   Player player1 = new Player();
 		   AI Ai1 = new AI();
 		   
-		   this.players.add(player1);
+		   Durak.players.add(player1);
 		   player1.ai = false;
-		   this.players.add(Ai1.player);
+		   Durak.players.add(Ai1.player);
 		   
 	   }else{
 		   System.out.println("Zu wenig oder zu viele Spieler!");
@@ -715,11 +737,11 @@ public class Durak {
 	   playerNumber = playerCount;
 
 	   this.discardPile = new ArrayList<Card>();
-	   this.Trump = dealer.dealCards(this.players, deck);
-	   this.setFirstAttacker(this.Trump, this.players);
+	   Durak.Trump = dealer.dealCards(Durak.players, deck);
+	   this.setFirstAttacker(Durak.Trump, Durak.players);
 
 	   
-	   System.out.println(this.players);
+	   System.out.println(Durak.players);
 	   //System.out.println("karten auf hand: " + this.players.get(1).getHand());
 	   
 	   //zum rotieren benutzen
@@ -727,7 +749,9 @@ public class Durak {
 //	   rndmCard.turn_card();
 //	   player1Hand.getChildren().add(rndmCard);
 	   
-	   
+	 //-----------------------------------------------------------------------------
+	 //----------------ZUM TESTEN------------------------------
+	   /*
 	   //FELDKARTEN //------KARTEN IM FELD NOTFALLS RESIZEN
 	   Card field1card1 = new Card();
 	   field1card1.turn_card();
@@ -750,9 +774,9 @@ public class Durak {
 	   field2card2.turn_card();
 	   topCardTable.getChildren().add(field2card2);
 	   
-	   Card field2card3 = new Card();
-	   field2card3.turn_card();
-	   topCardTable.getChildren().add(field2card3);
+//	   Card field2card3 = new Card();
+//	   field2card3.turn_card();
+//	   topCardTable.getChildren().add(field2card3);
 	   
 	   //////HÄNDE\\\\\\
 	   
@@ -850,9 +874,32 @@ public class Durak {
 	   Card ai3Card6 = new Card();
 	   ai3Card6.setRotate(90);
 	   ai3Hand.getChildren().add(ai3Card6);
-	   
+	   */
 	   //---------------ENDE----------------
-	   
+	   //-----------------------------------------------------------------------------
+	   for(Player player : players)
+	   {
+		   for(Card cardInHand : player.getHand())
+		   {
+			   switch(player.getId()){
+			   case 0:
+				   cardInHand.turn_card();
+				   player1Hand.getChildren().add(cardInHand);
+				   break;
+			   case 1:
+				   ai1Hand.getChildren().add(cardInHand);
+				   break;
+			   case 2:
+				   cardInHand.setRotate(90);
+				   ai2Hand.getChildren().add(cardInHand);
+				   break;
+			   case 3:
+				   cardInHand.setRotate(90);
+				   ai3Hand.getChildren().add(cardInHand);
+				   break;
+			   } 
+		   }
+	   }
 
 	   
 	   while(looser != true){
@@ -860,7 +907,7 @@ public class Durak {
 		   //System.out.println("HAND: " + this.players.get(1).getHand());
 		   //System.out.println("HAND: " + this.players.get(2).getHand());
 
-		   this.round(this.players,deck);
+		   this.round(Durak.players,deck);
 		   this.checkLooser();
 	   } 
 

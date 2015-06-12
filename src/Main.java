@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -35,6 +33,7 @@ public class Main extends Application {
 	static VBox ai3Hand = new VBox();
 	static HBox bottomCardTable = new HBox();
 	static HBox topCardTable = new HBox();
+	static int clickCounter = 0;
 
 	
 	static HBox getPlayer1Hand()
@@ -179,17 +178,17 @@ public class Main extends Application {
 		
 		// bottomCardTable
 		//bottomCardTable.setPadding(new Insets(-50));
-		bottomCardTable.setAlignment(Pos.CENTER);
+		bottomCardTable.setAlignment(Pos.CENTER_LEFT);
 		bottomCardTable.setSpacing(30);
 		AnchorPane.setTopAnchor(bottomCardTable, 200.0);
-		AnchorPane.setLeftAnchor(bottomCardTable, 300.0);
+		AnchorPane.setLeftAnchor(bottomCardTable, 220.0);
 		AnchorPane.setRightAnchor(bottomCardTable, 300.0);
 
 		// topCardTable
-		topCardTable.setAlignment(Pos.CENTER);
+		topCardTable.setAlignment(Pos.CENTER_LEFT);
 		topCardTable.setSpacing(30);
 		AnchorPane.setTopAnchor(topCardTable, 210.0);
-		AnchorPane.setLeftAnchor(topCardTable, 340.0);
+		AnchorPane.setLeftAnchor(topCardTable, 240.0);
 		AnchorPane.setRightAnchor(topCardTable, 300.0);
 
 		
