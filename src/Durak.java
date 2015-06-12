@@ -928,25 +928,23 @@ public class Durak {
    
    void clearAllHands(){
 	   
-	   for(int i = 0; i < player1Hand.getChildren().size()+6; i++){
+	   
+	   while(player1Hand.getChildren().size() > 0){
 		   player1Hand.getChildren().remove(0);
 	   }
-   
-	   for(int i = 0; i < ai1Hand.getChildren().size()+6; i++){
+	   
+	   while(ai1Hand.getChildren().size() > 0){
 		   ai1Hand.getChildren().remove(0);
 	   }
 	   
-	   if(playerNumber > 1){
-		   for(int i = 0; i < ai2Hand.getChildren().size()+6; i++){
-			   ai2Hand.getChildren().remove(0);
-		   }
+	   while(ai2Hand.getChildren().size() > 0){
+		   ai2Hand.getChildren().remove(0);
 	   }
 	   
-	   if(playerNumber > 2){
-		   for(int i = 0; i < ai3Hand.getChildren().size()+6; i++){
-			   ai3Hand.getChildren().remove(0);
-		   }
+	   while(ai3Hand.getChildren().size() > 0){
+		   ai3Hand.getChildren().remove(0);
 	   }
+	   
    }
    
    /*void playCardAttacker(Player Attacker, Card card){
