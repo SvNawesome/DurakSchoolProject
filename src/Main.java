@@ -27,6 +27,9 @@ public class Main extends Application {
 	ArrayList<Player> players = new ArrayList<Player>();
 	Table table = new Table();
 	*/
+	
+	Durak durak = new Durak();
+	
 	static HBox player1Hand = new HBox();
 	static HBox ai1Hand = new HBox();
 	static VBox ai2Hand = new VBox();
@@ -92,7 +95,7 @@ public class Main extends Application {
 		System.out.println(player1Hand);
 		Button startButton = new Button("Start");
 		Button exitButton = new Button("Exit");
-		Button takeFieldCards = new Button("Draw Cards");
+		Button takeFieldCards = new Button("Take Cards");
 		
 		//Instanziierung 2. Stage für die Abfrage der Spieler anzahl
 		AnchorPane pane = new AnchorPane();
@@ -218,7 +221,8 @@ public class Main extends Application {
 				if(text.matches("[2-4]"))
 				{
 					System.out.println(playerCount.getText());
-					Durak durak = new Durak(Integer.parseInt(playerCount.getText()));
+					//Durak durak = new Durak(Integer.parseInt(playerCount.getText()));
+					durak.run(Integer.parseInt(playerCount.getText()));
 					optionStage.close();
 					//Durak durak = new Durak(Integer.parseInt(playerCount.getText()));
 					//durak.run(Integer.parseInt(playerCount.getText()));
@@ -256,17 +260,17 @@ public class Main extends Application {
 				});
 
 		//nehmen der Karten vom Table // momentan umgeschrieben zum karten ziehen zum testen
-		/*
+		
 		takeFieldCards.setOnAction(new EventHandler<ActionEvent>()
 				{
 			@Override public void handle(ActionEvent e)
 			{
-				Card card = deck.getCard();
-				card.turn_card();
-				player1Hand.getChildren().add(card);
+				durak.takeCards(0);
+				durak.clearCardTable();
+				durak.updateHand();
 			}
 				});
-				*/
+				
 
 		
 		return root;

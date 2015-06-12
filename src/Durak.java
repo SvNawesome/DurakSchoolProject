@@ -33,10 +33,10 @@ public class Durak {
 	
 	Scanner scan = new Scanner(System.in);
 	
-	public Durak (int playerCount){
+	public Durak (){
 		ArrayList<Player> players = new ArrayList<Player>();
 		System.out.println(players);
-		run(playerCount);
+		//run(playerCount);
 		
 		/*Deck deck = new Deck();
 		for(int i = 0 ; i < playerCount; i++)
@@ -991,7 +991,8 @@ public class Durak {
    
 	public static void main(String[] args) {
 		
-		Durak durak = new Durak(4);
+		Durak durak = new Durak();
+		durak.run(4);
 		/* Notizen Sven
 		 * Evtl getter/setter für deck spieler karten usw.
 		 */
