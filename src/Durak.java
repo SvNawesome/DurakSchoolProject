@@ -540,7 +540,8 @@ public class Durak {
 				     }
 				  catch(RuntimeException e){
 					discardPile();
-					
+					clearCardTable();
+					updateHand();
 					System.out.println("Karten werden abgelegt!");
 					break;
 				  }
@@ -551,6 +552,8 @@ public class Durak {
 				  }
 				  catch(RuntimeException e){
 					  takeCards(getDefender(players));
+					  clearCardTable();
+					  updateHand();
 					  System.out.println("Karten werden aufgenommen!");
 					break;
 				  }
@@ -576,6 +579,8 @@ public class Durak {
 					     }
 					  catch(RuntimeException e){
 						discardPile();
+						clearCardTable();
+						updateHand();
 						System.out.println("Karten werden abgelegt!");
 						break;
 					  }
@@ -586,6 +591,8 @@ public class Durak {
 					  }
 					  catch(RuntimeException e){
 						  takeCards(getDefender(players));
+						  clearCardTable();
+						  updateHand();
 						  System.out.println("Karten werden aufgenommen!");
 						break;
 					  }
@@ -597,6 +604,8 @@ public class Durak {
 					     }
 					  catch(RuntimeException e){
 						discardPile();
+						clearCardTable();
+						updateHand();
 						System.out.println("Karten werden abgelegt!");
 						break;
 					  }
@@ -611,6 +620,8 @@ public class Durak {
 					     }
 					  catch(RuntimeException e){
 						takeCards(getDefender(players));
+						clearCardTable();
+						updateHand();
 						System.out.println("Karten werden aufgenommen!");
 						break;
 					  }
@@ -928,7 +939,6 @@ public class Durak {
    
    void clearAllHands(){
 	   
-	   
 	   while(player1Hand.getChildren().size() > 0){
 		   player1Hand.getChildren().remove(0);
 	   }
@@ -947,13 +957,35 @@ public class Durak {
 	   
    }
    
-   /*void playCardAttacker(Player Attacker, Card card){
-	   bottomCardTable.getChildren().add(card);
-   }
-   
-   void playCardDefender(){
+   void updateHand(){
+	   clearAllHands();
 	   
-   }*/
+	   for(Player player : players)
+	   {
+		   for(Card cardInHand : player.getHand())
+		   {
+			   switch(player.getId()){
+			   case 0:
+				   cardInHand.turn_card();
+				   player1Hand.getChildren().add(cardInHand);
+				   break;
+			   case 1:
+				   ai1Hand.getChildren().add(cardInHand);
+				   break;
+			   case 2:
+				   cardInHand.setRotate(90);
+				   ai2Hand.getChildren().add(cardInHand);
+				   break;
+			   case 3:
+				   cardInHand.setRotate(90);
+				   ai3Hand.getChildren().add(cardInHand);
+				   break;
+			   } 
+		   }
+	   }
+	   
+   }
+
    
    //-------------------------MAIN-------------------------------------
    
