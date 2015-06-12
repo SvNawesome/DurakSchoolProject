@@ -514,6 +514,7 @@ public class Durak {
    void restart(){
 	   System.out.println("Spiel wird neu gestartet...");
 	   clearCardTable();
+	   clearAllHands();
 	   //Durak durak = new Durak(3);
 	   //Spiel neu starten
    }
@@ -867,6 +868,7 @@ public class Durak {
    
    //-------------------------Grafik Methoden--------------------------
    
+   //Entfernt die ausgespielten Karten (Grafisch)
    void clearCardTable(){
 	   bottomCardTable.getChildren().remove(0);
 	   bottomCardTable.getChildren().remove(0);
@@ -876,6 +878,32 @@ public class Durak {
 	   topCardTable.getChildren().remove(0);
 	   topCardTable.getChildren().remove(0);
    }
+   
+   void clearAllHands(){
+	   for(int i = 0; i < player1Hand.getChildren().size()+6; i++){
+		   player1Hand.getChildren().remove(0);
+	   }
+	   
+	   for(int i = 0; i < ai1Hand.getChildren().size()+6; i++){
+		   ai1Hand.getChildren().remove(0);
+	   }
+	   
+	   for(int i = 0; i < ai2Hand.getChildren().size()+6; i++){
+		   ai2Hand.getChildren().remove(0);
+	   }
+	   
+	   for(int i = 0; i < ai3Hand.getChildren().size()+6; i++){
+		   ai3Hand.getChildren().remove(0);
+	   }
+   }
+   
+   /*void playCardAttacker(Player Attacker, Card card){
+	   bottomCardTable.getChildren().add(card);
+   }
+   
+   void playCardDefender(){
+	   
+   }*/
    
    //-------------------------MAIN-------------------------------------
    
