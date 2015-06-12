@@ -917,30 +917,38 @@ public class Durak {
    
    //Entfernt die ausgespielten Karten (Grafisch)
    void clearCardTable(){
-	   bottomCardTable.getChildren().remove(0);
-	   bottomCardTable.getChildren().remove(0);
-	   bottomCardTable.getChildren().remove(0);
+	   while(bottomCardTable.getChildren().size() != 0){
+		   bottomCardTable.getChildren().remove(0);
+	   }
 	   
-	   topCardTable.getChildren().remove(0);
-	   topCardTable.getChildren().remove(0);
-	   topCardTable.getChildren().remove(0);
+	   while(topCardTable.getChildren().size() != 0){
+		   topCardTable.getChildren().remove(0);
+	   }
    }
    
    void clearAllHands(){
-	   for(int i = 0; i < player1Hand.getChildren().size()+6; i++){
-		   player1Hand.getChildren().remove(0);
+	   if(player1Hand != null){
+		   for(int i = 0; i < player1Hand.getChildren().size()+6; i++){
+			   player1Hand.getChildren().remove(0);
+		   }
 	   }
 	   
-	   for(int i = 0; i < ai1Hand.getChildren().size()+6; i++){
-		   ai1Hand.getChildren().remove(0);
+	   if(ai1Hand != null){
+		   for(int i = 0; i < ai1Hand.getChildren().size()+6; i++){
+			   ai1Hand.getChildren().remove(0);
+		   }
 	   }
 	   
-	   for(int i = 0; i < ai2Hand.getChildren().size()+6; i++){
-		   ai2Hand.getChildren().remove(0);
+	   if(playerNumber > 2){
+		   for(int i = 0; i < ai2Hand.getChildren().size()+6; i++){
+			   ai2Hand.getChildren().remove(0);
+		   }
 	   }
 	   
-	   for(int i = 0; i < ai3Hand.getChildren().size()+6; i++){
-		   ai3Hand.getChildren().remove(0);
+	   if(playerNumber > 3){
+		   for(int i = 0; i < ai3Hand.getChildren().size()+6; i++){
+			   ai3Hand.getChildren().remove(0);
+		   }
 	   }
    }
    
