@@ -513,6 +513,7 @@ public class Durak {
    //neu starten des Spiels
    void restart(){
 	   System.out.println("Spiel wird neu gestartet...");
+	   clearCardTable();
 	   //Durak durak = new Durak(3);
 	   //Spiel neu starten
    }
@@ -862,6 +863,18 @@ public class Durak {
 		   this.checkLooser();
 	   } 
 
+   }
+   
+   //-------------------------Grafik Methoden--------------------------
+   
+   void clearCardTable(){
+	   bottomCardTable.getChildren().remove(0);
+	   bottomCardTable.getChildren().remove(0);
+	   bottomCardTable.getChildren().remove(0);
+	   
+	   topCardTable.getChildren().remove(0);
+	   topCardTable.getChildren().remove(0);
+	   topCardTable.getChildren().remove(0);
    }
    
    //-------------------------MAIN-------------------------------------
