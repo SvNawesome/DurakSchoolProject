@@ -479,6 +479,7 @@ public class Durak {
 					   }else{
 					   setLooser(players.get(i));
 					   looser = true;
+					   updateHand();
 					   break;
 					   } 
 				   }
@@ -893,29 +894,31 @@ public class Durak {
 	   */
 	   //---------------ENDE----------------
 	   //-----------------------------------------------------------------------------
-	   for(Player player : players)
-	   {
-		   for(Card cardInHand : player.getHand())
-		   {
-			   switch(player.getId()){
-			   case 0:
-				   cardInHand.turn_card();
-				   player1Hand.getChildren().add(cardInHand);
-				   break;
-			   case 1:
-				   ai1Hand.getChildren().add(cardInHand);
-				   break;
-			   case 2:
-				   cardInHand.setRotate(90);
-				   ai2Hand.getChildren().add(cardInHand);
-				   break;
-			   case 3:
-				   cardInHand.setRotate(90);
-				   ai3Hand.getChildren().add(cardInHand);
-				   break;
-			   } 
-		   }
-	   }
+//	   for(Player player : players)
+//	   {
+//		   for(Card cardInHand : player.getHand())
+//		   {
+//			   switch(player.getId()){
+//			   case 0:
+//				   cardInHand.turn_card();
+//				   player1Hand.getChildren().add(cardInHand);
+//				   break;
+//			   case 1:
+//				   ai1Hand.getChildren().add(cardInHand);
+//				   break;
+//			   case 2:
+//				   cardInHand.setRotate(90);
+//				   ai2Hand.getChildren().add(cardInHand);
+//				   break;
+//			   case 3:
+//				   cardInHand.setRotate(90);
+//				   ai3Hand.getChildren().add(cardInHand);
+//				   break;
+//			   } 
+//		   }
+//	   }
+	   
+	   updateHand();
 
 	   
 	   while(looser != true){
