@@ -10,6 +10,11 @@ public class Table {
 	
 	//Add und Remove methoden für Table 
 	public void addCard(Table table, Card card){
+		if(card.isFaceUp()==false)
+		{
+			card.turn_card();
+			card.setFaceUp(true);
+		}
 		table.add(card);
 	}
 
@@ -19,6 +24,11 @@ public class Table {
 	
 	public void add(Card card)
 	{
+		if(card.isFaceUp()==false)
+		{
+			card.turn_card();
+			card.setFaceUp(true);
+		}
 		this.table.add(card);
 		//Grob geschrieben
 		//Image card_Image = card.card_faceup_image;

@@ -479,7 +479,7 @@ public class Durak {
 					   }else{
 					   setLooser(players.get(i));
 					   looser = true;
-					   updateHand();
+					   update();
 					   break;
 					   } 
 				   }
@@ -530,6 +530,7 @@ public class Durak {
    //Funktion fuer die Runden
    void round(ArrayList<Player> players,Deck deck) 
    {
+	   update();
 	   //players.get(0).fillHand(deck);
 	   int cardCounter = 0;
 	   
@@ -697,6 +698,7 @@ public class Durak {
 	   this.setDeck(deck);
 	   Dealer dealer = new Dealer(deck);
 	   Durak.players = new ArrayList<Player>();
+	   players.clear();
 	   
 	   //evtl statt den If-Abfragen
 	   //int firsttime = 1;
@@ -917,8 +919,6 @@ public class Durak {
 //			   } 
 //		   }
 //	   }
-	   
-	   updateHand();
 
 	   
 	   while(looser != true){
