@@ -36,6 +36,7 @@ public class Main extends Application {
 	static VBox ai3Hand = new VBox();
 	static HBox bottomCardTable = new HBox();
 	static HBox topCardTable = new HBox();
+	static Button takeFieldCards = new Button("Take Cards");
 	static int clickCounter = 0;
 
 	
@@ -95,7 +96,6 @@ public class Main extends Application {
 		System.out.println(player1Hand);
 		Button startButton = new Button("Start");
 		Button exitButton = new Button("Exit");
-		Button takeFieldCards = new Button("Take Cards");
 		
 		//Instanziierung 2. Stage für die Abfrage der Spieler anzahl
 		AnchorPane pane = new AnchorPane();

@@ -13,6 +13,8 @@ public class Card extends ImageView{
 	//Initialisieren der benötigten Strings
 	private String rank;
 	private String suit;
+	private boolean faceUp;
+	private boolean rotated90;
 	HBox player1Hand = Main.player1Hand;
 	HBox bottomCardTable = Main.bottomCardTable;
 	
@@ -90,7 +92,7 @@ public class Card extends ImageView{
 		}
 
 		setImage( ImageStorage.card_back_image ) ; // Initially the card is face-down
-		setX(100);
+		faceUp = false;
 		
 	}
 	
@@ -165,6 +167,7 @@ public class Card extends ImageView{
 			}
 
 			setImage(ImageStorage.card_back_image ) ; // Initially the card is face-down
+			faceUp = false;
 	
 		}
 		else 
@@ -179,10 +182,12 @@ public class Card extends ImageView{
 		if(getImage() == card_faceup_image)
 		{
 			setImage(ImageStorage.card_back_image);
+			faceUp = false;
 		}
 		else if(getImage() == ImageStorage.card_back_image)
 		{
 			setImage(card_faceup_image);
+			faceUp = true;
 		}
 	}
 	
@@ -277,6 +282,22 @@ public class Card extends ImageView{
 		this.suit = suit;
 	}
 	
+	public boolean isFaceUp() {
+		return faceUp;
+	}
+
+	public void setFaceUp(boolean faceUp) {
+		this.faceUp = faceUp;
+	}
+
+	public boolean isRotated90() {
+		return rotated90;
+	}
+
+	public void setRotated90(boolean rotated90) {
+		this.rotated90 = rotated90;
+	}
+
 	//Neue String Ausgabe der Karten
 	public String toString()
 	{

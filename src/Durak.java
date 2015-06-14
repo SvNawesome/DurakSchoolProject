@@ -452,6 +452,8 @@ public class Durak {
 					   }
 					   setWinner(players.get(i));
 					   players.remove(i);
+					   System.out.println("PLAYERS --------------------");
+					   System.out.println(players);
 					   playerNumber =playerNumber-1;
 					   break;
 				   }
@@ -666,6 +668,7 @@ public class Durak {
 	   
    static void playerTurn(Card card)
    {
+	   Main.takeFieldCards.setDisable(false);
 	   System.out.println("PLAYERTURN");
 	   System.out.println("Trump: " + Trump);
 	   if(Main.clickCounter == 0)
@@ -960,6 +963,7 @@ public class Durak {
    }
    
    void updateHand(){
+	   System.out.println("UPDATE----------------------------------");
 	   clearAllHands();
 	   
 	   for(Player player : players)
@@ -968,17 +972,59 @@ public class Durak {
 		   {
 			   switch(player.getId()){
 			   case 0:
-				   cardInHand.turn_card();
+				   System.out.println("VOR DER BEHANNDLUNG");
+				   System.out.println("Card FaceUp ? " + cardInHand.isFaceUp());
+				   System.out.println("Card Rotated ? " + cardInHand.isRotated90());
+				   System.out.println("------------------------");
+				   if(cardInHand.isFaceUp()==false)
+				   {
+					   cardInHand.turn_card();
+				   }
+				   if(cardInHand.isRotated90()==true)
+				   {
+					   cardInHand.setRotate(-90);
+					   cardInHand.setRotated90(false);
+				   }
 				   player1Hand.getChildren().add(cardInHand);
+				   System.out.println("NACH DER BEHANDLUNG");
+				   System.out.println("Card FaceUp ? " + cardInHand.isFaceUp());
+				   System.out.println("Card Rotated ? " + cardInHand.isRotated90());
+				   System.out.println("-----------------------");
 				   break;
 			   case 1:
+				   if(cardInHand.isFaceUp()==true)
+				   {
+					   cardInHand.turn_card();
+				   }
+				   if(cardInHand.isRotated90()==true)
+				   {
+					   cardInHand.setRotate(-90);
+					   cardInHand.setRotated90(false);
+				   }
 				   ai1Hand.getChildren().add(cardInHand);
 				   break;
 			   case 2:
-				   cardInHand.setRotate(90);
+				   if(cardInHand.isFaceUp()==true)
+				   {
+					   cardInHand.turn_card();
+				   }
+				   if(cardInHand.isRotated90()==false)
+				   {
+					   cardInHand.setRotate(90);
+					   cardInHand.setRotated90(true);
+				   }
 				   ai2Hand.getChildren().add(cardInHand);
 				   break;
 			   case 3:
+				   if(cardInHand.isFaceUp()==true)
+				   {
+					   cardInHand.turn_card();
+				   }
+				   if(cardInHand.isRotated90()==false)
+				   {
+					   cardInHand.setRotate(90);
+					   cardInHand.setRotated90(true);
+				   }
 				   cardInHand.setRotate(90);
 				   ai3Hand.getChildren().add(cardInHand);
 				   break;

@@ -76,7 +76,7 @@ public class Player
 	//Methode um die Hand mit dem KArten vom Deck zu füllen
 	public void fillHand(Deck deck){
 		if(hand.size() < 6){
-			while(hand.size() < 6){
+			while(hand.size() < 6 && deck.size() != 0){
 				hand.add(deck.getCard());//von stapel nehmen
 			}
 			System.out.println(hand);

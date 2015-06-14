@@ -71,6 +71,10 @@ public class Deck {
 			return deck;
 	}
 	
+	public int size(){
+		return cardDeck.size();
+	}
+	
 	//Add und Remove Methoden für das Deck 
 	public void addCard(Deck deck, Card card){
 		deck.add(card);
