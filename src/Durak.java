@@ -545,7 +545,7 @@ public class Durak {
 				  catch(RuntimeException e){
 					discardPile();
 					clearCardTable();
-					updateHand();
+					update();
 					System.out.println("Karten werden abgelegt!");
 					break;
 				  }
@@ -557,7 +557,7 @@ public class Durak {
 				  catch(RuntimeException e){
 					  takeCards(getDefender(players));
 					  clearCardTable();
-					  updateHand();
+					  update();
 					  System.out.println("Karten werden aufgenommen!");
 					break;
 				  }
@@ -584,7 +584,7 @@ public class Durak {
 					  catch(RuntimeException e){
 						discardPile();
 						clearCardTable();
-						updateHand();
+						update();
 						System.out.println("Karten werden abgelegt!");
 						break;
 					  }
@@ -596,7 +596,7 @@ public class Durak {
 					  catch(RuntimeException e){
 						  takeCards(getDefender(players));
 						  clearCardTable();
-						  updateHand();
+						  update();
 						  System.out.println("Karten werden aufgenommen!");
 						break;
 					  }
@@ -609,7 +609,7 @@ public class Durak {
 					  catch(RuntimeException e){
 						discardPile();
 						clearCardTable();
-						updateHand();
+						update();
 						System.out.println("Karten werden abgelegt!");
 						break;
 					  }
@@ -625,7 +625,7 @@ public class Durak {
 					  catch(RuntimeException e){
 						takeCards(getDefender(players));
 						clearCardTable();
-						updateHand();
+						update();
 						System.out.println("Karten werden aufgenommen!");
 						break;
 					  }
@@ -962,10 +962,13 @@ public class Durak {
 	   
    }
    
-   void updateHand(){
+   void update(){
 	   System.out.println("UPDATE----------------------------------");
+	   
+	   //Alle Karten auf der Hand grafisch löschen
 	   clearAllHands();
 	   
+	   //Alle Karten auf der Hand neu zeichnen
 	   for(Player player : players)
 	   {
 		   for(Card cardInHand : player.getHand())
@@ -1029,6 +1032,23 @@ public class Durak {
 				   ai3Hand.getChildren().add(cardInHand);
 				   break;
 			   } 
+		   }
+	   }
+	   
+	   //Alle Karten in der Mitte grafisch löschen
+	   clearCardTable();
+	   
+	   //Karten in der Mitte neu zeichnen
+	   for(int i = 0; i < currentTable.size(); i++){
+		   boolean top = false;
+		   
+		   if(top == false){
+			   bottomCardTable.getChildren().add(currentTable.get(i));
+			   top = true;
+		   }
+		   else{
+			   topCardTable.getChildren().add(currentTable.get(i));
+			   top = false;
 		   }
 	   }
 	   

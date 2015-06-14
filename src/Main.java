@@ -267,7 +267,7 @@ public class Main extends Application {
 			{
 				durak.takeCards(0);
 				durak.clearCardTable();
-				durak.updateHand();
+				durak.update();
 			}
 				});
 				
