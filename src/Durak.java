@@ -420,7 +420,9 @@ public class Durak {
 			   }else{
 				   
 				  // if(crdcnt == 6){
+				   if(i == AiPlayer.getHand().size()){
 				   throw new RuntimeException();
+				   }
 				   }
 			   }
 				   
