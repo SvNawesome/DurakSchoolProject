@@ -236,7 +236,7 @@ public class Durak {
 			System.out.println(currentTable.get(currentTable.size()-1) + "/" + defCard);
 			System.out.println("------------------------");
 			Card attCard = currentTable.get(currentTable.size()-1);
-			if(attCard.comparing(defCard) == 1) //compareTo benutzen!
+			if(attCard.comparing(defCard) == 1 || attCard.checkTrump(Trump, defCard) == 2 ||  attCard.checkTrump(Trump, defCard) == 1 && attCard.comparing(defCard) == 1) //compareTo benutzen!
 			{
 				currentTable.add(defCard);
 				//card.move(x,y);
