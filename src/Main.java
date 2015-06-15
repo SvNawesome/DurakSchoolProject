@@ -36,7 +36,8 @@ public class Main extends Application {
 	static VBox ai3Hand = new VBox();
 	static HBox bottomCardTable = new HBox();
 	static HBox topCardTable = new HBox();
-	static Button takeFieldCards = new Button("Take Cards");
+	static Button takeFieldCards = new Button("Karten aufnehmen");
+	static Label statusLabel = new Label("");
 	static int clickCounter = 0;
 
 	
@@ -79,10 +80,17 @@ public class Main extends Application {
 		Main.topCardTable = topCardTable;
 	}
 	
+	public static Label getStatusLabel() {
+		return statusLabel;
+	}
+	public static void setStatusLabel(Label statusLabel) {
+		Main.statusLabel = statusLabel;
+	}
 	//VIELLEICHT LISTENER FÜR NEUE KARTEN // DENKE ABER NICHT ZWINGEND NOTWENDIG
 	private Parent createGui()
 	{
 		Stage optionStage;
+		Stage helpStage;
 		
 		//players.add(player1);
 		//players.add(player2);
@@ -95,9 +103,10 @@ public class Main extends Application {
 		ToolBar gameTBar = new ToolBar();
 		System.out.println(player1Hand);
 		Button startButton = new Button("Start");
+		Button helpButton = new Button("Hilfe");
 		Button exitButton = new Button("Exit");
 		
-		//Instanziierung 2. Stage für die Abfrage der Spieler anzahl
+		//Instanziierung 2. Stage für die Abfrage der Spieler Anzahl
 		AnchorPane pane = new AnchorPane();
 		pane.getStyleClass().add("pane");
 		Button acceptButton = new Button("Akzeptieren");
@@ -117,10 +126,27 @@ public class Main extends Application {
 		optionStage.setResizable(false);
 		optionStage.initModality(Modality.APPLICATION_MODAL);
 		
+		//Instanziierung 3. Stage für die Hilfe
+		AnchorPane helpPane = new AnchorPane();
+		helpPane.getStyleClass().add("pane");
+		Button okButton = new Button("Ok");
+		AnchorPane.setTopAnchor(okButton, 260.0);
+		AnchorPane.setLeftAnchor(okButton, 300.0);
+		AnchorPane.setRightAnchor(okButton, 0.0);
+		Label helpLabel = new Label("Spieleranzahl: 2-4 Spieler\nRegeln:\nJeder Spieler erhält 6 Karten.\nDer Spieler mit dem niedrigsten Trumpf beginnt mit dem 'Angriff'.\nDer Spieler wählt eine Karte aus um seinen Nachbarn anzugreifen.\nEs können auch mehrere Karten für einen Angriff verwendet werden wenn sie den gleichen Rang besitzen.\nDer Verteidiger versucht sein möglichstes um die angreifenden Karten zu schlagen.\nDies ist möglich durch das legen einer Karte mit höheren Wert als die angreifende oder einem Trumpf.\nSchafft er dies nicht muss er die Karten aufnehmen und darf nicht Angreifen.\nSchafft der Verteidiger es werden die Karten aus dem Spiel entfernt\nund der Verteidiger ist nun der Angreifer.\nDas Spiel endet wenn nur noch einer Karten auf der Hand hat und somit der Durak ist.");
+		Scene scene3 = new Scene(helpPane);
+		scene3.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		helpPane.getChildren().addAll(helpLabel, okButton);
+		helpPane.autosize();
+		helpStage = new Stage();
+		helpStage.setScene(scene3);
+		helpStage.setResizable(false);
+		helpStage.initModality(Modality.APPLICATION_MODAL);
+		
 		
 		//Root Fenster settings
 		root.getStyleClass().add("background");
-		root.getChildren().addAll(gameField, tBar, gameTBar, bottomCardTable, topCardTable);
+		root.getChildren().addAll(gameField, tBar, gameTBar, bottomCardTable, topCardTable, statusLabel);
 		
 		//BorderPane settingsa
 		gameField.getStyleClass().add("background");
@@ -131,10 +157,8 @@ public class Main extends Application {
 		gameField.setRight(ai3Hand);
 		AnchorPane.setTopAnchor(gameField, 0.0);
 		
-
-		
 		//Toolbar settings
-		tBar.getItems().addAll(startButton, exitButton);
+		tBar.getItems().addAll(startButton, helpButton, exitButton);
 		tBar.getStyleClass().add("toolbar");
 		AnchorPane.setTopAnchor(tBar, 0.0);
 		AnchorPane.setLeftAnchor(tBar, 0.0);
@@ -144,7 +168,7 @@ public class Main extends Application {
 		gameTBar.getItems().addAll(takeFieldCards);
 		gameTBar.getStyleClass().add("toolbar");
 		AnchorPane.setTopAnchor(gameTBar, 0.0);
-		AnchorPane.setLeftAnchor(gameTBar, 650.0);
+		AnchorPane.setLeftAnchor(gameTBar, 614.0);
 		AnchorPane.setRightAnchor(gameTBar, 0.0);
 
 		//TakeCard button überarbeitet prüft nur einmal
@@ -154,6 +178,10 @@ public class Main extends Application {
 		}
 		else takeFieldCards.setDisable(false);
 		*/
+		
+		//Label Settings
+		AnchorPane.setTopAnchor(statusLabel, 10.0);
+		AnchorPane.setLeftAnchor(statusLabel, 300.0);
 		
 		//Player1Hand setting
 		player1Hand.setPadding(new Insets(-50));
@@ -244,11 +272,16 @@ public class Main extends Application {
 			@Override public void handle(ActionEvent e){
 				System.out.println("Spiel startet");
 				optionStage.showAndWait();
-				
-//				Durak durak = new Durak();
-//				durak.run();
 			}
 		});
+		
+		helpButton.setOnAction (new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e){
+				System.out.println("Hilfe geöffnet.");
+				helpStage.showAndWait();
+			}
+		});
+		
 		
 		//Schließen der Anwendung
 		exitButton.setOnAction(new EventHandler<ActionEvent>()
@@ -256,6 +289,14 @@ public class Main extends Application {
 			@Override public void handle(ActionEvent e)
 			{
 				Platform.exit();
+			}
+				});
+		
+		okButton.setOnAction(new EventHandler<ActionEvent>()
+				{
+			@Override public void handle(ActionEvent e)
+			{
+				helpStage.close();
 			}
 				});
 

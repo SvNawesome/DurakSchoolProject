@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import cardAssignment.Assignment;
 
 public class Durak {
-	private int currentPlayerId, roundStatus, playerNumber;
+	private int  roundStatus, playerNumber;
 	private int firstCard = 0;
 	private int firstCard2 = 0;
 	static Card firstSelectedCard;
@@ -19,13 +20,14 @@ public class Durak {
 	Table currentTable = new Table();
 	private ArrayList<Card> discardPile;
 	private Card removeCard, aiPrevCard,attackcard,defendcard;
-	private boolean looser,attackcardset,defendcardset;
+	private boolean looser;
 	private Deck deck;
 	
 	HBox player1Hand = Main.getPlayer1Hand();
 	HBox ai1Hand = Main.getAi1Hand();
 	VBox ai2Hand = Main.getAi2Hand();
 	VBox ai3Hand = Main.getAi3Hand();
+	Label statusLabel = Main.getStatusLabel();
 	
 	HBox bottomCardTable = Main.getBottomCardTable();
 	HBox topCardTable = Main.getTopCardTable();	
@@ -513,6 +515,7 @@ public class Durak {
    //Ausgabe des Verlierers und neustarten des Spiels
    void setLooser(Player looser){
 	   System.out.println("Verloren hat spieler nummer: " + looser.getId());
+	   statusLabel.setText("Verloren hat Spieler Nummer:" + looser.getId());
 	   //players.clear();
 	   restart();
    }

@@ -224,7 +224,6 @@ public class Card extends ImageView{
 	//	 	  (-1) = Nur der Angreifer ist Trumpf
 	public int checkTrump(String TRUMP, Card defCard)
 	{
-		System.out.println("AttCard: " + this + "defCard: " + defCard + "Trump: " + TRUMP);
 		if(defCard.getSuit().equalsIgnoreCase(TRUMP) && this.getSuit().equalsIgnoreCase(TRUMP))
 		{
 			System.out.println("Beide Karten sind Trumpf");
@@ -253,15 +252,23 @@ public class Card extends ImageView{
 	//Zweite if-Abfrage ob der Angreifer Trumpf ist wenn ja 1(geschlagen) return
 	//Ansonsten 0 für nicht möglich
 	public int compareTo(String TRUMP, Card defCard) {
-		if(this.checkTrump(TRUMP, defCard) == 1 || this.checkTrump(TRUMP, defCard) == 0)
+		System.out.println("AttCard: " + this + "defCard: " + defCard + "Trump: " + TRUMP);
+		if(defCard == null)
 		{
-			return this.comparing(defCard);
+			return 0;
 		}
-		else if(this.checkTrump(TRUMP, defCard) == 2)
+		else
 		{
-			return 1;
+			if(this.checkTrump(TRUMP, defCard) == 1 || this.checkTrump(TRUMP, defCard) == 0)
+			{
+				return this.comparing(defCard);
+			}
+			else if(this.checkTrump(TRUMP, defCard) == 2)
+			{
+				return 1;
+			}
+			else return 0;
 		}
-		else return 0;
 	}
 
 	
