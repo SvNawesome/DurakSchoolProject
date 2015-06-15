@@ -1,8 +1,9 @@
-
+//Ai Klasse
 public class AI {
 	public Player player;
 
 	public AI(){
+		//zuweisen der Spielerklasse und setzen der Ai auf true
 		this.player = new Player();
 		this.player.artificialIntelligence = true;
 	}

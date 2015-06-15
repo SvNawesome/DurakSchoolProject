@@ -29,15 +29,18 @@ public class Card extends ImageView{
 	{
 		Card thisCard = this;
 		
+		//Eventhandler um Feedback zu bekommen wenn eine Karte geklickt wird 
+		//Eventhandler zum verteidigen (2 klicks erst die eigene Karte dann die angreifer Karte
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent m) {
 				Main.clickCounter = Main.clickCounter%2;
 				System.out.println(Main.clickCounter);
-
+				// 0 = erster Klick 1 = zweiter Klick
 				if(Main.clickCounter == 0)
 				{
+					//Um zu schauen ob die Karte in der Spielerhand ist
 					for(Node cardInHand: player1Hand.getChildren())
 					{
 						Card card = (Card) cardInHand;
@@ -52,6 +55,7 @@ public class Card extends ImageView{
 				}
 				else if(Main.clickCounter == 1)
 				{
+					//zum Überprüfen ob die Karte auf dem Feld liegt
 					for(Node cardInHand: bottomCardTable.getChildren())
 					{
 						Card card = (Card) cardInHand;
@@ -73,7 +77,7 @@ public class Card extends ImageView{
 		this.rank = Assignment.ranks[random.nextInt(Assignment.ranks.length-1)];
 		this.suit = Assignment.suits[random.nextInt(Assignment.suits.length-1)];
 		
-		// Damit andere klassen ohne gui getestet werden können
+		//Zuweisen der Bilder zu den Karten
 		if ( suit == "Hearts" )
 		{
 			card_faceup_image = ImageStorage.getInstance().get( "hearts" + Assignment.cardValues.get(rank) ) ;
@@ -90,18 +94,18 @@ public class Card extends ImageView{
 		{
 			card_faceup_image = ImageStorage.getInstance().get( "clubs" + Assignment.cardValues.get(rank) ) ;
 		}
-
+		
+		//Standar den Kartenrücken als Bild setzen
 		setImage( ImageStorage.card_back_image ) ; // Initially the card is face-down
 		faceUp = false;
 		
 	}
 	
 	// Konstruktor für eine bestimmte Karte
-	// Imageview evtl einfügen
 	public Card(String r, String s)
 	{
 		Card thisCard = this;
-		
+		//selbe wie beim Random Konstruktor
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -176,7 +180,7 @@ public class Card extends ImageView{
 		}
 		}
 	
-	//Funktion zum umdrehen der Karte
+	//Funktion zum umdrehen der Karte + setzen der faceUp variable
 	public void turn_card()
 	{
 		if(getImage() == card_faceup_image)
@@ -273,6 +277,7 @@ public class Card extends ImageView{
 
 	
 	//Getter und Setter für Rank und Suit
+	//+ FaceUp und Rotated90
 	public String getRank() {
 		return rank;
 	}

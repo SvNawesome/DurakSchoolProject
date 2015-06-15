@@ -71,6 +71,7 @@ public class Deck {
 			return deck;
 	}
 	
+	//Rückgabe der Deck größe
 	public int size(){
 		return cardDeck.size();
 	}

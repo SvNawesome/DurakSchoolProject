@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import cardAssignment.Assignment;
 
 public class Durak {
+	//deklarieren der Variablen
 	private int  roundStatus, playerNumber;
 	private int firstCard = 0;
 	private int firstCard2 = 0;
@@ -23,6 +24,7 @@ public class Durak {
 	private boolean looser;
 	private Deck deck;
 	
+	//setzen der Gui Objekte in die Durak Klasse
 	HBox player1Hand = Main.getPlayer1Hand();
 	HBox ai1Hand = Main.getAi1Hand();
 	VBox ai2Hand = Main.getAi2Hand();
@@ -51,6 +53,7 @@ public class Durak {
 		*/
 	}
 	
+	//Setter und Getter für das Deck
 	void setDeck(Deck deck)
 	{
 		this.deck = deck.getDeck();
@@ -118,6 +121,8 @@ public class Durak {
 		
 		System.out.println("playersize");
 		System.out.println(players.size());
+		
+		//Je nach größe der players ArrayList den verteidiger setzen
 		switch(players.size()) {
 		case 2:
 			setDefender(players.get((this.firstPlayer+1)%2));
@@ -178,20 +183,6 @@ public class Durak {
 		return 0;
 	}
 
-	//muss ueberarbeitet werden wegen den neuen Set/Get Methoden
-	
-//	public final void changeCurrentPlayer(ArrayList<Player> players)
-//	{
-//		if (players. == 1)
-//		{
-//			setDefender(currentPlayerId);
-//		}
-//	}
-	
-
-// Spiellogik
-// Karten vergleichen (aufrufen)
-
 	
 	//Setzen der angreifenden Karte
 		void placeCardAttacker(Card attCard)
@@ -199,6 +190,7 @@ public class Durak {
 			
 			if(firstCard2 == 0)
 			{
+			//Karte dem Tisch hinzufügen
 			currentTable.addCard(currentTable, attCard);
 			int player = getAttacker(players);
 					
@@ -402,7 +394,7 @@ public class Durak {
 	 }
 	
 	 //Ai verteidigt mit der ersten karte mit der es möglich ist 
-	 //Gibt die Karte zurÃ¯Â¾Æ’Ã¯Â½Â¼ck mit der die Ai verteidigt
+	 //Gibt die Karte zurück mit der die Ai verteidigt
 	   Card AiDefendCard(Player AiPlayer, int Id){
 		  /// int crdcnt = 0;
 		   //Card card = AiPlayer.getHand(0);
@@ -671,6 +663,7 @@ public class Durak {
 	   firstCard2 = 0;
 	   }
 	   
+   //Methode für den Eventhandler für den Spielerzug
    static void playerTurn(Card card)
    {
 	   Main.takeFieldCards.setDisable(false);
@@ -717,7 +710,7 @@ public class Durak {
 	    * }
 	    * 
 	    */
-	   
+	   //erstellen der Instanzen je nach Spielerzahl
 	   if(playerCount == 4){
 		   Player player1 = new Player();
 		   AI Ai1 = new AI();
@@ -899,31 +892,8 @@ public class Durak {
 	   */
 	   //---------------ENDE----------------
 	   //-----------------------------------------------------------------------------
-//	   for(Player player : players)
-//	   {
-//		   for(Card cardInHand : player.getHand())
-//		   {
-//			   switch(player.getId()){
-//			   case 0:
-//				   cardInHand.turn_card();
-//				   player1Hand.getChildren().add(cardInHand);
-//				   break;
-//			   case 1:
-//				   ai1Hand.getChildren().add(cardInHand);
-//				   break;
-//			   case 2:
-//				   cardInHand.setRotate(90);
-//				   ai2Hand.getChildren().add(cardInHand);
-//				   break;
-//			   case 3:
-//				   cardInHand.setRotate(90);
-//				   ai3Hand.getChildren().add(cardInHand);
-//				   break;
-//			   } 
-//		   }
-//	   }
 
-	   
+	   //Solange kein Verliere gefunden wurde läuft das Spiel
 	   while(looser != true){
 		   //System.out.println("HAND: " + this.players.get(0).getHand());
 		   //System.out.println("HAND: " + this.players.get(1).getHand());
@@ -947,7 +917,7 @@ public class Durak {
 		   topCardTable.getChildren().remove(0);
 	   }
    }
-   
+   //Entfernt die Karten in der Hand
    void clearAllHands(){
 	   
 	   while(player1Hand.getChildren().size() > 0){
@@ -968,6 +938,7 @@ public class Durak {
 	   
    }
    
+   //Aktualisiert die Grafik
    void update(){
 	   System.out.println("UPDATE----------------------------------");
 	   
@@ -979,6 +950,7 @@ public class Durak {
 	   {
 		   for(Card cardInHand : player.getHand())
 		   {
+			   //Je nach Spieler muss die Karte gedreht werden und Kartenrücken oder Gesicht gezeigt werden
 			   switch(player.getId()){
 			   case 0:
 				   System.out.println("VOR DER BEHANNDLUNG");

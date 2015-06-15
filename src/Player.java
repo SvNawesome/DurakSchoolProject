@@ -13,6 +13,7 @@ public class Player
 	public boolean emptyHand, winner, artificialIntelligence,ai;
 	
 	public Player() {
+		//setzen der Variablen für den Spieler
 		this.hand = new ArrayList<Card>();
 		id = idCounter;
 		idCounter = idCounter+1;

@@ -27,9 +27,10 @@ public class Main extends Application {
 	ArrayList<Player> players = new ArrayList<Player>();
 	Table table = new Table();
 	*/
-	
+	//Durak instanziieren
 	Durak durak = new Durak();
 	
+	//statische instanziierung der GUI Komponenten
 	static HBox player1Hand = new HBox();
 	static HBox ai1Hand = new HBox();
 	static VBox ai2Hand = new VBox();
@@ -40,7 +41,7 @@ public class Main extends Application {
 	static Label statusLabel = new Label("");
 	static int clickCounter = 0;
 
-	
+	//Getter/Setter für die Komponenten
 	static HBox getPlayer1Hand()
 	{
 		return player1Hand;
@@ -86,7 +87,7 @@ public class Main extends Application {
 	public static void setStatusLabel(Label statusLabel) {
 		Main.statusLabel = statusLabel;
 	}
-	//VIELLEICHT LISTENER FÜR NEUE KARTEN // DENKE ABER NICHT ZWINGEND NOTWENDIG
+	//Methode zum erstellen der Gui
 	private Parent createGui()
 	{
 		Stage optionStage;
@@ -107,6 +108,7 @@ public class Main extends Application {
 		Button exitButton = new Button("Exit");
 		
 		//Instanziierung 2. Stage für die Abfrage der Spieler Anzahl
+		//+Setzen der Anker für die Anchorpane
 		AnchorPane pane = new AnchorPane();
 		pane.getStyleClass().add("pane");
 		Button acceptButton = new Button("Akzeptieren");
@@ -221,26 +223,12 @@ public class Main extends Application {
 		AnchorPane.setTopAnchor(topCardTable, 210.0);
 		AnchorPane.setLeftAnchor(topCardTable, 240.0);
 		AnchorPane.setRightAnchor(topCardTable, 300.0);
-
-		
-		
-		//nur zur überprüfung ob karten angezeigt werden
-		/*for(int i = 0; i < 6;i++)
-		{
-		player1.addCard(deck.getCard());
-		}
-
-		for(Card cards : player1.getHand())
-		{
-			cards.turn_card();
-			player1Hand.getChildren().add(cards);
-		}
-		*/
 		
 		
 		// BUTTON FUNKTION
 		
 		//Akzeptieren der Spieleranzahl und Durak starten
+		//Setzen der Eventhandler
 		acceptButton.setOnAction(new EventHandler<ActionEvent>()
 				{
 			@Override public void handle(ActionEvent e)
@@ -291,7 +279,7 @@ public class Main extends Application {
 				Platform.exit();
 			}
 				});
-		
+		//schließen des Hilfe-Fensters
 		okButton.setOnAction(new EventHandler<ActionEvent>()
 				{
 			@Override public void handle(ActionEvent e)

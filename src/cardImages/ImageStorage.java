@@ -6,6 +6,8 @@ import java.util.Map;
 import javafx.scene.image.Image;
 
 public class ImageStorage{
+	
+	//Instanziieren der Bilder
 	public static Image card_back_image = new Image("cardImages/card_back.png", 101, 145, false, false);
 
 	public static Image hearts6 = new Image("cardImages/hearts6.png", 101, 145, false, false);
@@ -51,7 +53,7 @@ public class ImageStorage{
 
 	public static HashMap<String, Image> card_face_Images ;
 
-
+	//erstellen der Map für die Zuweisung zu den Bildern
 	public static  Map<String, Image> getInstance() {
 		if (card_face_Images==null) {
 		card_face_Images=new HashMap<String, Image>();
